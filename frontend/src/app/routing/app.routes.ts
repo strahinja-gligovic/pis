@@ -1,5 +1,5 @@
-import { LoginComponent } from './../security/login/login.component';
+import { AppComponent } from './../app.component';
 
 export const routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' }
+  { path: '', component: AppComponent, pathMatch: 'full' }
 ];

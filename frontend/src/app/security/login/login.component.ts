@@ -1,7 +1,9 @@
+import { User } from './../../models/user.model';
 import { AuthService } from './../auth.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnInit, Inject } from '@angular/core';
+import { NbAuthService, NB_AUTH_OPTIONS_TOKEN, NbAuthResult } from '@nebular/auth';
+import { getDeepFromObject } from '@nebular/auth/helpers';
 
 @Component({
   selector: 'app-login',
@@ -10,28 +12,24 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class LoginComponent {
 
-  form: FormGroup;
+  loginError = false;
+  user = new User();
+  submitted = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService,
-    private router: Router) {
-
-    this.form = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+  constructor(private authService: AuthService, private router: Router) {
   }
 
-  login() {
-    const val = this.form.value;
-
-    if (val.username && val.password) {
-      this.authService.login(val.username, val.password)
-        .subscribe((response) => {
-          console.log('User is logged in');
-          console.log(response);
-          this.router.navigateByUrl('/');
-        });
-    }
+  login(): void {
+    this.submitted = true;
+    this.authService.login(this.user.username, this.user.password)
+      .subscribe(() => {
+        if (this.authService.isLoggedIn()) {
+          this.loginError = false;
+        }
+      }, error => {
+        console.log(error);
+        this.loginError = true;
+        this.submitted = false;
+      });
   }
-
 }

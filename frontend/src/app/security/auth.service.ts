@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/delay';
 
 @Injectable()
 export class AuthService {
@@ -11,9 +12,10 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService) {
   }
 
-  login(email: string, password: string) {
-    return this.http.post<User>('/api/login', { email, password })
-      .do(response => this.setSession(response));
+  login(username: string, password: string) {
+    return this.http.post<User>('/api/login', { username, password })
+      .do(response => this.setSession(response))
+      .delay(750);
   }
 
   private setSession(authResult) {
