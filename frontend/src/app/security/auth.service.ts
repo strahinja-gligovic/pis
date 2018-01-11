@@ -1,5 +1,5 @@
-import { User } from './../models/user.model';
 import { HttpClient } from '@angular/common/http';
+import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
@@ -13,12 +13,11 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<User>('/api/login', { email, password })
-      .do(response => this.setSession);
+      .do(response => this.setSession(response));
   }
 
   private setSession(authResult) {
     const expiresAt = moment().add(authResult.expiresIn, 'second');
-
 
     this.cookieService.put('id_token', authResult.token);
     this.cookieService.put('expires_at', JSON.stringify(expiresAt.valueOf()));
