@@ -21,11 +21,6 @@ export class LoginComponent {
     });
   }
 
-  checkForCookies() {
-    debugger;
-    this.authService.checkForCookies();
-  }
-
   login() {
     const val = this.form.value;
 
