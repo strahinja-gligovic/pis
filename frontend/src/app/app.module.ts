@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routing/app.routes';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CookieModule, CookieService } from 'ngx-cookie';
+import { NbThemeModule, NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
+
 
 
 @NgModule({
@@ -20,10 +22,13 @@ import { CookieModule, CookieService } from 'ngx-cookie';
     HttpClientModule,
     RouterModule.forRoot(routes),
     CookieModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbLayoutModule,
+    NbSidebarModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AuthService, CookieService],
+  providers: [AuthService, CookieService, NbSidebarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
