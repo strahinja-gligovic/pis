@@ -8,7 +8,7 @@ import { getDeepFromObject } from '@nebular/auth/helpers';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['../auth.scss']
 })
 export class LoginComponent {
 
@@ -25,6 +25,7 @@ export class LoginComponent {
       .subscribe(() => {
         if (this.authService.isLoggedIn()) {
           this.loginError = false;
+          this.router.navigate(['/']);
         }
       }, error => {
         console.log(error);

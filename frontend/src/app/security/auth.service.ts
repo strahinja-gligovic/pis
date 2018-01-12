@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { HttpClient } from '@angular/common/http';
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
@@ -9,20 +10,26 @@ import 'rxjs/add/operator/delay';
 @Injectable()
 export class AuthService {
 
+  expiresAt;
+
   constructor(private http: HttpClient, private cookieService: CookieService) {
+    if (this.cookieService.get('id_token')) {
+      this.expiresAt = this.cookieService.get('expires_at');
+    }
   }
+
 
   login(username: string, password: string) {
     return this.http.post<User>('/api/login', { username, password })
       .do(response => this.setSession(response))
-      .delay(750);
+      .delay(500);
   }
 
   private setSession(authResult) {
-    const expiresAt = moment().add(authResult.expiresIn, 'second');
+    this.expiresAt = moment().add(authResult.expiresIn, 'second');
 
     this.cookieService.put('id_token', authResult.token);
-    this.cookieService.put('expires_at', JSON.stringify(expiresAt.valueOf()));
+    this.cookieService.put('expires_at', JSON.stringify(this.expiresAt.valueOf()));
   }
 
   logout() {
@@ -31,7 +38,11 @@ export class AuthService {
   }
 
   public isLoggedIn() {
-    return moment().isBefore(this.getExpiration());
+    if (this.expiresAt) {
+      return moment().isBefore(this.getExpiration());
+    } else {
+      return false;
+    }
   }
 
   isLoggedOut() {

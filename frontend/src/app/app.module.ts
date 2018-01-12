@@ -1,3 +1,4 @@
+import { AuthGuard } from './routing/auth.guard';
 import { AuthService } from './security/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -18,12 +19,18 @@ import {
   NbResetPasswordComponent,
 } from '@nebular/auth';
 import { LoginComponent } from './security/login/login.component';
+import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './security/register/register.component';
+import { PageNotFoundComponent } from './util/page-not-found/page-not-found.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -35,9 +42,9 @@ import { LoginComponent } from './security/login/login.component';
     NbLayoutModule,
     NbSidebarModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [AuthService, CookieService, NbSidebarService],
+  providers: [AuthService, CookieService, NbSidebarService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
