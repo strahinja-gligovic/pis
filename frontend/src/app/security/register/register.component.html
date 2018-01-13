@@ -9,7 +9,7 @@
             <div>
               <strong>Oh snap! Try Again.</strong>
             </div>
-            <div>{{error.errmsg}}</div>
+            <div>{{error.errmsg|| 'Something unexpected happened.'}}</div>
           </div>
           <div *ngIf="success" class="alert alert-success" role="alert">
             <div>

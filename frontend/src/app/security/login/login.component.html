@@ -7,7 +7,7 @@
         <small class="form-text sub-title">Hello! Sign in with your Username</small>
         <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
           <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
-            <strong>{{error.errmsg}}</strong>
+            <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
           </div>
           <div class="form-group">
             <input name="username" [(ngModel)]="user.username" id="input-username" class="form-control" placeholder="Username" #username="ngModel"

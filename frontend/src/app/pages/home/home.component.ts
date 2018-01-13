@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  toggled = true;
+
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -17,6 +19,10 @@ export class HomeComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['login']);
+  }
+
+  toggleMenu() {
+    this.toggled = !this.toggled;
   }
 
 }
