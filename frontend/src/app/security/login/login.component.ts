@@ -1,6 +1,6 @@
 import { User } from './../../models/user.model';
 import { AuthService } from './../auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
 import { NbAuthService, NB_AUTH_OPTIONS_TOKEN, NbAuthResult } from '@nebular/auth';
 import { getDeepFromObject } from '@nebular/auth/helpers';
@@ -10,13 +10,19 @@ import { getDeepFromObject } from '@nebular/auth/helpers';
   templateUrl: './login.component.html',
   styleUrls: ['../auth.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   loginError = false;
   user = new User();
   submitted = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      this.user.username = params['user'];
+    });
   }
 
   login(): void {

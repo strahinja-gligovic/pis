@@ -38,7 +38,7 @@ import { PageNotFoundComponent } from './util/page-not-found/page-not-found.comp
     RouterModule.forRoot(routes),
     CookieModule.forRoot(),
     NbAuthModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbSidebarModule,
     FormsModule,

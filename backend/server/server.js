@@ -13,11 +13,13 @@ const dbConfig = require('../db/db.config');
 
 mongoose.connect(dbConfig.url, {
   useMongoClient: true,
+}, function (err) {
+  if (err) console.log(error.message);
 });
 const app = express();
 
 app.use(morgan('dev'));
-app.use(cookieParser()); 
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

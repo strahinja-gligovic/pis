@@ -1,12 +1,15 @@
-
 const express = require('express');
 const router = express.Router();
-const loginRoute = require("../security/security").loginRoute;
-const checkIfAuthenticated =  require('../security/security').checkIfAuthenticated;
+// činimo dostupnim funkcije iz security servisa
+const security = require("../security/security.service");
 
-router.post('/login', (req, res) => loginRoute(req, res))
+// rute za autentifikaciju
+router.post('/login', (req, res) => security.loginRoute(req, res));
+router.post('/register', (req, res) => security.registerRoute(req, res));
 
-router.use(checkIfAuthenticated);
+// ovaj middleware proverava da li je korisnik ulogovan
+// tek ovde ga uključujemo da bi rute za autentifikaciju bile dostupne
+router.use(security.checkIfAuthenticated);
 
 router.post('/secCheck', (req, res) => {
   res.json({zdravo : 'batice'});

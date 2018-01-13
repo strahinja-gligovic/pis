@@ -4,6 +4,7 @@
   "description": "projektovanje informacionih sistema",
   "main": "backend/server/server.js",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "bcrypt-nodejs": "latest",
     "body-parser": "^1.18.2",
     "connect-flash": "~0.1.1",
@@ -16,7 +17,8 @@
     "mongoose": "^4.13.9",
     "morgan": "~1.7.0",
     "passport": "~0.3.2",
-    "passport-local": "~1.0.0"
+    "passport-local": "~1.0.0",
+    "colors": "^1.1.2"
   },
   "devDependencies": {},
   "scripts": {

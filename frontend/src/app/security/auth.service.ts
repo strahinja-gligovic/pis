@@ -25,6 +25,10 @@ export class AuthService {
       .delay(500);
   }
 
+  register(user: User) {
+    return this.http.post<User>('/api/register', user);
+  }
+
   private setSession(authResult) {
     this.expiresAt = moment().add(authResult.expiresIn, 'second');
 
@@ -34,7 +38,8 @@ export class AuthService {
 
   logout() {
     this.cookieService.remove('id_token');
-    this.cookieService.remove('expores_at');
+    this.cookieService.remove('expires_at');
+    this.expiresAt = null;
   }
 
   public isLoggedIn() {
