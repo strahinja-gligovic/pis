@@ -8,16 +8,6 @@ import { RouterModule } from '@angular/router';
 import { routes } from './routing/app.routes';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CookieModule, CookieService } from 'ngx-cookie';
-import { NbThemeModule, NbSidebarModule, NbLayoutModule, NbSidebarService } from '@nebular/theme';
-import { NbAuthModule } from '@nebular/auth';
-import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbRegisterComponent,
-  NbLogoutComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
 import { LoginComponent } from './security/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './security/register/register.component';
@@ -37,8 +27,6 @@ import { PageNotFoundComponent } from './util/page-not-found/page-not-found.comp
     HttpClientModule,
     RouterModule.forRoot(routes),
     CookieModule.forRoot(),
-    NbThemeModule.forRoot({ name: 'default' }),
-    NbLayoutModule,
     FormsModule,
     ReactiveFormsModule,
   ],

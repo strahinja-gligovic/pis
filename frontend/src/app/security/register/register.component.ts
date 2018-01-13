@@ -5,8 +5,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['../auth.scss']
+  templateUrl: './register.component.html'
 })
 export class RegisterComponent {
 

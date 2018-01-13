@@ -1,8 +1,8 @@
-<nb-layout>
-  <nb-layout-column>
+<div class="nb-layout">
+  <div class="nb-layout-column">
     <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
 
-      <nb-auth-block>
+      <div class="nb-auth-block">
         <h2 class="title">Sign Up</h2>
         <form (ngSubmit)="register()" #form="ngForm">
           <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
@@ -64,7 +64,7 @@
             </a>
           </small>
         </div>
-      </nb-auth-block>
+      </div>
     </div>
-  </nb-layout-column>
-</nb-layout>
+  </div>
+</div>

@@ -2,13 +2,10 @@ import { User } from './../../models/user.model';
 import { AuthService } from './../auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
-import { NbAuthService, NB_AUTH_OPTIONS_TOKEN, NbAuthResult } from '@nebular/auth';
-import { getDeepFromObject } from '@nebular/auth/helpers';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['../auth.scss']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent implements OnInit {
 
