@@ -12,7 +12,7 @@ import { getDeepFromObject } from '@nebular/auth/helpers';
 })
 export class LoginComponent implements OnInit {
 
-  loginError = false;
+  error;
   user = new User();
   submitted = false;
 
@@ -30,13 +30,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user.username, this.user.password)
       .subscribe(() => {
         if (this.authService.isLoggedIn()) {
-          this.loginError = false;
+          this.error = null;
           this.router.navigate(['/']);
         }
       }, error => {
-        console.log(error);
-        this.loginError = true;
+        this.error = error.error;
         this.submitted = false;
+        console.log(error);
       });
   }
 }
