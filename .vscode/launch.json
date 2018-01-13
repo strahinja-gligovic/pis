@@ -12,7 +12,8 @@
             "program": "${workspaceFolder}\\backend\\server\\server.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
-            ]
+            ],
+            "protocol": "inspector"
         }
     ]
 }

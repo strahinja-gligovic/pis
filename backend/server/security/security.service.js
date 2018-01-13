@@ -12,31 +12,38 @@ const secret = 'shhhhh';
 
 exports.loginRoute = function loginRoute(req, res) {
     // kupimo parametre iz zahteva
-    const username = req.body.username,
-        password = req.body.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
     // pronalazimo usera iz DB
     User.findOne({ username: username }, function (error, user) {
-        if (error || !user) {
-            if (error) console.log(error);
-            res.sendStatus(401);
+        if (error) {
+            console.log(error);
+            res.status(401).json(error);
             return;
         }
+
+        if (!user) {
+            res.status(401).json({ errmsg: "Invalid credentials !" });
+            return;
+        }
+
         user.comparePasswords(password, function (error, result) {
             if (error) {
                 console.log(error);
-                result = false;
+                res.status(401).json(error);
+                return;
             }
+
             if (result) {
                 // kreiramo JWT
                 const jwtToken = jwt.sign({ username: username }, secret, { expiresIn: 7200 });
                 // obaveštavamo o uspešnosti i šaljemo token frontendu
                 // token traje 2 sata
                 // ponovo šaljemo ovaj podatak zbog lakšeg upravljanja
-                res.status(200).json({token: jwtToken, expiresIn: 7200});
+                res.status(200).json({ token: jwtToken, expiresIn: 7200 });
             } else {
-                // obaveštavamo o grešci
-                res.sendStatus(401);
+                res.status(401).json({ errmsg: "Invalid credentials !" });
             }
         })
     });
