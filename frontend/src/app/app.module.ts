@@ -37,14 +37,12 @@ import { PageNotFoundComponent } from './util/page-not-found/page-not-found.comp
     HttpClientModule,
     RouterModule.forRoot(routes),
     CookieModule.forRoot(),
-    NbAuthModule.forRoot(),
     NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
-    NbSidebarModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, CookieService, NbSidebarService, AuthGuard],
+  providers: [AuthService, CookieService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
