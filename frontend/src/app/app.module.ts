@@ -14,6 +14,7 @@ import { RegisterComponent } from './security/register/register.component';
 import { PageNotFoundComponent } from './util/page-not-found/page-not-found.component';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { SidebarComponent } from './util/sidebar/sidebar.component';
+import { SidebarService } from './util/sidebar-service/sidebar-service.service';
 
 
 @NgModule({
@@ -34,7 +35,7 @@ import { SidebarComponent } from './util/sidebar/sidebar.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, CookieService, AuthGuard],
+  providers: [AuthService, CookieService, AuthGuard, SidebarService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

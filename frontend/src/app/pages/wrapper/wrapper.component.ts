@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../security/auth.service';
 import { Router } from '@angular/router';
+import { SidebarService } from '../../util/sidebar-service/sidebar-service.service';
 
 @Component({
   selector: 'app-wrapper',
@@ -9,20 +10,17 @@ import { Router } from '@angular/router';
 })
 export class WrapperComponent implements OnInit {
 
-  toggled = true;
+  toggled: Boolean;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private sidebarService: SidebarService) {
+    sidebarService.$toggled.subscribe((toggled) => this.toggled = toggled);
+  }
 
   ngOnInit() {
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['login']);
-  }
-
-  toggleMenu() {
-    this.toggled = !this.toggled;
   }
 
 }

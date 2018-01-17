@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { HttpClient } from '@angular/common/http';
 import { User } from './../models/user.model';
@@ -15,7 +16,7 @@ export class AuthService {
   // Čuvamo vreme isteka tokena
   expiresAt;
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {
+  constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
     if (this.cookieService.get('id_token')) {
       this.expiresAt = this.cookieService.get('expires_at');
     }
@@ -46,6 +47,7 @@ export class AuthService {
     this.cookieService.remove('id_token');
     this.cookieService.remove('expires_at');
     this.expiresAt = null;
+    this.router.navigate(['login']);
   }
 
   public isLoggedIn() {

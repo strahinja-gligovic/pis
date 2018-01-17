@@ -1,3 +1,4 @@
+import { SidebarService } from './../../util/sidebar-service/sidebar-service.service';
 import { Router } from '@angular/router';
 import { AuthService } from './../../security/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   toggled = true;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private sidebarService: SidebarService) { }
 
   ngOnInit() {
   }
@@ -21,8 +22,8 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['login']);
   }
 
-  toggleMenu() {
-    this.toggled = !this.toggled;
+  toggleSidebar() {
+    this.sidebarService.toggleSidebar();
   }
 
 }
