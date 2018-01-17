@@ -12,6 +12,8 @@ import { LoginComponent } from './security/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './security/register/register.component';
 import { PageNotFoundComponent } from './util/page-not-found/page-not-found.component';
+import { WrapperComponent } from './pages/wrapper/wrapper.component';
+import { SidebarComponent } from './util/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { PageNotFoundComponent } from './util/page-not-found/page-not-found.comp
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    WrapperComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

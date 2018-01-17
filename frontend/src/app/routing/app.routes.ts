@@ -1,3 +1,4 @@
+import { WrapperComponent } from './../pages/wrapper/wrapper.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PageNotFoundComponent } from './../util/page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
@@ -9,13 +10,12 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
-      { path: '**', component: PageNotFoundComponent}
-  ]
+    path: 'auth', component: WrapperComponent, canActivate: [AuthGuard],
+    children: [ { path: '', component: HomeComponent, pathMatch: 'full' },
+                { path: '**', component: PageNotFoundComponent}]
   },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [AuthGuard] },
-  { path: '**', redirectTo: 'home/404', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'auth', pathMatch: 'full', canActivate: [AuthGuard] },
+  { path: '**', redirectTo: 'auth/404', pathMatch: 'full', canActivate: [AuthGuard] },
 ];
