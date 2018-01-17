@@ -1,46 +1,40 @@
-<div>
-  <div>
-    <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
-
-      <div>
-        <h2 class="title">Sign In</h2>
-        <small class="form-text sub-title">Hello! Sign in with your Username</small>
-        <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
-          <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
-            <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
-          </div>
-          <div class="form-group">
-            <input name="username" [(ngModel)]="user.username" id="input-username" class="form-control" placeholder="Username" #username="ngModel"
-              [class.form-control-danger]="username.invalid && username.touched" required="true" autofocus>
-            <small class="form-text error" *ngIf="username.invalid && username.touched">
-              Username is required!
-            </small>
-          </div>
-          <div class="form-group">
-            <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control" placeholder="Password"
-              #password="ngModel" [class.form-control-danger]="password.invalid && password.touched" required="true">
-            <small class="form-text error" *ngIf="password.invalid && password.touched">
-              Password is required!
-            </small>
-          </div>
-
-          <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success" [class.btn-pulse]="submitted">
-            Sign In
-          </button>
-        </form>
-        <div class="links">
-          <div class="socials">
-            <a href="https://github.com/strahinja-gligovic" target="_blank" class="socicon-github"></a>
-          </div>
-          <small class="form-text">
-            Don't have an account?
-            <a routerLink="../register">
-              <strong>Sign Up</strong>
-            </a>
-          </small>
-        </div>
-      </div>
+<div class="col-xl-4 col-lg-6 col-md-8 col-sm-12 offset-xl-4 offset-lg-3 offset-md-2">
+  <div class="text-center" style="margin-bottom: 10px">
+    <h3 class="display-4">Sign In</h3>
+    <h6>Hello! Sign in with your Username</h6>
+  </div>
+  <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
+    <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+      <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
+    </div>
+    <div class="form-group">
+      <input name="username" [(ngModel)]="user.username" id="input-username" class="form-control" placeholder="Username" #username="ngModel"
+        [class.is-invalid]="username.invalid && username.touched" required="true">
+      <small class="invalid-feedback" *ngIf="username.invalid && username.touched">
+        Username is required!
+      </small>
+    </div>
+    <div class="form-group">
+      <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control" placeholder="Password"
+        #password="ngModel" [class.is-invalid]="password.invalid && password.touched" required="true">
+      <small class="invalid-feedback" *ngIf="password.invalid && password.touched">
+        Password is required!
+      </small>
     </div>
 
+    <button [disabled]="submitted || !form.valid" class="btn btn-block btn-primary">
+      Sign In
+    </button>
+  </form>
+  <div class="text-center">
+    <div style="font-size: 50px">
+      <a href="https://github.com/strahinja-gligovic" target="_blank" class="socicon-github"></a>
+    </div>
+    <small class="lead">
+      Don't have an account?
+      <a routerLink="../register">
+        <strong>Sign Up</strong>
+      </a>
+    </small>
   </div>
 </div>

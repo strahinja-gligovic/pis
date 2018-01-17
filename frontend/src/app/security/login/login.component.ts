@@ -2,24 +2,20 @@ import { User } from './../../models/user.model';
 import { AuthService } from './../auth.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit, Inject } from '@angular/core';
+import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html'
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   error;
   user = new User();
   submitted = false;
+  passwordField;
 
-  constructor(private authService: AuthService, private router: Router, private activatedRoute: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      this.user.username = params['user'];
-    });
+  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
   }
 
   login(): void {

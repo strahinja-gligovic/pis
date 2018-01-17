@@ -1,70 +1,65 @@
-<div class="nb-layout">
-  <div class="nb-layout-column">
-    <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
-
-      <div class="nb-auth-block">
-        <h2 class="title">Sign Up</h2>
-        <form (ngSubmit)="register()" #form="ngForm">
-          <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
-            <div>
-              <strong>Oh snap! Try Again.</strong>
-            </div>
-            <div>{{error.errmsg|| 'Something unexpected happened.'}}</div>
-          </div>
-          <div *ngIf="success" class="alert alert-success" role="alert">
-            <div>
-              <strong>Hooray!</strong>
-            </div>
-            <div>Registration a success ! Redirecting to Login...</div>
-          </div>
-          <div class="form-group">
-            <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel" class="form-control" placeholder="Full name"
-              [class.form-control-danger]="fullName.invalid && fullName.touched" [required]="true" autofocus>
-            <small class="form-text error" *ngIf="fullName.invalid && fullName.touched && fullName.errors?.required">
-              Full name is required!
-            </small>
-          </div>
-          <div class="form-group">
-            <input name="username" [(ngModel)]="user.username" id="input-username" #username="ngModel" class="form-control" placeholder="Username"
-             [class.form-control-danger]="username.invalid && username.touched" [required]="true">
-            <small class="form-text error" *ngIf="username.invalid && username.touched && username.errors?.required">
-              Username is required!
-            </small>
-          </div>
-          <div class="form-group">
-            <label for="input-password" class="sr-only">Password</label>
-            <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control" placeholder="Password"
-              #password="ngModel" [class.form-control-danger]="password.invalid && password.touched" [required]="true">
-            <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
-              Password is required!
-            </small>
-          </div>
-          <div class="form-group">
-            <input name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password" class="form-control" placeholder="Confirm Password"
-              #rePass="ngModel" [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched" [required]="true">
-            <small class="form-text error" *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
-              Password confirmation is required!
-            </small>
-            <small class="form-text error" *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
-              Password does not match the confirm password.
-            </small>
-          </div>
-          <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success" [class.btn-pulse]="submitted">
-            Register
-          </button>
-        </form>
-        <div class="links">
-          <small class="form-text">
-            <div class="socials">
-              <a href="https://github.com/strahinja-gligovic" target="_blank" class="socicon-github"></a>
-            </div>
-            Already have an account?
-            <a routerLink="/login">
-              <strong>Sign in</strong>
-            </a>
-          </small>
-        </div>
+<div class="col-xl-4 col-lg-6 col-md-8 col-sm-12 offset-xl-4 offset-lg-3 offset-md-2">
+  <div class="text-center" style="margin-bottom: 30px">
+    <h3 class="display-4">Sign Up</h3>
+  </div>
+  <form (ngSubmit)="register()" #form="ngForm" >
+    <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+      <div>
+        <strong>Oh snap! Try Again.</strong>
       </div>
+      <div>{{error.errmsg || 'Something unexpected happened.'}}</div>
     </div>
+    <div *ngIf="success" class="alert alert-success" role="alert">
+      <div>
+        <strong>Hooray!</strong>
+      </div>
+      <div>Registration a success ! Redirecting to Login...</div>
+    </div>
+    <div class="form-group">
+      <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel" class="form-control" placeholder="Full name"
+        [class.is-invalid]="fullName.invalid && fullName.touched" [required]="true" autofocus>
+      <small class="invalid-feedback" *ngIf="fullName.invalid && fullName.touched && fullName.errors?.required">
+        Full name is required!
+      </small>
+    </div>
+    <div class="form-group">
+      <input name="username" [(ngModel)]="user.username" id="input-username" #username="ngModel" class="form-control" placeholder="Username"
+        [class.is-invalid]="username.invalid && username.touched" [required]="true">
+      <small class="invalid-feedback" *ngIf="username.invalid && username.touched && username.errors?.required">
+        Username is required!
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="input-password" class="sr-only">Password</label>
+      <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control" placeholder="Password"
+        #password="ngModel" [class.is-invalid]="password.invalid && password.touched" [required]="true">
+      <small class="invalid-feedback" *ngIf="password.invalid && password.touched && password.errors?.required">
+        Password is required!
+      </small>
+    </div>
+    <div class="form-group">
+      <input name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password" class="form-control" placeholder="Confirm Password"
+        #rePass="ngModel" [class.is-invalid]="(rePass.invalid || password.value != rePass.value) && rePass.touched" [required]="true">
+      <small class="invalid-feedback" *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
+        Password confirmation is required!
+      </small>
+      <small class="invalid-feedback" *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
+        Password does not match the confirm password.
+      </small>
+    </div>
+    <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success" [class.btn-pulse]="submitted">
+      Register
+    </button>
+  </form>
+  <div class="text-center">
+    <div style="font-size: 50px">
+      <a href="https://github.com/strahinja-gligovic" target="_blank" class="socicon-github"></a>
+    </div>
+    <small class="lead">
+      Already have an account?
+      <a routerLink="/login">
+        <strong>Sign in</strong>
+      </a>
+    </small>
   </div>
 </div>

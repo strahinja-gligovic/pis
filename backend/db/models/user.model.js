@@ -26,7 +26,7 @@ userSchema.pre('save', function (next) {
             // upisujemo hash
             user.password = hash;
             // sledeću funkciju pozivamo da bi se nastavio tok programa (tj save())
-            // opet, ovo je ovde čisto zbog prirode mongoose modula i javascript
+            // opet, ovo je ovde zbog prirode mongoose modula i javascript
             next();
         });
     });

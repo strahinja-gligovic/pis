@@ -2,14 +2,17 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { HttpClient } from '@angular/common/http';
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
+// modul za lakše upravljanje vremenom
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService {
 
+  // Čuvamo vreme isteka tokena
   expiresAt;
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
@@ -22,6 +25,7 @@ export class AuthService {
   login(username: string, password: string) {
     return this.http.post<User>('/api/login', { username, password })
       .do(response => this.setSession(response))
+      // simuliramo reakciju
       .delay(500);
   }
 
@@ -29,6 +33,7 @@ export class AuthService {
     return this.http.post<User>('/api/register', user);
   }
 
+  // postavlja cookies i računa vreme isteka tokena
   private setSession(authResult) {
     this.expiresAt = moment().add(authResult.expiresIn, 'second');
 
@@ -36,6 +41,7 @@ export class AuthService {
     this.cookieService.put('expires_at', JSON.stringify(this.expiresAt.valueOf()));
   }
 
+  // briše sve podatke o autentifikaciji
   logout() {
     this.cookieService.remove('id_token');
     this.cookieService.remove('expires_at');

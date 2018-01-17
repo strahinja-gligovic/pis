@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+/*Crveni placehodler tekst za invalid input polja*/
+
+input.is-invalid::-webkit-input-placeholder {
+    color: #dc3545 !important;
+    opacity: 1 !important;
+  }
+  
+  input.is-invalid::-moz-placeholder {
+    color: #dc3545 !important;
+    opacity: 1 !important;
+  }
+  
+  input.is-invalid:-ms-input-placeholder {
+    color: #dc3545 !important;
+    opacity: 1 !important;
+  }
+  
+  input.is-invalid::placeholder {
+    color: #dc3545 !important;
+    opacity: 1 !important;
+  }
