@@ -16,6 +16,10 @@ import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { SidebarComponent } from './util/sidebar/sidebar.component';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { MovieComponent } from './pages/movies/movie/movie.component';
+import { ClientsComponent } from './pages/clients/clients.component';
+import { ClientComponent } from './pages/clients/client/client.component';
+import { ClientService } from './pages/clients/client.service';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @NgModule({
@@ -28,7 +32,9 @@ import { MovieComponent } from './pages/movies/movie/movie.component';
     WrapperComponent,
     SidebarComponent,
     MoviesComponent,
-    MovieComponent
+    MovieComponent,
+    ClientsComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,
@@ -37,8 +43,9 @@ import { MovieComponent } from './pages/movies/movie/movie.component';
     CookieModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    NgxDatatableModule
   ],
-  providers: [AuthService, CookieService, AuthGuard],
+  providers: [AuthService, CookieService, AuthGuard, ClientService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

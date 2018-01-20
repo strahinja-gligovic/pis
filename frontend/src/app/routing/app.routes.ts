@@ -8,6 +8,7 @@ import { LoginComponent } from './../security/login/login.component';
 import { AppComponent } from './../app.component';
 import { Routes } from '@angular/router';
 import { MoviesComponent } from '../pages/movies/movies.component';
+import { ClientsComponent } from '../pages/clients/clients.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,7 @@ export const routes: Routes = [
     children: [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'movies', component: MoviesComponent },
+      { path: 'clients', component: ClientsComponent },
       { path: '**', component: PageNotFoundComponent }
     ]
   },
