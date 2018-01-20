@@ -20,6 +20,10 @@ input.is-invalid::-webkit-input-placeholder {
     opacity: 1 !important;
   }
 
+  .clickable {
+    cursor: pointer;
+  }
+
  /* Sidebar Styles */
  
   #wrapper {
