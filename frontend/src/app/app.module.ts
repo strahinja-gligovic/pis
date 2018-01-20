@@ -48,6 +48,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     NgxDatatableModule,
     ModalModule.forRoot()
   ],
+  entryComponents: [ClientComponent],
   providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
