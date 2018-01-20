@@ -137,4 +137,7 @@ input.is-invalid::-webkit-input-placeholder {
       margin-right: 0;
     }
   }
+  .row {
+    margin-left: 0px !important;
+}
   
