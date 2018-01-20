@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { HttpClient } from '@angular/common/http';
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
@@ -20,9 +19,9 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
     if (this.cookieService.get('id_token')) {
       this.expiresAt = this.cookieService.get('expires_at');
+      this.loggedInUsername = this.cookieService.get('username');
     }
   }
-
 
   login(username: string, password: string) {
     return this.http.post<User>('/api/login', { username, password })
@@ -38,9 +37,8 @@ export class AuthService {
   // postavlja cookies i računa vreme isteka tokena
   private setSession(authResult) {
     this.expiresAt = moment().add(authResult.expiresIn, 'second');
-
     this.loggedInUsername = authResult.user.username;
-
+    this.cookieService.put('username', authResult.user.username)
     this.cookieService.put('id_token', authResult.token);
     this.cookieService.put('expires_at', JSON.stringify(this.expiresAt.valueOf()));
   }
@@ -49,6 +47,7 @@ export class AuthService {
   logout() {
     this.cookieService.remove('id_token');
     this.cookieService.remove('expires_at');
+    this.cookieService.remove('username');
     this.expiresAt = null;
     this.loggedInUsername = null;
     this.router.navigate(['login']);

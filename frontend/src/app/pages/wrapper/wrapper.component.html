@@ -9,8 +9,9 @@
         <div class="container-fluid bordered">
             <router-outlet></router-outlet>
         </div>
-        <a style="position: absolute; left:20px; bottom: 5vh;" class="btn btn-secondary" (click)="toggleSidebar()">Toggle Menu</a>
-
+        <div (click)="toggleSidebar()" style="cursor: pointer">
+            <i class="fas fa-align-justify fa-2x" style="position: absolute; left:20px; bottom: 5vh;"  ></i>
+        </div>
     </div>
     <!-- /#page-content-wrapper -->
 
