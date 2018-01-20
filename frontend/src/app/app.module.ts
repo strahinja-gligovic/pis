@@ -15,6 +15,8 @@ import { PageNotFoundComponent } from './util/page-not-found/page-not-found.comp
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { SidebarComponent } from './util/sidebar/sidebar.component';
 import { SidebarService } from './util/sidebar-service/sidebar-service.service';
+import { MoviesComponent } from './pages/movies/movies.component';
+import { MovieComponent } from './pages/movies/movie/movie.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { SidebarService } from './util/sidebar-service/sidebar-service.service';
     PageNotFoundComponent,
     HomeComponent,
     WrapperComponent,
-    SidebarComponent
+    SidebarComponent,
+    MoviesComponent,
+    MovieComponent
   ],
   imports: [
     BrowserModule,
