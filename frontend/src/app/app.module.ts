@@ -20,6 +20,8 @@ import { ClientsComponent } from './pages/clients/clients.component';
 import { ClientComponent } from './pages/clients/client/client.component';
 import { ClientService } from './pages/clients/client.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+
 
 
 @NgModule({
@@ -43,9 +45,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     CookieModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    ModalModule.forRoot()
   ],
-  providers: [AuthService, CookieService, AuthGuard, ClientService],
+  providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

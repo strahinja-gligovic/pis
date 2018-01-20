@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class WrapperComponent implements OnInit {
 
-  toggled: Boolean;
+  toggled =  true;
 
   constructor(private authService: AuthService, private router: Router) {
   }
