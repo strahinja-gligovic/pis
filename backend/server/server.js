@@ -11,9 +11,7 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const dbConfig = require('../db/db.config');
 
-mongoose.connect(dbConfig.url, {
-  useMongoClient: true,
-}, function (err) {
+mongoose.connect(dbConfig.url, function (err) {
   if (err) console.log(error.message);
 });
 const app = express();
