@@ -15,6 +15,7 @@ export class AuthService {
 
   // Čuvamo vreme isteka tokena
   expiresAt;
+  loggedInUsername: String;
 
   constructor(private http: HttpClient, private cookieService: CookieService, private router: Router) {
     if (this.cookieService.get('id_token')) {
@@ -27,7 +28,7 @@ export class AuthService {
     return this.http.post<User>('/api/login', { username, password })
       .do(response => this.setSession(response))
       // simuliramo reakciju
-      .delay(500);
+      .delay(1000);
   }
 
   register(user: User) {
@@ -38,6 +39,8 @@ export class AuthService {
   private setSession(authResult) {
     this.expiresAt = moment().add(authResult.expiresIn, 'second');
 
+    this.loggedInUsername = authResult.user.username;
+
     this.cookieService.put('id_token', authResult.token);
     this.cookieService.put('expires_at', JSON.stringify(this.expiresAt.valueOf()));
   }
@@ -47,6 +50,7 @@ export class AuthService {
     this.cookieService.remove('id_token');
     this.cookieService.remove('expires_at');
     this.expiresAt = null;
+    this.loggedInUsername = null;
     this.router.navigate(['login']);
   }
 

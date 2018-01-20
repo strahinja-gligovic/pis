@@ -41,7 +41,7 @@ exports.loginRoute = function loginRoute(req, res) {
                 // obaveštavamo o uspešnosti i šaljemo token frontendu
                 // token traje 2 sata
                 // ponovo šaljemo ovaj podatak zbog lakšeg upravljanja
-                res.json({ token: jwtToken, expiresIn: 7200 });
+                res.json({ token: jwtToken, expiresIn: 7200, user });
             } else {
                 res.status(401).json({ errmsg: "Invalid credentials !" });
             }
