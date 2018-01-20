@@ -31,7 +31,7 @@ exports.loginRoute = function loginRoute(req, res) {
         user.comparePasswords(password, function (error, result) {
             if (error) {
                 console.log(error);
-                res.status(401).json(error);
+                res.status(401).json({ errmsg: "Invalid credentials !" });
                 return;
             }
 
@@ -41,7 +41,7 @@ exports.loginRoute = function loginRoute(req, res) {
                 // obaveštavamo o uspešnosti i šaljemo token frontendu
                 // token traje 2 sata
                 // ponovo šaljemo ovaj podatak zbog lakšeg upravljanja
-                res.status(200).json({ token: jwtToken, expiresIn: 7200 });
+                res.json({ token: jwtToken, expiresIn: 7200 });
             } else {
                 res.status(401).json({ errmsg: "Invalid credentials !" });
             }
@@ -58,15 +58,9 @@ exports.registerRoute = function registerRoute(req, res) {
         // ukoliko postoji greška obavestavamo o istoj
         if (error) {
             res.status(500).json(error);
-            console.log(error);
-            return;
+        } else {
+            res.json(user);
         }
-
-        if (user && (rows > 0)) {
-            // obaveštavamo o uspešnosti
-            res.status(200).json(user);
-        }
-
     });
 
 }
