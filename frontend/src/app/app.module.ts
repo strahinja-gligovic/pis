@@ -14,7 +14,6 @@ import { RegisterComponent } from './security/register/register.component';
 import { PageNotFoundComponent } from './util/page-not-found/page-not-found.component';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
 import { SidebarComponent } from './util/sidebar/sidebar.component';
-import { SidebarService } from './util/sidebar-service/sidebar-service.service';
 import { MoviesComponent } from './pages/movies/movies.component';
 import { MovieComponent } from './pages/movies/movie/movie.component';
 
@@ -39,7 +38,7 @@ import { MovieComponent } from './pages/movies/movie/movie.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AuthService, CookieService, AuthGuard, SidebarService],
+  providers: [AuthService, CookieService, AuthGuard],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

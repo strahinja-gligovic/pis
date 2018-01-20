@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarService } from '../../util/sidebar-service/sidebar-service.service';
 
 @Component({
   selector: 'app-movies',
@@ -8,12 +7,10 @@ import { SidebarService } from '../../util/sidebar-service/sidebar-service.servi
 })
 export class MoviesComponent implements OnInit {
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
-  toggleSidebar() {
-    this.sidebarService.toggleSidebar();
-  }
+
 }
