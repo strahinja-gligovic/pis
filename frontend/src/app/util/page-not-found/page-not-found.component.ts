@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  countdownNumbers: Array<Number>;
+  interval = 1000;
+  countdownStart = 3;
+
+  constructor(private location: Location) { }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.countdownNumbers =  Array<Number>(this.countdownStart-1);
+      const intervalRef = setInterval(() => {
+        this.countdownNumbers.push(this.countdownStart);
+        this.countdownStart--;
+        if (!this.countdownStart) {
+          clearInterval(intervalRef);
+          this.goBack();
+        }
+      }, this.interval);
+    }, this.interval)
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }
