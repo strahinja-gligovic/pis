@@ -2,11 +2,21 @@
 
 <div class="row">
     <div class="col">
-        <button type="button" class="btn btn-secondary" (click)="openClientModal()">Create modal with component</button>
+        <button type="button" class="btn btn-secondary" (click)="openClientModal()">Add Client</button>
     </div>
 </div>
 
-
-<ngx-datatable class="bootstrap" [rows]="clients" [columns]="columns" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40"
-    [rowHeight]="'auto'" [limit]="8" [reorderable]="reorderable">
-</ngx-datatable>
+<div class="row">
+    <div class="col">
+        <ngx-datatable class="bootstrap" [rows]="clients" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40" [rowHeight]="'auto'">
+            <ngx-datatable-column name="First Name" prop="firstName" [flexGrow]="1"></ngx-datatable-column>
+            <ngx-datatable-column name="Last Name" prop="lastName" [flexGrow]="1"></ngx-datatable-column>
+            <ngx-datatable-column name="Email" prop="email" [flexGrow]="1"></ngx-datatable-column>
+            <ngx-datatable-column name="Date of Birth" prop="dob" [flexGrow]="1">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <span>{{value | date}}</span>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>

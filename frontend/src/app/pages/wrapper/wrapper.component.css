@@ -9,3 +9,13 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
+.sidebar-toggle{
+    position: absolute; 
+    left: 5px; 
+    bottom: 5vh;
+    opacity: 0.5
+}
+
+.sidebar-toggle:hover {
+    opacity: 1
+}

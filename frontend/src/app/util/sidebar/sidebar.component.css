@@ -1,3 +1,10 @@
 .active {
     color: #fff
 }
+
+.fa-text-container{
+    color: #999999
+}
+.fa-text-container:hover {
+    color: white;
+  }

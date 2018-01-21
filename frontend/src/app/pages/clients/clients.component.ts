@@ -14,10 +14,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ClientsComponent implements OnInit {
 
-  columns = [
-    { name: 'firstName' },
-    { name: 'lastName' }
-  ]
   clients: Client[];
 
   clientsChanged: Subscription;
