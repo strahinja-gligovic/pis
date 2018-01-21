@@ -5,3 +5,8 @@
         <button type="button" class="btn btn-secondary" (click)="openClientModal()">Create modal with component</button>
     </div>
 </div>
+
+
+<ngx-datatable class="bootstrap" [rows]="clients" [columns]="columns" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40"
+    [rowHeight]="'auto'" [limit]="8" [reorderable]="reorderable">
+</ngx-datatable>

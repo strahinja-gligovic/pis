@@ -19,12 +19,13 @@ import { MovieComponent } from './pages/movies/movie/movie.component';
 import { ClientsComponent } from './pages/clients/clients.component';
 import { ClientComponent } from './pages/clients/client/client.component';
 import { ClientService } from './pages/clients/client.service';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SidebarService } from './util/sidebar/sidebar.service';
 import { TitleComponent } from './util/title/title.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+
 
 @NgModule({
   declarations: [
@@ -48,10 +49,10 @@ import { TitleComponent } from './util/title/title.component';
     CookieModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    NgxDatatableModule,
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    NgSelectModule
+    NgxDatatableModule,
+    NgSelectModule,
   ],
   entryComponents: [ClientComponent],
   providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService],

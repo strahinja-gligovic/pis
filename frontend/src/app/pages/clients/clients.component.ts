@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { ClientService } from './client.service';
 import { Observable } from 'rxjs/Observable';
 import { Client } from '../../models/client.model';
@@ -9,20 +9,23 @@ import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-clients',
   templateUrl: './clients.component.html',
-  styleUrls: ['./clients.component.css']
+  styleUrls: ['./clients.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ClientsComponent implements OnInit {
 
-  // promenljiva koja čuva referencu na pretplatu iz servisa
-  clients$: Observable<Client[]>;
-  // promenljiva u kojoj se nalaze podaci zarad lakšeg upravljanja njima
+  columns = [
+    { name: 'firstName' },
+    { name: 'lastName' }
+  ]
   clients: Client[];
 
   clientsChanged: Subscription;
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, private clientService: ClientService) { }
 
   ngOnInit() {
+    this.getClients();
   }
 
   // client opcioni parametar
@@ -45,13 +48,15 @@ export class ClientsComponent implements OnInit {
     // ukoliko korisnik uspešno izmeni klijenta, ponovo povlačimo podatke
     this.clientsChanged = modalRef.content.clientsChanged$.subscribe(changed => {
       if (changed) {
-        this.refreshClients();
+        this.getClients();
       }
     }, error => {}, () => { this.clientsChanged.unsubscribe() })
   }
 
-  refreshClients() {
-    console.log('yyeeeee');
+  getClients() {
+    this.clientService.listClients().subscribe(clients => {
+      this.clients = clients;
+    })
   }
 
 }
