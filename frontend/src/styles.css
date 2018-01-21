@@ -137,7 +137,18 @@ input.is-invalid::-webkit-input-placeholder {
       margin-right: 0;
     }
   }
-  .row {
+.row {
     margin-left: 0px !important;
+}
+
+.fa-text-container{
+  display: inline-block;
+  cursor: pointer;
+}
+.icon-center {
+  vertical-align: middle;
+}
+.logout-text {
+  font-size: 20px
 }
   

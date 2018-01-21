@@ -24,6 +24,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SidebarService } from './util/sidebar/sidebar.service';
+import { TitleComponent } from './util/title/title.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { SidebarService } from './util/sidebar/sidebar.service';
     MovieComponent,
     ClientsComponent,
     ClientComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,

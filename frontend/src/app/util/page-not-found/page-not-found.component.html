@@ -1,7 +1,10 @@
-<div class="col-xl-4 col-lg-6 col-md-8 col-sm-12 offset-xl-4 offset-lg-3 offset-md-2">
-    <div class="text-center" style="margin-bottom: 10px">
-        <h3 class="display-5">what are you doing here???</h3>
-        <h3 *ngIf="countdownNumbers" class="display-5">sending you back in...</h3>
-        <h3 class="display-5" *ngFor="let number of countdownNumbers">{{number}}</h3>
+<app-title [title]="thinkofsomething"></app-title>
+<div class="row">
+    <div class="col-xl-4 col-lg-6 col-md-8 col-sm-12 offset-xl-4 offset-lg-3 offset-md-2">
+        <div class="text-center" style="margin-bottom: 10px">
+            <h3 class="display-5">what are you doing here???</h3>
+            <h3 *ngIf="countdownNumbers" class="display-5">sending you back in...</h3>
+            <h3 class="display-5" *ngFor="let number of countdownNumbers">{{number}}</h3>
+        </div>
     </div>
 </div>
