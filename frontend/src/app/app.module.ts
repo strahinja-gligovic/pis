@@ -23,6 +23,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SidebarService } from './util/sidebar/sidebar.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     MoviesComponent,
     MovieComponent,
     ClientsComponent,
-    ClientComponent
+    ClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +52,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgSelectModule
   ],
   entryComponents: [ClientComponent],
-  providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService],
+  providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
