@@ -25,6 +25,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SidebarService } from './util/sidebar/sidebar.service';
 import { TitleComponent } from './util/title/title.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxResizeWatcherDirective } from './util/ngx-resize-watcher.directive';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MovieComponent,
     ClientsComponent,
     ClientComponent,
-    TitleComponent
+    TitleComponent,
+    NgxResizeWatcherDirective
   ],
   imports: [
     BrowserModule,

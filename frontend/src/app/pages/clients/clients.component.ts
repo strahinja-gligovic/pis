@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewEncapsulation, ViewChild } from '@angular/core';
 import { ClientService } from './client.service';
 import { Observable } from 'rxjs/Observable';
 import { Client } from '../../models/client.model';
@@ -15,7 +15,6 @@ import { Subscription } from 'rxjs/Subscription';
 export class ClientsComponent implements OnInit {
 
   clients: Client[];
-
   clientsChanged: Subscription;
 
   constructor(private modalService: BsModalService, private clientService: ClientService) { }
