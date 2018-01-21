@@ -14,7 +14,7 @@ export class Client {
             this.firstName = json.firstName;
             this.lastName = json.lastName;
             this.email = json.email;
-            this.dob = json.dob;
+            this.dob = new Date(json.dob);
             if (json.address) {
                 this.address = new Address(json.address);
             }

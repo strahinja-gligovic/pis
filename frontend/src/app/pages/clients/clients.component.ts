@@ -27,7 +27,7 @@ export class ClientsComponent implements OnInit {
   openClientModal(client?: Client) {
     // instanciramo praznog klijenta za add
     if (!client) {
-      client = new Client({_id: 'desitebra'});
+      client = new Client();
     }
     // kreiramo objekat koji prosleđujemo komponenti u modalu
     // mora da se zove tako
@@ -36,6 +36,10 @@ export class ClientsComponent implements OnInit {
     };
 
     this.modalService.show(ClientComponent, { initialState });
+  }
+
+  refreshClients() {
+    console.log('yyeeeee');
   }
 
 }

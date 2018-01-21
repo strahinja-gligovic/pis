@@ -33,4 +33,12 @@ export class ClientService {
         return this.http.delete('/api/client/delete/' + client_id);
     }
 
+    saveClient(client: Client): Observable<any> {
+        if (client._id) {
+            return this.updateClient(client);
+        } else {
+            return this.addClient(client);
+        }
+    }
+
 }

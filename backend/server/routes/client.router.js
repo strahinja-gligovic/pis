@@ -33,7 +33,7 @@ clientRouter.get('/list/', function (req, res) {
 
 clientRouter.post('/add/', function (req, res) {
     // iz body zahteva kreiramo instancu client modela
-    const client = new Client(req.body);
+    let client = new Client(req.body);
 
     client.save(function (error, client) {
         if (error) {
