@@ -211,3 +211,29 @@ input.is-invalid::-webkit-input-placeholder {
   -webkit-transform: spin(45deg);
   transform: spin(45deg);
 }
+
+// ELIPSIS ON DATATABLE
+.datatable-body-cell-label {
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// DATATABLE RESPONSIVE
+@media screen and (max-width: 800px) {
+  .desktop-hidden {
+    display: initial;
+  }
+  .mobile-hidden {
+    display: none;
+  }
+}
+@media screen and (min-width: 800px) {
+  .desktop-hidden {
+    display: none;
+  }
+  .mobile-hidden {
+    display: initial;
+  }
+}

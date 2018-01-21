@@ -1,5 +1,7 @@
 <app-title [title]="'Clients'"></app-title>
-
+<div *ngIf="success" class="alert alert-success" role="alert">
+    <strong>Success!</strong>
+</div>
 <div class="row">
     <div class="col">
         <button type="button" class="btn btn-secondary" (click)="openClientModal()">Add Client</button>
@@ -8,19 +10,35 @@
 
 <div class="row">
     <div class="col">
-        <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40"
+        <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40"
             [rowHeight]="'auto'">
-            <ngx-datatable-column name="First Name" prop="firstName"></ngx-datatable-column>
-            <ngx-datatable-column name="Last Name" prop="lastName"></ngx-datatable-column>
-            <ngx-datatable-column name="Email" prop="email"></ngx-datatable-column>
-            <ngx-datatable-column name="Date of Birth" prop="dob">
+            <ngx-datatable-column name="First Name" prop="firstName" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Last Name" prop="lastName" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Email" prop="email" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Date of Birth" prop="dob" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
                 <ng-template let-dob="value" ngx-datatable-cell-template>
                     <span>{{dob | date}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Address" prop="address">
+            <ngx-datatable-column name="Address" prop="address" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
                 <ng-template let-address="value" ngx-datatable-cell-template>
-                    <span (click)="openAddressModal(address, addressTemplate)">Click to view</span>
+                    <span style="cursor: pointer;" (click)="openAddressModal(address, addressTemplate)">Click to view</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Operations" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+                <ng-template ngx-datatable-header-template>
+                    &nbsp;
+                </ng-template>
+                <ng-template let-client="row" ngx-datatable-cell-template>
+                    <div>
+                        <span (click)="openClientModal(client)">
+                            <i class="fas fa-pencil-alt fa-lg clickable"></i>
+                        </span>
+                        &nbsp;
+                        <span (click)="deleteClient(client)">
+                            <i class="fas fa-trash fa-lg clickable"></i>
+                        </span>
+                    </div>
                 </ng-template>
             </ngx-datatable-column>
         </ngx-datatable>

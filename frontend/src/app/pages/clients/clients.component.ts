@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Address, countries } from '../../models/address.model';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-clients',
@@ -24,8 +25,11 @@ export class ClientsComponent implements OnInit {
   selectedAddress: Address;
   // povratna vrednost metode koja otvara modal, služi da bi isti mogli da zatvorimo
   addressModalRef: BsModalRef;
-  // činimo dostupnom na template uveženu promenljivu
+  // činimo uveženu promenljivu dostupnom na template
   countries = countries;
+
+  // UI
+  success = false;
 
   constructor(private modalService: BsModalService, private clientService: ClientService) { }
 
@@ -46,6 +50,7 @@ export class ClientsComponent implements OnInit {
     const initialState = {
       client: client
     };
+    debugger;
 
     // ostaje nam reference na otvoreni modal
     const modalRef = this.modalService.show(ClientComponent, { initialState });
@@ -55,8 +60,29 @@ export class ClientsComponent implements OnInit {
     this.clientsChanged = modalRef.content.clientsChanged$.subscribe(changed => {
       if (changed) {
         this.getClients();
+        this.toggleSuccessMessage();
       }
     }, error => {}, () => { this.clientsChanged.unsubscribe() })
+  }
+
+  deleteClient(client: Client) {
+    this.clientService.deleteClient(client._id).subscribe(res => {
+      this.toggleSuccessMessage();
+      for (let i = 0; i < this.clients.length; i++) {
+        const element = this.clients[i];
+        if (element._id === client._id) {
+          this.clients.splice(i, 1);
+        }
+      }
+    }, error => {
+      debugger;
+    })
+  }
+
+  getClients() {
+    this.clientService.listClients().subscribe(clients => {
+      this.clients = clients;
+    })
   }
 
   // ***TEMPLATE MODAL***
@@ -65,10 +91,13 @@ export class ClientsComponent implements OnInit {
     this.addressModalRef = this.modalService.show(template);
   }
 
-  getClients() {
-    this.clientService.listClients().subscribe(clients => {
-      this.clients = clients;
-    })
+  private toggleSuccessMessage() {
+    const duration = 3000;
+
+    this.success = true;
+    setTimeout(() => {
+      this.success = false;
+    }, duration);
   }
 
 }

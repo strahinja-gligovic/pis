@@ -49,7 +49,7 @@ clientRouter.put('/update/', function (req, res) {
 
     // prvo pronalazimo primljeni klijent
     Client.findOne({ _id: client_id }, function (error, client) {
-        if (error || !user) {
+        if (error || !client) {
             res.status(500).json({ errmsg: "No such client." });
         } else {
             // setujemo nove vrednosti iz zahteva
@@ -70,7 +70,7 @@ clientRouter.put('/update/', function (req, res) {
 clientRouter.delete('/delete/:_id', function (req, res) {
     const client_id = req.params._id;
 
-    Client.findByIdAndRemove(client_id, function(error) {
+    Client.findByIdAndRemove(client_id, function (error) {
         if (error) {
             res.status(500).json({ errmsg: "Woops." });
         } else {

@@ -36,6 +36,7 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.clientsChanged$ = new EventEmitter<Boolean>();
+    console.log(this.client);
   }
 
   ngOnDestroy(): void {
@@ -50,12 +51,16 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   saveClient() {
     const client: Client = this.clientForm.value;
+    // u formi ne čuvamo vrednost za id
+    client._id = this.client._id;
     this.submitted = true;
 
     this.clientService.saveClient(client).subscribe(res => {
       this.submitted = false;
       this.success = true;
       this.madeChanges = true;
+
+      this.closeModal();
     }, error => {
       this.submitted = false;
       this.success = false;

@@ -32,7 +32,8 @@ export class ClientService {
     }
 
     deleteClient(client_id: String): Observable<any> {
-        return this.http.delete('/api/client/delete/' + client_id);
+        // setujemo responseType na text jer sa bekenda šaljemo "OK";
+        return this.http.delete('/api/client/delete/' + client_id, { responseType: 'text' });
     }
 
     saveClient(client: Client): Observable<Client> {
