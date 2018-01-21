@@ -1,14 +1,107 @@
 <div class="modal-header">
-  <span *ngIf="client._id; else clientAdd">Client Update</span>
+  <h4 class="modal-title" *ngIf="client._id; else clientAdd">Client Update</h4>
   <ng-template #clientAdd>
-    <span>Client Add</span>
+    <h4 class="modal-title">Client Add</h4>
   </ng-template>
 </div>
 <div class="modal-body">
-  <div class="row">
-    top
-  </div>
+  <form #clientForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input name="firstName" [(ngModel)]="client.firstName" id="input-firstName" class="form-control" placeholder="First Name"
+            #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" required="true">
+          <small class="invalid-feedback" *ngIf="firstName.invalid && firstName.touched">
+            First Name is required!
+          </small>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <input name="lastName" [(ngModel)]="client.lastName" id="input-lastName" class="form-control" placeholder="Last Name" #lastName="ngModel"
+            [class.is-invalid]="lastName.invalid && lastName.touched" required="true">
+          <small class="invalid-feedback" *ngIf="lastName.invalid && lastName.touched">
+            Last Name is required!
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input name="email" [(ngModel)]="client.email" pattern=".+@.+\..+" id="input-email" class="form-control" placeholder="Email Address"
+            #email="ngModel" [class.is-invalid]="email.invalid && email.touched" required="true">
+          <small class="invalid-feedback" *ngIf="email.invalid && email.touched && email.errors?.required">
+            Email Address is required!
+          </small>
+          <small class="invalid-feedback" *ngIf="email.invalid && email.touched && email.errors?.pattern">
+            That's not an Email Address!
+          </small>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <input name="dob" [(ngModel)]="client.dob" bsDatepicker id="input-dob" class="form-control" placeholder="Date of Birth" #dob="ngModel"
+            [class.is-invalid]="dob.invalid && dob.touched" required="true" [bsConfig]="{ containerClass: 'theme-default' }">
+          <small class="invalid-feedback" *ngIf="dob.invalid && dob.touched">
+            Date of Birth is required!
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <h6>Address</h6>
+      </div>
+    </div>
+    <div ngModelGroup="address" #address="ngModelGroup">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <input name="street" [(ngModel)]="client.street" street id="input-street" class="form-control" placeholder="Street" #street="ngModel"
+              [class.is-invalid]="street.invalid && street.touched" required="true">
+            <small class="invalid-feedback" *ngIf="street.invalid && street.touched">
+              Street is required!
+            </small>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input name="city" [(ngModel)]="client.city" id="input-city" class="form-control" placeholder="City" #city="ngModel" [class.is-invalid]="city.invalid && city.touched"
+              required="true">
+            <small class="invalid-feedback" *ngIf="city.invalid && city.touched">
+              City is required!
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <ng-select name="country" [(ngModel)]="client.country" country id="input-country" placeholder="Country" #country="ngModel"
+              [class.is-invalid]="country.invalid && country.touched" required="true">
+              <ng-option [value]="true">Yes</ng-option>
+              <ng-option [value]="false">No</ng-option>
+            </ng-select>
+            <small class="invalid-feedback" *ngIf="country.invalid && country.touched">
+              Country is required!
+            </small>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input name="zip" [(ngModel)]="client.zip" id="input-zip" class="form-control" placeholder="Zip" #zip="ngModel" [class.is-invalid]="zip.invalid && zip.touched"
+              required="true">
+            <small class="invalid-feedback" *ngIf="zip.invalid && zip.touched">
+              Zip is required!
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
+  <button type="button" class="btn btn-default" (click)="saveClient()">Save</button>
+  <button type="button" class="btn btn-default" (click)="closeModal()">Close</button>
 </div>

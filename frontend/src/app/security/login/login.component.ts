@@ -15,7 +15,8 @@ export class LoginComponent {
   submitted = false;
   passwordField;
 
-  constructor(private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(private authService: AuthService, private router: Router, 
+    private route: ActivatedRoute) {
   }
 
   login(): void {

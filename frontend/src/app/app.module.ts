@@ -21,8 +21,8 @@ import { ClientComponent } from './pages/clients/client/client.component';
 import { ClientService } from './pages/clients/client.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
-
-
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,9 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     FormsModule,
     ReactiveFormsModule,
     NgxDatatableModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    NgSelectModule
   ],
   entryComponents: [ClientComponent],
   providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService],
