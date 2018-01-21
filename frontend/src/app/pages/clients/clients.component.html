@@ -10,15 +10,62 @@
     <div class="col">
         <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'force'" [headerHeight]="40" [footerHeight]="40"
             [rowHeight]="'auto'">
-            <ngx-datatable-column name="First Name" prop="firstName" ></ngx-datatable-column>
+            <ngx-datatable-column name="First Name" prop="firstName"></ngx-datatable-column>
             <ngx-datatable-column name="Last Name" prop="lastName"></ngx-datatable-column>
             <ngx-datatable-column name="Email" prop="email"></ngx-datatable-column>
             <ngx-datatable-column name="Date of Birth" prop="dob">
-                <ng-template let-value="value" ngx-datatable-cell-template>
-                    <span>{{value | date}}</span>
+                <ng-template let-dob="value" ngx-datatable-cell-template>
+                    <span>{{dob | date}}</span>
                 </ng-template>
             </ngx-datatable-column>
-            <ngx-datatable-column name="Address" prop="address"></ngx-datatable-column>
+            <ngx-datatable-column name="Address" prop="address">
+                <ng-template let-address="value" ngx-datatable-cell-template>
+                    <span (click)="openAddressModal(address, addressTemplate)">Click to view</span>
+                </ng-template>
+            </ngx-datatable-column>
         </ngx-datatable>
     </div>
 </div>
+
+<ng-template #addressTemplate>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Address</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="addressModalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <fieldset disabled>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="input-street">Street</label>
+                        <input name="street" [ngModel]="selectedAddress.street" id="input-street" class="form-control" placeholder="Street" #street="ngModel">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="input-city">City</label>
+                        <input name="city" [ngModel]="selectedAddress.city" id="input-city" class="form-control" placeholder="City" #city="ngModel">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="input-country">Country</label>
+                        <ng-select disabled="true" name="country" [ngModel]="selectedAddress.country" id="input-country" placeholder="Country" #country="ngModel">
+                            <ng-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="input-zip">Zip</label>
+                        <input name="zip" [ngModel]="selectedAddress.zip" id="input-zip" class="form-control" placeholder="Zip" #zip="ngModel">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</ng-template>

@@ -5,6 +5,7 @@ import { Client } from '../../models/client.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
+import { Address, countries } from '../../models/address.model';
 
 @Component({
   selector: 'app-clients',
@@ -15,7 +16,16 @@ import { Subscription } from 'rxjs/Subscription';
 export class ClientsComponent implements OnInit {
 
   clients: Client[];
+  // referenca na osluškivanje promena u Client modalu
   clientsChanged: Subscription;
+
+  // ***TEMPLATE MODAL***
+  // smeštamo adresu koju želimo da prikažemo u modalu
+  selectedAddress: Address;
+  // povratna vrednost metode koja otvara modal, služi da bi isti mogli da zatvorimo
+  addressModalRef: BsModalRef;
+  // činimo dostupnom na template uveženu promenljivu
+  countries = countries;
 
   constructor(private modalService: BsModalService, private clientService: ClientService) { }
 
@@ -23,6 +33,7 @@ export class ClientsComponent implements OnInit {
     this.getClients();
   }
 
+  // ***COMPONENT MODAL***
   // client opcioni parametar
   // ukoliko otvaramo add, ne prosleđujemo ga kao parametar
   openClientModal(client?: Client) {
@@ -46,6 +57,12 @@ export class ClientsComponent implements OnInit {
         this.getClients();
       }
     }, error => {}, () => { this.clientsChanged.unsubscribe() })
+  }
+
+  // ***TEMPLATE MODAL***
+  openAddressModal(address: Address, template: TemplateRef<any>) {
+    this.selectedAddress = address;
+    this.addressModalRef = this.modalService.show(template);
   }
 
   getClients() {
