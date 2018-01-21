@@ -8,12 +8,15 @@
   <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
     <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
   </div>
+  <div *ngIf="success" class="alert alert-success" role="alert">
+    <strong>Success!</strong>
+  </div>
   <form #clientForm="ngForm">
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <input name="firstName" [ngModel]="client.firstName" id="input-firstName" class="form-control" placeholder="First Name"
-            #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" required="true">
+          <input name="firstName" [ngModel]="client.firstName" id="input-firstName" class="form-control" placeholder="First Name" #firstName="ngModel"
+            [class.is-invalid]="firstName.invalid && firstName.touched" required="true">
           <small class="invalid-feedback" *ngIf="firstName.invalid && firstName.touched">
             First Name is required!
           </small>
