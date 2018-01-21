@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Client } from '../../models/client.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-clients',
@@ -16,6 +17,8 @@ export class ClientsComponent implements OnInit {
   clients$: Observable<Client[]>;
   // promenljiva u kojoj se nalaze podaci zarad lakšeg upravljanja njima
   clients: Client[];
+
+  clientsChanged: Subscription;
 
   constructor(private modalService: BsModalService) { }
 
@@ -32,10 +35,19 @@ export class ClientsComponent implements OnInit {
     // kreiramo objekat koji prosleđujemo komponenti u modalu
     // mora da se zove tako
     const initialState = {
-      client : client
+      client: client
     };
 
-    this.modalService.show(ClientComponent, { initialState });
+    // ostaje nam reference na otvoreni modal
+    const modalRef = this.modalService.show(ClientComponent, { initialState });
+
+    // pristupamo poljima u okviru komponente koja se nalazi u modalu
+    // ukoliko korisnik uspešno izmeni klijenta, ponovo povlačimo podatke
+    this.clientsChanged = modalRef.content.clientsChanged$.subscribe(changed => {
+      if (changed) {
+        this.refreshClients();
+      }
+    }, error => {}, () => { this.clientsChanged.unsubscribe() })
   }
 
   refreshClients() {

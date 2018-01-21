@@ -4,20 +4,24 @@ import { countries, Address } from '../../../models/address.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgForm } from '@angular/forms';
 import { ClientService } from '../client.service';
+import { Subject } from 'rxjs/Subject';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.css']
 })
-export class ClientComponent implements OnInit {
+export class ClientComponent implements OnInit, OnDestroy {
 
   countries = countries;
   client: Client;
   @ViewChild('clientForm') clientForm: NgForm;
   submitted = false;
   error;
-  @Output() clientsChanged= new EventEmitter();
+  
+  private _clientsChanged = new Subject<Boolean>();
+  clientsChanged$ = this._clientsChanged.asObservable();
 
   constructor(private bsModalRef: BsModalRef, private clientService: ClientService) { }
 
@@ -28,17 +32,22 @@ export class ClientComponent implements OnInit {
     this.bsModalRef.hide();
   }
 
-  saveClient() {
-    this.submitted = true;
+  saveClient() {    
     const client: Client = this.clientForm.value;
+    this.submitted = true;
+
     this.clientService.saveClient(client).subscribe(res => {
       this.submitted = false;
-      this.client = new Client(res);
+      this._clientsChanged.next(true);
+      this.closeModal();
     }, error => {
       this.submitted = false;
       this.error = error.error;
     })
-    //this.clientsChanged.emit();
+  }
+
+  ngOnDestroy(): void {
+    this._clientsChanged.complete();
   }
 
 }
