@@ -24,6 +24,11 @@ export class ClientComponent implements OnInit, OnDestroy {
   submitted = false;
   success = false;
   
+  // najjednostavniji oblik događaja
+  // imamo mogućnost da pravimo događaje sa .emit(), prosleđujemo parametar deklarisanog tipa
+  // komponente pretplaćene na ovaj događaja nemaju konstantno uvid u stanje servisa
+  // samo kad mi to hoćemo pozivom metode
+  // u ovom slučaju nam više i ne treba jer samo hoćemo da po zatvaranju modala obavestimo o promenama
   private clientsChanged$: EventEmitter<Boolean>;
 
   constructor(private bsModalRef: BsModalRef, private clientService: ClientService) { }
@@ -32,6 +37,8 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    // kada se komponenta gasi obaveštavamo da li su njene akcije prouzrokovale promenu u db
+    // hoćemo ponovo da učitamo podatke ukoliko je to slučaj
     this.clientsChanged$.emit(this.madeChanges);
   }
 
