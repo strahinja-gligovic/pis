@@ -30,8 +30,8 @@ const api = require('./routes/api');
 app.use('/api', api);
 
 // EVERY OTHER REQUEST GOES TO THE ANGULAR APP
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend/dist/index'));
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, '../../frontend/dist/index.html'));
 });
 
 const port = process.env.PORT || '3000';

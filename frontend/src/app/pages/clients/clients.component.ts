@@ -6,7 +6,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Address, countries } from '../../models/address.model';
-import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-clients',
