@@ -19,7 +19,7 @@ export class WrapperComponent implements OnInit {
   ngOnInit() {
     this.sidebarService.toggled$.subscribe(toggled => {
       this.toggled = toggled;
-    })
+    });
   }
 
   logout() {

@@ -38,7 +38,7 @@ export class AuthService {
   private setSession(authResult) {
     this.expiresAt = moment().add(authResult.expiresIn, 'second');
     this.loggedInUsername = authResult.user.username;
-    this.cookieService.put('username', authResult.user.username)
+    this.cookieService.put('username', authResult.user.username);
     this.cookieService.put('id_token', authResult.token);
     this.cookieService.put('expires_at', JSON.stringify(this.expiresAt.valueOf()));
   }

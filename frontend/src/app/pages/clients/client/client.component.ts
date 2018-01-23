@@ -65,6 +65,6 @@ export class ClientComponent implements OnInit, OnDestroy {
       this.submitted = false;
       this.success = false;
       this.error = error.error;
-    })
+    });
   }
 }

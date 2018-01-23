@@ -49,7 +49,6 @@ export class ClientsComponent implements OnInit {
     const initialState = {
       client: client
     };
-    debugger;
 
     // ostaje nam reference na otvoreni modal
     const modalRef = this.modalService.show(ClientComponent, { initialState });
@@ -61,7 +60,7 @@ export class ClientsComponent implements OnInit {
         this.getClients();
         this.toggleSuccessMessage();
       }
-    }, error => {}, () => { this.clientsChanged.unsubscribe() })
+    }, error => { }, () => { this.clientsChanged.unsubscribe(); });
   }
 
   deleteClient(client: Client) {
@@ -74,14 +73,13 @@ export class ClientsComponent implements OnInit {
         }
       }
     }, error => {
-      debugger;
-    })
+    });
   }
 
   getClients() {
     this.clientService.listClients().subscribe(clients => {
       this.clients = clients;
-    })
+    });
   }
 
   // ***TEMPLATE MODAL***

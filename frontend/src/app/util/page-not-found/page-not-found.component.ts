@@ -16,7 +16,7 @@ export class PageNotFoundComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.countdownNumbers =  Array<Number>(this.countdownStart-1);
+      this.countdownNumbers = Array<Number>(this.countdownStart - 1);
       const intervalRef = setInterval(() => {
         this.countdownNumbers.push(this.countdownStart);
         this.countdownStart--;
@@ -25,7 +25,7 @@ export class PageNotFoundComponent implements OnInit {
           this.goBack();
         }
       }, this.interval);
-    }, this.interval)
+    }, this.interval);
   }
 
   goBack() {

@@ -11,20 +11,20 @@ export class TitleComponent implements OnInit {
 
   toggled: Boolean;
   @Input() title: String;
-  
+
   constructor(private sidebarService: SidebarService, private authService: AuthService) { }
 
   ngOnInit() {
     this.sidebarService.toggled$.subscribe(toggled => {
       this.toggled = toggled;
-    })
+    });
   }
 
   toggleSidebar() {
-    this.sidebarService.toggleSidebar();;
+    this.sidebarService.toggleSidebar();
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 

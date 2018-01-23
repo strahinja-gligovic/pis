@@ -1,7 +1,7 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import { Client } from "../../models/client.model";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Client } from '../../models/client.model';
 
 @Injectable()
 export class ClientService {
@@ -18,7 +18,7 @@ export class ClientService {
 
     listClients(): Observable<Client[]> {
         return this.http.get('/api/client/list/')
-            .map(response => <Client[]>response)
+            .map(response => <Client[]>response);
     }
 
     addClient(client: Client): Observable<Client> {
@@ -28,7 +28,7 @@ export class ClientService {
 
     updateClient(client: Client): Observable<any> {
         return this.http.put('/api/client/update/', client)
-            .map(response => new Client(response));;
+            .map(response => new Client(response));
     }
 
     deleteClient(client_id: String): Observable<any> {
