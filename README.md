@@ -8,6 +8,12 @@ Projektovanje Informacionih Sistema
 $ npm install
 ```
 
+## Build
+
+```
+$ npm run-script build
+```
+
 ## Deployment
 
 ```
