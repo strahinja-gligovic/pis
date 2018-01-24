@@ -21,6 +21,7 @@ export class SidebarService implements OnInit {
     }
 
     ngOnInit(): void {
+        this.dammitDatatable();
     }
 
     toggleSidebar() {
@@ -28,5 +29,14 @@ export class SidebarService implements OnInit {
         this.toggled = !this.toggled;
         // obaveštavama Subject da mu se stanje promenilo
         this.toggled$.next(this.toggled);
+
+        this.dammitDatatable();
     }
-    
+
+    dammitDatatable() {
+        // klasičan budž
+        setTimeout(() => {
+            window.dispatchEvent(new Event('resize'));
+        }, 600);
+    }
+}

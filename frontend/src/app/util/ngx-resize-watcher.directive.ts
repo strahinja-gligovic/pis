@@ -1,5 +1,5 @@
 import { Directive, AfterContentChecked } from '@angular/core';
-import { DatatableComponent } from "@swimlane/ngx-datatable";
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 @Directive({ selector: '[ngx-resize-watcher]' })
 export class NgxResizeWatcherDirective implements AfterContentChecked {
