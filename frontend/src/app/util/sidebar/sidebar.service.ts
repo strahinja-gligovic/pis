@@ -6,7 +6,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
-export class SidebarService implements OnInit {
+export class SidebarService {
 
     // malo komplikovaniji oblik događaja ( naspram onog u komponentama )
     // ovde želimo da pratimo stanje toggled promenljive i treba da nam je dostupno uvek
@@ -18,10 +18,6 @@ export class SidebarService implements OnInit {
     constructor() {
         // setujemo inicijalnu vrednost kroz konstruktor
         this.toggled$ = new BehaviorSubject<Boolean>(this.toggled);
-    }
-
-    ngOnInit(): void {
-        this.dammitDatatable();
     }
 
     toggleSidebar(value?: Boolean) {
