@@ -11,7 +11,7 @@ export class SidebarService implements OnInit {
     // malo komplikovaniji oblik događaja ( naspram onog u komponentama )
     // ovde želimo da pratimo stanje toggled promenljive i treba da nam je dostupno uvek
     // komponenta koja se pretplati na BehaviorSubject odmah će imati uvid u vrednost toggled
-    toggled: Boolean = true;
+    private toggled: Boolean = true;
     // podklasa Subject koja omogućava postavljanje inicijalne vrednosti
     toggled$: BehaviorSubject<Boolean>;
 
@@ -24,16 +24,21 @@ export class SidebarService implements OnInit {
         this.dammitDatatable();
     }
 
-    toggleSidebar() {
-        // menjamo stanje
-        this.toggled = !this.toggled;
+    toggleSidebar(value?: Boolean) {
+        if (value == null) {
+            // menjamo stanje
+            this.toggled = !this.toggled;
+        } else {
+            this.toggled = value;
+        }
+
         // obaveštavama Subject da mu se stanje promenilo
         this.toggled$.next(this.toggled);
 
         this.dammitDatatable();
     }
 
-    dammitDatatable() {
+    private dammitDatatable() {
         // klasičan budž
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));

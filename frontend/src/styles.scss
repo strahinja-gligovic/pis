@@ -220,6 +220,12 @@ input.is-invalid::-webkit-input-placeholder {
   white-space: nowrap;
 }
 
+// CENTER NO DATA TEXT
+.empty-row {
+  text-align: center;
+  margin: 5%
+}
+
 // DATATABLE RESPONSIVE
 @media screen and (max-width: 800px) {
   .desktop-hidden {

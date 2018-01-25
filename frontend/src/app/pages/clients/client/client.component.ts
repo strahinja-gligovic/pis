@@ -9,8 +9,7 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-client',
-  templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  templateUrl: './client.component.html'
 })
 export class ClientComponent implements OnInit, OnDestroy {
 

@@ -1,8 +1,40 @@
 <app-title [title]="'Movies'"></app-title>
+<div *ngIf="success" class="alert alert-success" role="alert">
+  <strong>Success!</strong>
+</div>
 <div class="row">
   <div class="col">
-    <p>
-      movies works!
-    </p>
+    <button type="button" class="btn btn-secondary" (click)="openMovieModal()">Add Movie</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="movies" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40"
+      [rowHeight]="'auto'">
+      <ngx-datatable-column name="Title" prop="title" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+      <ngx-datatable-column name="Release Date" prop="releaseDate" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-releaseDate="value" ngx-datatable-cell-template>
+          <span>{{ releaseDate | date}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Director" prop="director" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+      <ngx-datatable-column name="Operations" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template ngx-datatable-header-template>
+          &nbsp;
+        </ng-template>
+        <ng-template let-movie="row" ngx-datatable-cell-template>
+          <div>
+            <span (click)="openMovieModal(movie)">
+              <i class="fas fa-pencil-alt fa-lg clickable"></i>
+            </span>
+            &nbsp;
+            <span (click)="deleteMovie(movie)">
+              <i class="fas fa-trash fa-lg clickable"></i>
+            </span>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
   </div>
 </div>

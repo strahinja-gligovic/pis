@@ -26,6 +26,8 @@ import { SidebarService } from './util/sidebar/sidebar.service';
 import { TitleComponent } from './util/title/title.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxResizeWatcherDirective } from './util/ngx-resize-watcher.directive';
+import { MovieService } from './pages/movies/movie.service';
+import { Ng2CompleterModule } from 'ng2-completer';
 
 
 @NgModule({
@@ -55,9 +57,11 @@ import { NgxResizeWatcherDirective } from './util/ngx-resize-watcher.directive';
     BsDatepickerModule.forRoot(),
     NgxDatatableModule,
     NgSelectModule,
+    Ng2CompleterModule
   ],
-  entryComponents: [ClientComponent],
-  providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService],
+  entryComponents: [ClientComponent, MovieComponent],
+  providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService,
+    MovieService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
