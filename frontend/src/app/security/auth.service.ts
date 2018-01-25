@@ -31,7 +31,8 @@ export class AuthService {
   }
 
   register(user: User) {
-    return this.http.post<User>('/api/register', user);
+    return this.http.post<User>('/api/register', user)
+        .delay(1000);
   }
 
   // postavlja cookies i računa vreme isteka tokena

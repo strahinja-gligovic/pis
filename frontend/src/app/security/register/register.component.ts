@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
+  styleUrls: ['../auth.loader.css']
 })
 export class RegisterComponent {
 
@@ -25,6 +26,7 @@ export class RegisterComponent {
 
     this.authService.register(this.user).subscribe(result => {
       this.success = true;
+      this.submitted = false;
       console.log(result);
       setTimeout(() => this.router.navigate(['/login'], { queryParams: { user: result.username } }), 2500);
     }, error => {

@@ -6,9 +6,10 @@ import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['../auth.loader.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   error;
   user = new User();
@@ -17,6 +18,13 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router,
     private route: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    const userParam = this.route.snapshot.queryParamMap['params']['user'];
+    if (userParam) {
+      this.user.username = userParam;
+    }
   }
 
   login(): void {
