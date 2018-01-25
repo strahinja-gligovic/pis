@@ -2,7 +2,6 @@ import { Injectable, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core/src/event_emitter';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
