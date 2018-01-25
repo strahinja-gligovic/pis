@@ -43,7 +43,12 @@ export class ClientsComponent implements OnInit {
     // instanciramo praznog klijenta za add
     if (!client) {
       client = new Client();
+    } else {
+      // instanciramo ga ponovo da bi inicijalizovali Date objekat
+      // iz template dobijamo vrednosti u string formatu
+      client = new Client(client);
     }
+
     // kreiramo objekat koji prosleđujemo komponenti u modalu
     // mora da se zove tako
     const initialState = {

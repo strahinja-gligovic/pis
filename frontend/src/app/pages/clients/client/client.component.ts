@@ -1,5 +1,5 @@
+import { Client } from './../../../models/client.model';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { Client } from '../../../models/client.model';
 import { countries, Address } from '../../../models/address.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgForm } from '@angular/forms';
@@ -36,7 +36,6 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.clientsChanged$ = new EventEmitter<Boolean>();
-    console.log(this.client);
   }
 
   ngOnDestroy(): void {
