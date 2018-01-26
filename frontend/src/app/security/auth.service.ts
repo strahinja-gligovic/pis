@@ -27,7 +27,9 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.logout();
+    if (this.loggedInUser) {
+      this.logout();
+    }
   }
 
   login(username: string, password: string) {
