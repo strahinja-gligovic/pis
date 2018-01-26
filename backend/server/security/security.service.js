@@ -28,6 +28,11 @@ exports.loginRoute = function loginRoute(req, res) {
             return;
         }
 
+        if (user.currentlyLoggedIn) {
+            res.status(401).json({ errmsg: "Already logged in !" });
+            return;
+        }
+
         user.comparePasswords(password, function (error, result) {
             if (error) {
                 console.log(error);
@@ -36,6 +41,8 @@ exports.loginRoute = function loginRoute(req, res) {
             }
 
             if (result) {
+                user.currentlyLoggedIn = true;
+                user.save();
                 // kreiramo JWT
                 const jwtToken = jwt.sign({ username: username }, secret, { expiresIn: 7200 });
                 // obaveštavamo o uspešnosti i šaljemo token frontendu
@@ -47,6 +54,18 @@ exports.loginRoute = function loginRoute(req, res) {
             }
         })
     });
+}
+
+exports.logoutRoute = function logoutRoute(req, res) {
+    var user_id = req.body._id;
+
+    User.findOne({ _id: user_id }, function (error, user) {
+        user.set({currentlyLoggedIn : false});
+
+        user.save(function (error, user) {
+            res.sendStatus(200);
+        })
+    })
 }
 
 exports.registerRoute = function registerRoute(req, res) {

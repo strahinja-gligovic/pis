@@ -7,7 +7,8 @@ const saltRounds = 10;
 var userSchema = new mongoose.Schema({
     fullName: String,
     username: { type: String, unique: true, required: true },
-    password: String
+    password: String,
+    currentlyLoggedIn: Boolean
 });
 
 // funkcija koja pretvara plain text string u hashirani i čuva u DB
