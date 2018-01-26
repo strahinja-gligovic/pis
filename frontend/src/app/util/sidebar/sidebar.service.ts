@@ -14,23 +14,44 @@ export class SidebarService {
     // podklasa Subject koja omogućava postavljanje inicijalne vrednosti
     toggled$: BehaviorSubject<Boolean>;
 
+    // UI
+    private onResizeTriggered = false;
+
     constructor() {
         // setujemo inicijalnu vrednost kroz konstruktor
         this.toggled$ = new BehaviorSubject<Boolean>(this.toggled);
     }
 
-    toggleSidebar(value?: Boolean) {
-        if (value == null) {
-            // menjamo stanje
-            this.toggled = !this.toggled;
-        } else {
-            this.toggled = value;
-        }
+    toggleSidebar() {
+        // menjamo stanje
+        this.toggled = !this.toggled;
 
         // obaveštavama Subject da mu se stanje promenilo
         this.toggled$.next(this.toggled);
 
-        this.dammitDatatable();
+        // UI
+        if (this.onResizeTriggered) {
+            this.onResizeTriggered = false;
+        } else {
+            this.dammitDatatable();
+        }
+    }
+
+    private setSidebar(value: Boolean) {
+        this.toggled = value;
+
+        this.toggled$.next(this.toggled);
+    }
+
+    // UI
+    onResize(event) {
+        const width = event.target.innerWidth;
+        if (width < 768) {
+            if (this.onResizeTriggered === false) {
+                this.setSidebar(false);
+                this.onResizeTriggered = true;
+            }
+        }
     }
 
     private dammitDatatable() {

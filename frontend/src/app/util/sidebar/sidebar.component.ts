@@ -8,6 +8,8 @@ import { SidebarService } from './sidebar.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
+
   constructor(private authService: AuthService, private sidebarService: SidebarService) { }
 
   ngOnInit() {
@@ -18,9 +20,6 @@ export class SidebarComponent implements OnInit {
   }
 
   onResize(event) {
-    const width = event.target.innerWidth;
-    if (width < 760) {
-      this.sidebarService.toggleSidebar(false);
-    }
+    this.sidebarService.onResize(event);
   }
 }
