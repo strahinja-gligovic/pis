@@ -1,5 +1,6 @@
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
+const MONGO_DUPLICATE_CODE = require('../../const').MONGO_DUPLICATE_CODE;
 const User = require('../../db/models/user.model');
 // modul za kreiranje JWT
 const jwt = require('jsonwebtoken');
@@ -57,7 +58,11 @@ exports.registerRoute = function registerRoute(req, res) {
     user.save(function (error, user, rows) {
         // ukoliko postoji greška obavestavamo o istoj
         if (error) {
-            res.status(500).json(error);
+            if (error.code === MONGO_DUPLICATE_CODE) {
+                res.status(500).json({ errmsg: "That username is taken, try a different one!" });
+            } else {
+                res.status(500).json(error);
+            }
         } else {
             res.json(user);
         }

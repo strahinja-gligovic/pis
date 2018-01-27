@@ -1,6 +1,7 @@
 const express = require('express');
 const movieRouter = express.Router();
 const Movie = require('../../db/models/movie.model');
+const MONGO_DUPLICATE_CODE = require('../../const').MONGO_DUPLICATE_CODE;
 
 movieRouter.get('/get/:_id', function (req, res) {
     // iz URL parametra kupimo ObjectId
@@ -37,7 +38,12 @@ movieRouter.post('/add/', function (req, res) {
 
     movie.save(function (error, movie) {
         if (error) {
-            res.status(500).json({ errmsg: "That's not a movie." });
+            console.log(error);
+            if (error.code === MONGO_DUPLICATE_CODE) {
+                res.status(500).json({ errmsg: "You already added this movie."});
+            } else {
+                res.status(500).json({ errmsg: "That's not a movie." });
+            }
         } else {
             res.json(movie);
         }
