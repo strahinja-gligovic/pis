@@ -19,5 +19,8 @@ export class Client {
                 this.address = new Address(json.address);
             }
         }
+        if (!this.address) {
+            this.address = new Address();
+        }
     }
 }

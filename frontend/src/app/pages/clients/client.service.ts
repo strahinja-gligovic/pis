@@ -10,7 +10,7 @@ export class ClientService {
     }
 
     getClient(client_id): Observable<Client> {
-        return this.http.get('/api/clients/get/' + client_id)
+        return this.http.get('/api/client/get/' + client_id)
             // map funkcija se poziva pre nego što se povratni podaci proslede dalje
             // ovde želimo da od jsona napravimo instancu klase našeg modela
             .map(response => new Client(response));

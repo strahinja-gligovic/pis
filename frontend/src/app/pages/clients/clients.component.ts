@@ -54,7 +54,7 @@ export class ClientsComponent implements OnInit {
       client: client
     };
 
-    // ostaje nam reference na otvoreni modal
+    // ostaje nam referenca na otvoreni modal
     const modalRef = this.modalService.show(ClientComponent, { initialState });
 
     // pristupamo poljima u okviru komponente koja se nalazi u modalu
@@ -74,6 +74,8 @@ export class ClientsComponent implements OnInit {
         const element = this.clients[i];
         if (element._id === client._id) {
           this.clients.splice(i, 1);
+          // ngx-datatable detektor promena
+          this.clients = [...this.clients];
         }
       }
     }, error => {

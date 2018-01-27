@@ -17,7 +17,6 @@ export class ClientComponent implements OnInit, OnDestroy {
   countries = countries;
 
   client: Client;
-  @ViewChild('clientForm') clientForm: NgForm;
   error: any;
   madeChanges = false;
   submitted = false;
@@ -48,12 +47,12 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   saveClient() {
-    const client: Client = this.clientForm.value;
-    // u formi ne čuvamo vrednost za id
-    client._id = this.client._id;
+    // const client: Client = this.clientForm.value;
+    // // u formi ne čuvamo vrednost za id
+    // client._id = this.client._id;
     this.submitted = true;
 
-    this.clientService.saveClient(client).subscribe(res => {
+    this.clientService.saveClient(this.client).subscribe(res => {
       this.submitted = false;
       this.success = true;
       this.madeChanges = true;
