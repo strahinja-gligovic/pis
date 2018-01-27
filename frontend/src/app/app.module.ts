@@ -30,7 +30,6 @@ import { MovieService } from './pages/movies/movie.service';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AlertModule } from 'ngx-bootstrap/alert';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -7,8 +7,8 @@ export class Movie {
     overview: String;
     rating: Number;
     poster: String;
-    remaining: Number;
-    total: Number;
+    remaining: number;
+    total: number;
 
     constructor(json?: any) {
         if (json) {

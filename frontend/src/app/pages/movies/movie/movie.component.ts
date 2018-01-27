@@ -91,6 +91,28 @@ export class MovieComponent implements OnInit, OnDestroy {
     });
   }
 
+  private handleTotal() {
+    if (this.movie._id) {
+      const totalCtrl = this.movieForm.controls['total'];
+      const remainingCtrl = this.movieForm.controls['remaining'];
+
+      const totalDifference = totalCtrl.value - this.movie.total;
+      const remainingAdjusted = this.movie.remaining + totalDifference;
+
+      if (remainingAdjusted < 0) {
+        const errorObject = {};
+        errorObject['gt'] = true;
+        if (totalCtrl.value === null) {
+          errorObject['required'] = true;
+        }
+        totalCtrl.setErrors(errorObject);
+      } else {
+        remainingCtrl.setValue(remainingAdjusted);
+        totalCtrl.setErrors(null);
+      }
+    }
+  }
+
   private onHighlightedTmdb(data: CompleterItem) {
     if (data) {
       const movieData = data.originalObject;

@@ -36,6 +36,9 @@ movieRouter.post('/add/', function (req, res) {
     // iz body zahteva kreiramo instancu movie modela
     const movie = new Movie(req.body);
 
+    // TODO : naći bolje rešenje
+    movie.remaining = movie.total;
+
     movie.save(function (error, movie) {
         if (error) {
             console.log(error);
