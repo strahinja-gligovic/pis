@@ -4,18 +4,18 @@
       <h3 class="display-4">Sign Up</h3>
     </div>
     <form (ngSubmit)="register()" #form="ngForm">
-      <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
-        <div>
-          <strong>Oh snap! Try Again.</strong>
-        </div>
-        <div>{{error.errmsg || 'Something unexpected happened.'}}</div>
-      </div>
-      <div *ngIf="success" class="alert alert-success" role="alert">
+      <alert *ngIf="success" type="success">
         <div>
           <strong>Hooray!</strong>
         </div>
         <div>Registration a success ! Redirecting to Login...</div>
-      </div>
+      </alert>
+      <alert *ngIf="error && !submitted" [dismissible]="true" type="danger">
+        <div>
+          <strong>Oh snap!</strong>
+        </div>
+        <div>{{error.errmsg || 'Something unexpected happened.'}}</div>
+      </alert>
       <div class="form-group">
         <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel" class="form-control" placeholder="Full name"
           [class.is-invalid]="fullName.invalid && fullName.touched" [required]="true" autofocus>

@@ -5,9 +5,9 @@
   </ng-template>
 </div>
 <div class="modal-body">
-  <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+  <alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
     <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
-  </div>
+  </alert>
   <form #clientForm="ngForm">
     <div class="row">
       <div class="col">

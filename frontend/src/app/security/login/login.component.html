@@ -5,9 +5,9 @@
       <h6>Hello! Sign in with your Username</h6>
     </div>
     <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
-      <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+      <alert *ngIf="error && !submitted" [dismissible]="true" type="danger">
         <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
-      </div>
+      </alert>
       <div class="form-group">
         <input name="username" [(ngModel)]="user.username" id="input-username" class="form-control" placeholder="Username" #username="ngModel"
           [class.is-invalid]="username.invalid && username.touched" required="true">

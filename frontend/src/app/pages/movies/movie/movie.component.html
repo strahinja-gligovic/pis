@@ -5,9 +5,9 @@
   </ng-template>
 </div>
 <div class="modal-body">
-  <div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+  <alert *ngIf="error && !submitted" [dismissible]="true" type="danger">
     <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
-  </div>
+  </alert>
   <form #movieForm="ngForm">
     <div class="row">
       <div class="col img-div">

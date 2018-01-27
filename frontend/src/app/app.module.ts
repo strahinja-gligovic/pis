@@ -28,6 +28,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxResizeWatcherDirective } from './util/ngx-resize-watcher.directive';
 import { MovieService } from './pages/movies/movie.service';
 import { Ng2CompleterModule } from 'ng2-completer';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { Ng2CompleterModule } from 'ng2-completer';
     BsDatepickerModule.forRoot(),
     NgxDatatableModule,
     NgSelectModule,
-    Ng2CompleterModule
+    Ng2CompleterModule,
+    AlertModule.forRoot()
   ],
   entryComponents: [ClientComponent, MovieComponent],
   providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService,

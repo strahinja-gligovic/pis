@@ -1,10 +1,10 @@
 <app-title [title]="'Movies'"></app-title>
-<div *ngIf="success" class="alert alert-success" role="alert">
+<alert *ngIf="success" type="success">
   <strong>Success!</strong>
-</div>
-<div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+</alert>
+<alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
   <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
-</div>
+</alert>
 <div class="row">
   <div class="col">
     <button type="button" [disabled]="submitted" class="btn btn-secondary" (click)="openMovieModal()">Add Movie</button>
