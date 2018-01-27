@@ -11,9 +11,7 @@ export class MovieService {
     }
 
     getMovie(movie_id): Observable<Movie> {
-        return this.http.get('/api/movies/get/' + movie_id)
-            // map funkcija se poziva pre nego što se povratni podaci proslede dalje
-            // ovde želimo da od jsona napravimo instancu klase našeg modela
+        return this.http.get('/api/movie/get/' + movie_id)
             .map(response => new Movie(response));
     }
 
@@ -33,7 +31,6 @@ export class MovieService {
     }
 
     deleteMovie(movie_id: String): Observable<any> {
-        // setujemo responseType na text jer sa bekenda šaljemo "OK";
         return this.http.delete('/api/movie/delete/' + movie_id, { responseType: 'text' });
     }
 

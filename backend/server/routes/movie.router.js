@@ -49,7 +49,7 @@ movieRouter.put('/update/', function (req, res) {
 
     // prvo pronalazimo primljeni film
     Movie.findOne({ _id: movie_id }, function (error, movie) {
-        if (error || !user) {
+        if (error) {
             res.status(500).json({ errmsg: "No such movie." });
         } else {
             // setujemo nove vrednosti iz zahteva

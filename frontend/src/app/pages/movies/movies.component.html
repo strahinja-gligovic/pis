@@ -19,17 +19,17 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Director" prop="director" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
-      <ngx-datatable-column name="Operations" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+      <ngx-datatable-column name="Operations" prop="_id" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template ngx-datatable-header-template>
           &nbsp;
         </ng-template>
-        <ng-template let-movie="row" ngx-datatable-cell-template>
+        <ng-template let-movie_id="value" ngx-datatable-cell-template>
           <div>
-            <span (click)="openMovieModal(movie)">
+            <span (click)="openMovieModal(movie_id)">
               <i class="fas fa-pencil-alt fa-lg clickable"></i>
             </span>
             &nbsp;
-            <span (click)="deleteMovie(movie)">
+            <span (click)="deleteMovie(movie_id)">
               <i class="fas fa-trash fa-lg clickable"></i>
             </span>
           </div>

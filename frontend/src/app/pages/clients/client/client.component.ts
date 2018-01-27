@@ -18,7 +18,6 @@ export class ClientComponent implements OnInit, OnDestroy {
 
   client: Client;
   error: any;
-  madeChanges = false;
   submitted = false;
   success = false;
 
@@ -37,9 +36,7 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // kada se komponenta gasi obaveštavamo da li su njene akcije prouzrokovale promenu u db
-    // hoćemo ponovo da učitamo podatke ukoliko je to slučaj
-    this.clientsChanged$.emit(this.madeChanges);
+    this.clientsChanged$.complete();
   }
 
   closeModal() {
@@ -47,15 +44,14 @@ export class ClientComponent implements OnInit, OnDestroy {
   }
 
   saveClient() {
-    // const client: Client = this.clientForm.value;
-    // // u formi ne čuvamo vrednost za id
-    // client._id = this.client._id;
     this.submitted = true;
 
     this.clientService.saveClient(this.client).subscribe(res => {
       this.submitted = false;
       this.success = true;
-      this.madeChanges = true;
+      // ukoliko se izmene naprave obaveštavamo parent komponentu
+      // hoćemo ponovo da učitamo podatke ukoliko je to slučaj
+      this.clientsChanged$.emit(true);
 
       this.closeModal();
     }, error => {

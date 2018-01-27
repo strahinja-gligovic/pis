@@ -13,6 +13,9 @@ import { Address, countries } from '../../models/address.model';
 })
 export class MoviesComponent implements OnInit {
 
+  // model Movie u sebi sadrži sliku u String formatu
+  // nećemo bez potrebe da učitavamo sve te podatke
+  // zato ovu komponentu pravimo malo drugačije
   movies: Movie[];
   moviesChanged: Subscription;
 
@@ -25,43 +28,62 @@ export class MoviesComponent implements OnInit {
     this.getMovies();
   }
 
-  openMovieModal(movie?: Movie) {
-    if (!movie) {
-      movie = new Movie();
-    } else {
-      movie = new Movie(movie);
-    }
+  // sa template prosleđujemo samo id filma, a ne ceo objekat
+  openMovieModal(movie_id: String) {
 
     const initialState = {
-      movie: movie
+      movie_id
     };
 
+    // ostavljamo Movie komponenti da se bavi sa GET filma
     const modalRef = this.modalService.show(MovieComponent, { initialState, class: 'modal-lg' });
 
-    this.moviesChanged = modalRef.content.moviesChanged$.subscribe(changed => {
-      if (changed) {
-        this.getMovies();
-        this.toggleSuccessMessage();
-      }
+    this.moviesChanged = modalRef.content.moviesChanged$.subscribe(movie => {
+      this.updateMovieRows(movie);
     }, error => { }, () => { this.moviesChanged.unsubscribe(); });
   }
 
-  deleteMovie(movie: Movie) {
-    this.movieService.deleteMovie(movie._id).subscribe(res => {
+  private deleteMovie(movie_id: String) {
+    this.movieService.deleteMovie(movie_id).subscribe(res => {
       this.toggleSuccessMessage();
       for (let i = 0; i < this.movies.length; i++) {
         const element = this.movies[i];
-        if (element._id === movie._id) {
+        if (element._id === movie_id) {
           this.movies.splice(i, 1);
+          this.movies = [...this.movies];
+          break;
         }
       }
     }, error => {
+
     });
   }
 
-  getMovies() {
+  private updateMovieRows(movie) {
+    let found = false;
+
+    for (let i = 0; i < this.movies.length; i++) {
+      const movieElement = this.movies[i];
+
+      if (movieElement._id === movie._id) {
+        found = true;
+        Object.assign(movieElement, movie);
+        break;
+      }
+    }
+
+    if (!found) {
+      this.movies.push(movie);
+    }
+
+    this.movies = [...this.movies];
+  }
+
+  private getMovies() {
     this.movieService.listMovies().subscribe(movies => {
       this.movies = movies;
+    }, error => {
+
     });
   }
 
