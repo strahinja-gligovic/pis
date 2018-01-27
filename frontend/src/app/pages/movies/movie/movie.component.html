@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title" *ngIf="movie_id; else movieAdd">Movie Update</h4>
+  <h4 class="modal-title" *ngIf="movie?._id; else movieAdd">Movie Update</h4>
   <ng-template #movieAdd>
     <h4 class="modal-title">Movie Add</h4>
   </ng-template>
@@ -15,37 +15,65 @@
         <img class="img-fluid" [attr.src]="movie?.poster" />
       </div>
       <div class="col">
-        <div class="form-group">
-          <label for="input-title">Title</label>
-          <input name="title" [ngModel]="movie?.title" id="input-title" class="form-control" #title="ngModel" [class.is-invalid]="title.invalid && title.touched"
-            required="true">
-          <small class="invalid-feedback" *ngIf="title.invalid && title.touched">
-            Title is required!
-          </small>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="input-title">Title</label>
+              <input name="title" [ngModel]="movie?.title" id="input-title" class="form-control" #title="ngModel" [class.is-invalid]="title.invalid && title.touched"
+                required="true">
+              <small class="invalid-feedback" *ngIf="title.invalid && title.touched">
+                Title is required!
+              </small>
+            </div>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="input-director">Director</label>
-          <input name="director" [ngModel]="movie?.director" id="input-director" class="form-control" #director="ngModel"
-            [class.is-invalid]="director.invalid && director.touched" required="true">
-          <small class="invalid-feedback" *ngIf="director.invalid && director.touched">
-            Director is required!
-          </small>
+
+        <div class="row no-gutters">
+          <div class="col">
+
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label for="input-director">Remaining Copies</label>
+                  <input name="director" [ngModel]="movie?.director" id="input-director" class="form-control" #director="ngModel" [class.is-invalid]="director.invalid && director.touched"
+                    required="true">
+                  <small class="invalid-feedback" *ngIf="director.invalid && director.touched">
+                    Director is required!
+                  </small>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="input-director">Total Copies</label>
+                  <input name="director" [ngModel]="movie?.director" id="input-director" class="form-control" #director="ngModel" [class.is-invalid]="director.invalid && director.touched"
+                    required="true">
+                  <small class="invalid-feedback" *ngIf="director.invalid && director.touched">
+                    Director is required!
+                  </small>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <label for="input-director">Overview</label>
-        <textarea class="form-control" [ngModel]="movie?.overview" name="overview" id="input-overview" rows="10"></textarea>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-      </div>
-      <div class="col">
-        <div class="form-group">
-          <label for="input-releaseDate">Release Date</label>
-          <input name="releaseDate" [ngModel]="movie?.releaseDate" bsDatepicker id="input-releaseDate" class="form-control"
-            #releaseDate="ngModel" [class.is-invalid]="releaseDate.invalid && releaseDate.touched" required="true" [bsConfig]="{ containerClass: 'theme-default' }">
-          <small class="invalid-feedback" *ngIf="releaseDate.invalid && releaseDate.touched">
-            Release Date is required!
-          </small>
+        <div class="row">
+          <div class="col">
+            <label for="input-director">Overview</label>
+            <textarea class="form-control" [ngModel]="movie?.overview" name="overview" id="input-overview" rows="10"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="input-releaseDate">Release Date</label>
+              <input name="releaseDate" [ngModel]="movie?.releaseDate" bsDatepicker id="input-releaseDate" class="form-control" #releaseDate="ngModel"
+                [class.is-invalid]="releaseDate.invalid && releaseDate.touched" required="true" [bsConfig]="{ containerClass: 'theme-default' }">
+              <small class="invalid-feedback" *ngIf="releaseDate.invalid && releaseDate.touched">
+                Release Date is required!
+              </small>
+            </div>
+          </div>
         </div>
       </div>
     </div>
