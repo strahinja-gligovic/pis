@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MovieComponent } from './movie/movie.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Address, countries } from '../../models/address.model';
+import { SUCCESS_DURATION } from '../../util/const';
 
 @Component({
   selector: 'app-movies',
@@ -21,6 +22,8 @@ export class MoviesComponent implements OnInit {
 
   // UI
   success = false;
+  submitted = false;
+  error: any;
 
   constructor(private modalService: BsModalService, private movieService: MovieService) { }
 
@@ -40,10 +43,14 @@ export class MoviesComponent implements OnInit {
 
     this.moviesChanged = modalRef.content.moviesChanged$.subscribe(movie => {
       this.updateMovieRows(movie);
-    }, error => { }, () => { this.moviesChanged.unsubscribe(); });
+      this.toggleSuccessMessage();
+    }, error => {
+      this.error = error;
+    }, () => { this.moviesChanged.unsubscribe(); });
   }
 
   private deleteMovie(movie_id: String) {
+    this.submitted = true;
     this.movieService.deleteMovie(movie_id).subscribe(res => {
       this.toggleSuccessMessage();
       for (let i = 0; i < this.movies.length; i++) {
@@ -54,8 +61,10 @@ export class MoviesComponent implements OnInit {
           break;
         }
       }
+      this.submitted = false;
     }, error => {
-
+      this.error = error;
+      this.submitted = false;
     });
   }
 
@@ -80,20 +89,21 @@ export class MoviesComponent implements OnInit {
   }
 
   private getMovies() {
+    this.submitted = true;
     this.movieService.listMovies().subscribe(movies => {
       this.movies = movies;
+      this.submitted = false;
     }, error => {
-
+      this.error = error;
+      this.submitted = false;
     });
   }
 
   private toggleSuccessMessage() {
-    const duration = 3000;
-
     this.success = true;
     setTimeout(() => {
       this.success = false;
-    }, duration);
+    }, SUCCESS_DURATION);
   }
 
 }

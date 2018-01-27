@@ -2,9 +2,12 @@
 <div *ngIf="success" class="alert alert-success" role="alert">
     <strong>Success!</strong>
 </div>
+<div *ngIf="error && !submitted" class="alert alert-danger" role="alert">
+    <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
+  </div>
 <div class="row">
     <div class="col">
-        <button type="button" class="btn btn-secondary" (click)="openClientModal()">Add Client</button>
+        <button type="button" [disabled]="submitted" class="btn btn-secondary" (click)="openClientModal()">Add Client</button>
     </div>
 </div>
 
@@ -31,11 +34,11 @@
                 </ng-template>
                 <ng-template let-client="row" ngx-datatable-cell-template>
                     <div>
-                        <span (click)="openClientModal(client)">
+                        <span *ngIf="!submitted" (click)="openClientModal(client)">
                             <i class="fas fa-pencil-alt fa-lg clickable"></i>
                         </span>
                         &nbsp;
-                        <span (click)="deleteClient(client)">
+                        <span  *ngIf="!submitted" (click)="deleteClient(client)">
                             <i class="fas fa-trash fa-lg clickable"></i>
                         </span>
                     </div>

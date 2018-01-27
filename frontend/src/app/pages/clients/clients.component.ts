@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Address, countries } from '../../models/address.model';
+import { SUCCESS_DURATION } from '../../util/const';
 
 @Component({
   selector: 'app-clients',
@@ -28,6 +29,8 @@ export class ClientsComponent implements OnInit {
 
   // UI
   success = false;
+  error: any;
+  submitted = false;
 
   constructor(private modalService: BsModalService, private clientService: ClientService) { }
 
@@ -64,10 +67,11 @@ export class ClientsComponent implements OnInit {
         this.getClients();
         this.toggleSuccessMessage();
       }
-    }, error => { }, () => { this.clientsChanged.unsubscribe(); });
+    }, error => { this.error = error; }, () => { this.clientsChanged.unsubscribe(); });
   }
 
   deleteClient(client: Client) {
+    this.submitted = true;
     this.clientService.deleteClient(client._id).subscribe(res => {
       this.toggleSuccessMessage();
       for (let i = 0; i < this.clients.length; i++) {
@@ -78,13 +82,21 @@ export class ClientsComponent implements OnInit {
           this.clients = [...this.clients];
         }
       }
+      this.submitted = false;
     }, error => {
+      this.error = error;
+      this.submitted = false;
     });
   }
 
   getClients() {
+    this.submitted = true;
     this.clientService.listClients().subscribe(clients => {
       this.clients = clients;
+      this.submitted = false;
+    }, error => {
+      this.error = error;
+      this.submitted = false;
     });
   }
 
@@ -95,12 +107,10 @@ export class ClientsComponent implements OnInit {
   }
 
   private toggleSuccessMessage() {
-    const duration = 3000;
-
     this.success = true;
     setTimeout(() => {
       this.success = false;
-    }, duration);
+    }, SUCCESS_DURATION);
   }
 
 }

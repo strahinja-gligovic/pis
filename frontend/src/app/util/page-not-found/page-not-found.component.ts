@@ -17,7 +17,7 @@ export class PageNotFoundComponent implements OnInit, OnDestroy {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    setTimeout(() => {
+    this.intervalRef = setTimeout(() => {
       this.countdownNumbers = [];
       this.intervalRef = setInterval(() => {
         this.countdownNumbers.push(this.countdownStart--);
