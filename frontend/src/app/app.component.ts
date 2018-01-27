@@ -9,7 +9,7 @@ import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit{
 
   constructor(private authService: AuthService) {
 

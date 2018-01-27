@@ -54,8 +54,10 @@ export class MovieComponent implements OnInit, OnDestroy {
   saveMovie() {
     const movie: Movie = this.movieForm.value;
     movie._id = this.movie._id;
-
+    movie.poster = this.movie.poster;
     this.submitted = true;
+
+    console.log(movie);
 
     this.movieService.saveMovie(movie).subscribe(res => {
       this.submitted = false;
@@ -82,12 +84,30 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.movie.tmdb = movieData.id;
       this.movie.title = movieData.title;
       this.movie.releaseDate = new Date(movieData.release_date);
-      this.tmdbImageUrl = TMDB_IMG_BASE_URL + movieData.poster_path;
-      console.log(this.tmdbImageUrl);
+      this.movie.overview = movieData.overview;
+      this.movie.rating = movieData.rating;
+      if (movieData.poster_path) {
+        this.movieService.getMoviePoster(movieData.poster_path)
+          .subscribe(blob => {
+            this.createImageFromBlob(blob);
+          });
+      }
+      console.log(movieData);
     }
   }
 
   closeModal() {
     this.bsModalRef.hide();
   }
+
+  createImageFromBlob(image: Blob) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+       this.movie.poster = reader.result;
+    }, false);
+
+    if (image) {
+       reader.readAsDataURL(image);
+    }
+}
 }

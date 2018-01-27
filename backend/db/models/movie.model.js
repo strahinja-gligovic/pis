@@ -5,9 +5,11 @@ const mongoose = require('mongoose');
 var movieSchema = new mongoose.Schema({
     title: String,
     releaseDate: Date,
-    director: String,
+    overview: String,
     // ovo polje služi za asocijaciju filma sa API
-    tmdb: Number
+    tmdb: Number,
+    poster: String,
+    rating: Number
 });
 
 module.exports = mongoose.model('Movie', movieSchema);

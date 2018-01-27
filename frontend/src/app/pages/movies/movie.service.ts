@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Movie } from '../../models/movie.model';
-import { TMDB_BASE_URL } from '../../util/const';
+import { TMDB_BASE_URL, TMDB_IMG_BASE_URL } from '../../util/const';
 
 @Injectable()
 export class MovieService {
@@ -47,7 +47,11 @@ export class MovieService {
 
     // TMDB
     getMovieTmdb(tmdb_id: number): Observable<any> {
-        return this.http.get(TMDB_BASE_URL + 'movie/get')
+        return this.http.get(TMDB_BASE_URL + 'movie/get' + tmdb_id);
+    }
+
+    getMoviePoster(posterPath: Number): Observable<Blob> {
+        return this.http.get(TMDB_IMG_BASE_URL + posterPath, { responseType: 'blob'});
     }
 
 }
