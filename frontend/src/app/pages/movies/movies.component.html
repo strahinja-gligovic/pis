@@ -22,7 +22,8 @@
           <span>{{ releaseDate | date}}</span>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Director" prop="director" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+      <ngx-datatable-column name="Remaining" prop="remaining" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1"></ngx-datatable-column>
+      <ngx-datatable-column name="Total" prop="total" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1"></ngx-datatable-column>
       <ngx-datatable-column name="Operations" prop="_id" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template ngx-datatable-header-template>
           &nbsp;

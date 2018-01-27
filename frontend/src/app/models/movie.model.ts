@@ -7,6 +7,8 @@ export class Movie {
     overview: String;
     rating: Number;
     poster: String;
+    remaining: Number;
+    total: Number;
 
     constructor(json?: any) {
         if (json) {
@@ -18,6 +20,8 @@ export class Movie {
             this.overview = json.overview;
             this.rating = json.rating;
             this.poster = json.poster;
+            this.remaining = json.remaining;
+            this.total = json.total;
         }
     }
 }

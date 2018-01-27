@@ -18,3 +18,7 @@ img {
   height: 92%;
   object-fit: contain;
 }
+
+textarea {
+  resize: none;
+}

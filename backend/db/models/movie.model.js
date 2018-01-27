@@ -7,9 +7,11 @@ var movieSchema = new mongoose.Schema({
     releaseDate: Date,
     overview: String,
     // ovo polje služi za asocijaciju filma sa API
-    tmdb: Number,
+    tmdb: { type: Number, unique: true, required: false },
     poster: String,
-    rating: Number
+    rating: Number,
+    remaining: Number,
+    total: Number
 });
 
 module.exports = mongoose.model('Movie', movieSchema);

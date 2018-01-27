@@ -35,21 +35,17 @@
             <div class="row">
               <div class="col">
                 <div class="form-group">
-                  <label for="input-director">Remaining Copies</label>
-                  <input name="director" [ngModel]="movie?.director" id="input-director" class="form-control" #director="ngModel" [class.is-invalid]="director.invalid && director.touched"
-                    required="true">
-                  <small class="invalid-feedback" *ngIf="director.invalid && director.touched">
-                    Director is required!
-                  </small>
+                  <label for="input-remaining">Remaining Copies</label>
+                  <input name="remaining" [ngModel]="movie?.remaining" id="input-remaining" class="form-control" #remaining="ngModel">
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
-                  <label for="input-director">Total Copies</label>
-                  <input name="director" [ngModel]="movie?.director" id="input-director" class="form-control" #director="ngModel" [class.is-invalid]="director.invalid && director.touched"
+                  <label for="input-total">Total Copies</label>
+                  <input name="total" [ngModel]="movie?.total" id="input-total" class="form-control" #total="ngModel" [class.is-invalid]="total.invalid && total.touched"
                     required="true">
-                  <small class="invalid-feedback" *ngIf="director.invalid && director.touched">
-                    Director is required!
+                  <small class="invalid-feedback" *ngIf="total.invalid && total.touched">
+                    Total Copies is required!
                   </small>
                 </div>
               </div>
@@ -60,7 +56,7 @@
         <div class="row">
           <div class="col">
             <label for="input-director">Overview</label>
-            <textarea class="form-control" [ngModel]="movie?.overview" name="overview" id="input-overview" rows="10"></textarea>
+            <textarea class="form-control" resizable="false" [ngModel]="movie?.overview" name="overview" id="input-overview" rows="10"></textarea>
           </div>
         </div>
         <div class="row">
