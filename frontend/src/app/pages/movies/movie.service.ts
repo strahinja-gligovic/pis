@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Movie } from '../../models/movie.model';
+import { TMDB_BASE_URL } from '../../util/const';
 
 @Injectable()
 export class MovieService {
@@ -42,6 +43,11 @@ export class MovieService {
         } else {
             return this.addMovie(movie);
         }
+    }
+
+    // TMDB
+    getMovieTmdb(tmdb_id: number): Observable<any> {
+        return this.http.get(TMDB_BASE_URL + 'movie/get')
     }
 
 }

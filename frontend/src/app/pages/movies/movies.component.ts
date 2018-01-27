@@ -36,7 +36,7 @@ export class MoviesComponent implements OnInit {
       movie: movie
     };
 
-    const modalRef = this.modalService.show(MovieComponent, { initialState });
+    const modalRef = this.modalService.show(MovieComponent, { initialState, class: 'modal-lg' });
 
     this.moviesChanged = modalRef.content.moviesChanged$.subscribe(changed => {
       if (changed) {

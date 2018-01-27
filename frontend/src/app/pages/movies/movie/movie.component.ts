@@ -6,6 +6,10 @@ import { NgForm } from '@angular/forms';
 import { MovieService } from '../movie.service';
 import { Subject } from 'rxjs/Subject';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { CompleterService, RemoteData } from 'ng2-completer';
+import { TMDB_API_KEY, TMDB_BASE_URL, TMDB_IMG_BASE_URL } from '../../../util/const';
+import { CompleterData } from 'ng2-completer/services/completer-data';
+import { CompleterItem } from 'ng2-completer/components/completer-item';
 
 @Component({
   selector: 'app-movie',
@@ -21,29 +25,34 @@ export class MovieComponent implements OnInit, OnDestroy {
   submitted = false;
   success = false;
 
-  // tslint:disable-next-line:max-line-length
-  protected captains = ['James T. Kirk', 'Benjamin Sisko', 'Jean-Luc Picard', 'Spock', 'Jonathan Archer', 'Hikaru Sulu', 'Christopher Pike', 'Rachel Garrett' ];
+  tmdbDatasource: RemoteData;
+  tmdbImageUrl: String;
 
   private moviesChanged$: EventEmitter<Boolean>;
 
-  constructor(private bsModalRef: BsModalRef, private movieService: MovieService) {
+  constructor(private bsModalRef: BsModalRef, private movieService: MovieService, private completerService: CompleterService) {
+
   }
 
   ngOnInit() {
     this.moviesChanged$ = new EventEmitter<Boolean>();
+
+    this.tmdbDatasource = this.completerService.remote(
+      null,
+      'title',
+      'title');
+    this.tmdbDatasource.urlFormater(term => {
+      return `${TMDB_BASE_URL}search/movie${TMDB_API_KEY}&query=${term}`;
+    });
+    this.tmdbDatasource.dataField('results');
   }
 
   ngOnDestroy(): void {
     this.moviesChanged$.emit(this.madeChanges);
   }
 
-  closeModal() {
-    this.bsModalRef.hide();
-  }
-
   saveMovie() {
     const movie: Movie = this.movieForm.value;
-    // u formi ne čuvamo vrednost za id
     movie._id = this.movie._id;
 
     this.submitted = true;
@@ -59,5 +68,26 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.success = false;
       this.error = error.error;
     });
+  }
+
+  onHighlightedTmdb(data: CompleterItem) {
+    if (data) {
+      const movieData = data.originalObject;
+    }
+  }
+
+  onSelectedTmdb(data) {
+    if (data) {
+      const movieData = data.originalObject;
+      this.movie.tmdb = movieData.id;
+      this.movie.title = movieData.title;
+      this.movie.releaseDate = new Date(movieData.release_date);
+      this.tmdbImageUrl = TMDB_IMG_BASE_URL + movieData.poster_path;
+      console.log(this.tmdbImageUrl);
+    }
+  }
+
+  closeModal() {
+    this.bsModalRef.hide();
   }
 }

@@ -257,11 +257,15 @@ input.is-invalid::placeholder {
 }
 
 .completer-dropdown {
-  padding-top: 5%;
-  width: 180px !important;
+  width: 95% !important;
+  margin-top: 0% !important;
 }
 
-.completer-dropdown-holder {
-  padding-top: 4%;
-  width: 180px !important;
+.completer-row {
+  width: 100% !important;
 }
+
+// .completer-input {
+//   display: block;
+//   width: 100%;
+// }
