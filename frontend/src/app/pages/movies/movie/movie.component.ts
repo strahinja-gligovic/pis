@@ -74,14 +74,14 @@ export class MovieComponent implements OnInit, OnDestroy {
 
     this.submitted = true;
 
-    this.movieService.saveMovie(this.movie).subscribe(res => {
+    this.movieService.saveMovie(this.movie).subscribe(movie => {
       this.submitted = false;
       this.success = true;
       this.madeChanges = true;
 
       // sad više parent komponentu ne obaveštavamo booleanom, već šaljemo ceo izmenjen objekat
       // nećemo ponovo da pravimo nepotreban zahtev
-      this.moviesChanged$.emit(this.movie);
+      this.moviesChanged$.emit(movie);
 
       this.closeModal();
     }, error => {
