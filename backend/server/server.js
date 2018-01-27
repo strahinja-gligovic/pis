@@ -11,14 +11,13 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const dbConfig = require('../db/db.config');
 
-mongoose.connect(dbConfig.url, function (err) {
-  if (err) console.log(error.message);
-});
 const app = express();
 
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
@@ -37,6 +36,11 @@ app.use((req, res, next) => {
 const port = process.env.PORT || '3000';
 app.set('port', port);
 
-const server = http.createServer(app);
+mongoose.connect(dbConfig.url).then(() => {
+    const server = http.createServer(app);
 
-server.listen(port, () => console.log(`mađija na portu ${port}`.rainbow));
+    server.listen(port, () => console.log('mađija na portu ${port}'.rainbow));
+  },
+  (err) => {
+    console.log('   MONGO???   '.zebra);
+  });

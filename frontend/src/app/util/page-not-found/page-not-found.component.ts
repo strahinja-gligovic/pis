@@ -9,10 +9,10 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class PageNotFoundComponent implements OnInit, OnDestroy {
 
-  countdownNumbers: Array<Number>;
-  interval = 1000;
-  countdownStart = 3;
-  intervalRef: NodeJS.Timer;
+  private countdownNumbers: Array<Number>;
+  private interval = 1000;
+  private countdownStart = 3;
+  private intervalRef;
 
   constructor(private router: Router) { }
 
@@ -33,7 +33,7 @@ export class PageNotFoundComponent implements OnInit, OnDestroy {
     clearInterval(this.intervalRef);
   }
 
-  goBack() {
+  private goBack() {
     this.router.navigate(['']);
   }
 
