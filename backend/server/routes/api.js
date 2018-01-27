@@ -8,7 +8,6 @@ const security = require("../security/security.service");
 // rute za autentifikaciju
 router.post('/login', (req, res) => security.loginRoute(req, res));
 router.post('/register', (req, res) => security.registerRoute(req, res));
-router.post('/logout', (req, res) => security.logoutRoute(req, res));
 
 router.use('/movie', movieRouter);
 router.use('/client', clientRouter);
