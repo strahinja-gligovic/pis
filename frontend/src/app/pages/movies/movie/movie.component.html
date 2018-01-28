@@ -3,6 +3,9 @@
   <ng-template #movieAdd>
     <h4 class="modal-title">Movie Add</h4>
   </ng-template>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 <div class="modal-body">
   <alert *ngIf="error && !submitted" [dismissible]="true" type="danger">
@@ -14,7 +17,8 @@
         <label>Poster</label>
         <img class="img-fluid" *ngIf="movie?.poster" (click)="posterUpload.click()" [attr.src]="movie?.poster" />
         <div class="form-group" [attr.hidden]="movie?.poster">
-          <input type="file" #posterUpload [attr.disabled]="movie?.tmdb && !movie?.poster" (change)="posterChange($event)" placeholder="Upload poster" accept="image/*">
+          <input type="file" #posterUpload [attr.disabled]="movie?.tmdb && !movie?.poster" (change)="posterChange($event)" placeholder="Upload poster"
+            accept="image/*">
         </div>
       </div>
       <div class="col">

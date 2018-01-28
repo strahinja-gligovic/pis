@@ -3,6 +3,9 @@
   <ng-template #clientAdd>
     <h4 class="modal-title">Client Add</h4>
   </ng-template>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
 <div class="modal-body">
   <alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
@@ -12,8 +15,8 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <input name="firstName" [(ngModel)]="client.firstName" id="input-firstName" class="form-control" placeholder="First Name" #firstName="ngModel"
-            [class.is-invalid]="firstName.invalid && firstName.touched" required="true">
+          <input name="firstName" [(ngModel)]="client.firstName" id="input-firstName" class="form-control" placeholder="First Name"
+            #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" required="true">
           <small class="invalid-feedback" *ngIf="firstName.invalid && firstName.touched">
             First Name is required!
           </small>
@@ -61,8 +64,8 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <input name="street" [(ngModel)]="client.address.street" street id="input-street" class="form-control" placeholder="Street" #street="ngModel"
-              [class.is-invalid]="street.invalid && street.touched" required="true">
+            <input name="street" [(ngModel)]="client.address.street" street id="input-street" class="form-control" placeholder="Street"
+              #street="ngModel" [class.is-invalid]="street.invalid && street.touched" required="true">
             <small class="invalid-feedback" *ngIf="street.invalid && street.touched">
               Street is required!
             </small>
@@ -70,8 +73,8 @@
         </div>
         <div class="col">
           <div class="form-group">
-            <input name="city" [(ngModel)]="client.address.city" id="input-city" class="form-control" placeholder="City" #city="ngModel" [class.is-invalid]="city.invalid && city.touched"
-              required="true">
+            <input name="city" [(ngModel)]="client.address.city" id="input-city" class="form-control" placeholder="City" #city="ngModel"
+              [class.is-invalid]="city.invalid && city.touched" required="true">
             <small class="invalid-feedback" *ngIf="city.invalid && city.touched">
               City is required!
             </small>
