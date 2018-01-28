@@ -30,6 +30,7 @@ import { MovieService } from './pages/movies/movie.service';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CopiesTotalsDirective } from './util/copies-totals.directive';
+import { RentalsComponent } from './pages/rentals/rentals.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CopiesTotalsDirective } from './util/copies-totals.directive';
     ClientComponent,
     TitleComponent,
     NgxResizeWatcherDirective,
-    CopiesTotalsDirective
+    CopiesTotalsDirective,
+    RentalsComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { AppComponent } from './../app.component';
 import { Routes } from '@angular/router';
 import { MoviesComponent } from '../pages/movies/movies.component';
 import { ClientsComponent } from '../pages/clients/clients.component';
+import { RentalsComponent } from '../pages/rentals/rentals.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'movies', component: MoviesComponent },
       { path: 'clients', component: ClientsComponent },
+      { path: 'rentals', component: RentalsComponent },
       { path: '**', component: PageNotFoundComponent }
     ]
   },
