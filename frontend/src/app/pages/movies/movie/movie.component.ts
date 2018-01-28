@@ -107,6 +107,14 @@ export class MovieComponent implements OnInit, OnDestroy {
     });
   }
 
+  private posterChange(event: any) {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      const file: File = files[0];
+      this.createImageFromBlob(file);
+    }
+  }
+
   private onSelectedTmdb(data: CompleterItem) {
     let valuesToPatch;
     if (data) {

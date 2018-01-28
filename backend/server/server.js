@@ -18,7 +18,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 
 app.use(express.static(path.join(__dirname, '../../frontend/dist')));
 
