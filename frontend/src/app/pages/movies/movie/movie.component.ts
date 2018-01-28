@@ -111,21 +111,34 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   private onSelectedTmdb(data: CompleterItem) {
+    let valuesToPatch;
     if (data) {
       const movieData = data.originalObject;
+
+      valuesToPatch = {
+        title: movieData.title,
+        releaseDate: new Date(movieData.release_date),
+        overview: movieData.overview
+      };
       this.movie.tmdb = movieData.id;
-      this.movie.title = movieData.title;
-      this.movie.releaseDate = new Date(movieData.release_date);
-      this.movie.overview = movieData.overview;
-      this.movie.rating = movieData.rating;
       if (movieData.poster_path) {
         this.movieService.getMoviePoster(movieData.poster_path)
           .subscribe(blob => {
             this.createImageFromBlob(blob);
           });
       }
-      console.log(movieData);
+    } else {
+      valuesToPatch = {
+        title: null,
+        releaseDate: null,
+        overview: null,
+      };
+
+      this.movie.tmdb = null;
+      this.movie.poster = null;
     }
+
+    this.movieForm.form.patchValue(valuesToPatch);
   }
 
   private initTmdbDatasource() {
