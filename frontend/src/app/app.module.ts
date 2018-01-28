@@ -31,6 +31,8 @@ import { Ng2CompleterModule } from 'ng2-completer';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { CopiesTotalsDirective } from './util/copies-totals.directive';
 import { RentalsComponent } from './pages/rentals/rentals.component';
+import { RentalComponent } from './pages/rentals/rental/rental.component';
+import { RentalService } from './pages/rentals/rental.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import { RentalsComponent } from './pages/rentals/rentals.component';
     TitleComponent,
     NgxResizeWatcherDirective,
     CopiesTotalsDirective,
-    RentalsComponent
+    RentalsComponent,
+    RentalComponent
   ],
   imports: [
     BrowserModule,
@@ -64,9 +67,9 @@ import { RentalsComponent } from './pages/rentals/rentals.component';
     Ng2CompleterModule,
     AlertModule.forRoot()
   ],
-  entryComponents: [ClientComponent, MovieComponent],
+  entryComponents: [ClientComponent, MovieComponent, RentalComponent],
   providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService,
-    MovieService],
+    MovieService, RentalService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

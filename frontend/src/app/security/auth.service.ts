@@ -23,7 +23,7 @@ export class AuthService {
     }
   }
 
-  login(username: string, password: string) {
+  login(username: String, password: String) {
     return this.http.post<User>('/api/login', { username, password })
       .do(response => this.setSession(response))
       // simuliramo reakciju

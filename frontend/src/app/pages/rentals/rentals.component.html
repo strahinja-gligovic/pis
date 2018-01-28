@@ -1,3 +1,48 @@
-<p>
-  rentals works!
-</p>
+<app-title [title]="'Rentals'"></app-title>
+<alert *ngIf="success" type="success">
+    <strong>Success!</strong>
+</alert>
+<alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
+    <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
+  </alert>
+<div class="row">
+    <div class="col">
+        <button type="button" [disabled]="submitted" class="btn btn-secondary" (click)="openRentalModal()">Add Rental</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="rentals" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40"
+            [rowHeight]="'auto'">
+            <ngx-datatable-column name="Client" prop="client.name" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Movie" prop="lastName" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Start Date" prop="dob" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+                <ng-template let-startDate="value" ngx-datatable-cell-template>
+                    <span>{{startDate | date }}</span>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Return Date" prop="dob" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+              <ng-template let-returnDate="value" ngx-datatable-cell-template>
+                  <span>{{returnDate | date}}</span>
+              </ng-template>
+          </ngx-datatable-column>
+            <ngx-datatable-column name="Operations" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+                <ng-template ngx-datatable-header-template>
+                    &nbsp;
+                </ng-template>
+                <ng-template let-rental="row" ngx-datatable-cell-template>
+                    <div>
+                        <span *ngIf="!submitted" (click)="openRentalModal(rental)">
+                            <i class="fas fa-pencil-alt fa-lg clickable"></i>
+                        </span>
+                        &nbsp;
+                        <span  *ngIf="!submitted" (click)="deleteRental(rental)">
+                            <i class="fas fa-trash fa-lg clickable"></i>
+                        </span>
+                    </div>
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+</div>
