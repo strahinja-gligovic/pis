@@ -29,6 +29,7 @@ import { NgxResizeWatcherDirective } from './util/ngx-resize-watcher.directive';
 import { MovieService } from './pages/movies/movie.service';
 import { Ng2CompleterModule } from 'ng2-completer';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { CopiesTotalsDirective } from './util/copies-totals.directive';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
     ClientsComponent,
     ClientComponent,
     TitleComponent,
-    NgxResizeWatcherDirective
+    NgxResizeWatcherDirective,
+    CopiesTotalsDirective
   ],
   imports: [
     BrowserModule,

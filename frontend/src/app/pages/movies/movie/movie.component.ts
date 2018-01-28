@@ -39,6 +39,19 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   moviesChanged$: EventEmitter<Movie>;
 
+  get remainingValue(): number {
+    const totalFormValue = this.movieForm.controls['total'].value;
+    const totalValueDifference = this.movie.total - totalFormValue;
+
+    const remainingValue = this.movie.remaining - totalValueDifference;
+
+    if (remainingValue < 0) {
+      return 0;
+    } else {
+      return remainingValue;
+    }
+  }
+
   constructor(private bsModalRef: BsModalRef, private movieService: MovieService, private completerService: CompleterService) {
   }
 
@@ -89,28 +102,6 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.success = false;
       this.error = error.error;
     });
-  }
-
-  private handleTotal() {
-    if (this.movie._id) {
-      const totalCtrl = this.movieForm.controls['total'];
-      const remainingCtrl = this.movieForm.controls['remaining'];
-
-      const totalDifference = totalCtrl.value - this.movie.total;
-      const remainingAdjusted = this.movie.remaining + totalDifference;
-
-      if (remainingAdjusted < 0) {
-        const errorObject = {};
-        errorObject['gt'] = true;
-        if (totalCtrl.value === null) {
-          errorObject['required'] = true;
-        }
-        totalCtrl.setErrors(errorObject);
-      } else {
-        remainingCtrl.setValue(remainingAdjusted);
-        totalCtrl.setErrors(null);
-      }
-    }
   }
 
   private onHighlightedTmdb(data: CompleterItem) {

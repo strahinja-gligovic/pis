@@ -36,19 +36,19 @@
               <div class="col">
                 <div *ngIf="movie?._id" class="form-group">
                   <label for="input-remaining">Remaining Copies</label>
-                  <input name="remaining" [ngModel]="movie?.remaining" id="input-remaining" class="form-control" #remaining="ngModel" type="number"
+                  <input name="remaining" [ngModel]="remainingValue" id="input-remaining" class="form-control" #remaining="ngModel" type="number"
                     readonly>
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label for="input-total">Total Copies</label>
-                  <input name="total" [ngModel]="movie?.total" id="input-total" class="form-control" #total="ngModel" [class.is-invalid]="total.invalid && total.touched"
-                    required="true" (change)="handleTotal()" type="number">
+                  <input name="total" [ngModel]="movie?.total" id="input-total" appCopiesTotals [greaterThan]="movie?.total - movie?.remaining" class="form-control" #total="ngModel" [class.is-invalid]="total.invalid && total.touched"
+                    required="true" type="number">
                   <div class="invalid-feedback" *ngIf="total.errors?.required && total.touched">
                     Total Copies is required!
                   </div>
-                  <div class="invalid-feedback" *ngIf="total.touched && total.errors?.gt">
+                  <div class="invalid-feedback" *ngIf="total.touched && total.errors?.gt && !total.errors?.required">
                     Must be greater than {{movie?.total - movie?.remaining}}.
                   </div>
                 </div>
