@@ -16,6 +16,10 @@ export class CopiesTotalsDirective implements Validator {
   validate(totalControl: AbstractControl): { [key: string]: any; } {
     const totalValue = totalControl.value;
 
+    if (totalValue === null) {
+      return null;
+    }
+
     if (totalValue < this.greaterThan) {
       return {
         gt: true
