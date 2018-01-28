@@ -39,6 +39,9 @@ export class MovieComponent implements OnInit, OnDestroy {
 
   moviesChanged$: EventEmitter<Movie>;
 
+  // prilagođava remaining vrednost na osnovu unete total vrednosti
+  // getter se koristi kao bilo koja druga readonly promenljiva
+  // this.remainingValue / {{remainingValue}}
   get remainingValue(): number {
     const totalFormValue = this.movieForm.controls['total'].value;
     const totalValueDifference = this.movie.total - totalFormValue;
@@ -56,7 +59,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // movie_id možemo da dobijemo iz Movies komponente u tom slučaju radimo GET filma
+    // movie_id možemo da dobijemo iz Movies komponente i u tom slučaju radimo GET filma
     if (this.movie_id) {
       this.movieService.getMovie(this.movie_id).subscribe(movie => {
         this.movie = movie;
@@ -102,12 +105,6 @@ export class MovieComponent implements OnInit, OnDestroy {
       this.success = false;
       this.error = error.error;
     });
-  }
-
-  private onHighlightedTmdb(data: CompleterItem) {
-    if (data) {
-      const movieData = data.originalObject;
-    }
   }
 
   private onSelectedTmdb(data: CompleterItem) {

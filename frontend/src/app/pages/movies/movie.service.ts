@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Movie } from '../../models/movie.model';
 import { TMDB_BASE_URL, TMDB_IMG_BASE_URL } from '../../util/const';
@@ -15,22 +15,38 @@ export class MovieService {
             .map(response => new Movie(response));
     }
 
-    listMovies(): Observable<Movie[]> {
-        return this.http.get('/api/movie/list/')
+    listMovies(...excludeFields): Observable<Movie[]> {
+        // klasa HttpParams je immutable
+        // svaka operacija promene ovog objekta ne menja taj objekat
+        // već vraća novu instancu sa izmenama
+        let queryParams = new HttpParams();
+
+        // sva imena polja koja želimo da isključimo smeštamo u array
+        const params = [];
+        for (let i = 0; i < excludeFields.length; i++) {
+            const field = excludeFields[i];
+            params.push(field);
+        }
+
+        if (params.length) {
+            queryParams = queryParams.set('exclude', params.toString());
+        }
+
+        return this.http.get('/api/movie/list/', { params: queryParams })
             .map(response => <Movie[]>response);
     }
 
-    addMovie(movie: Movie): Observable<Movie> {
+    private addMovie(movie: Movie): Observable<Movie> {
         return this.http.post('/api/movie/add/', movie)
             .map(response => new Movie(response));
     }
 
-    updateMovie(movie: Movie): Observable<any> {
+    private updateMovie(movie: Movie): Observable<Movie> {
         return this.http.put('/api/movie/update/', movie)
             .map(response => new Movie(response));
     }
 
-    deleteMovie(movie_id: String): Observable<any> {
+    deleteMovie(movie_id: String): Observable<String> {
         return this.http.delete('/api/movie/delete/' + movie_id, { responseType: 'text' });
     }
 
@@ -48,7 +64,7 @@ export class MovieService {
     }
 
     getMoviePoster(posterPath: Number): Observable<Blob> {
-        return this.http.get(TMDB_IMG_BASE_URL + posterPath, { responseType: 'blob'});
+        return this.http.get(TMDB_IMG_BASE_URL + posterPath, { responseType: 'blob' });
     }
 
 }

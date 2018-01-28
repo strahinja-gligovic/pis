@@ -28,7 +28,8 @@ export class MoviesComponent implements OnInit {
   constructor(private modalService: BsModalService, private movieService: MovieService) { }
 
   ngOnInit() {
-    this.getMovies();
+    // isključujemo poster polje iz list zahteva, više o tome niz callstack
+    this.getMovies('poster');
   }
 
   // sa template prosleđujemo samo id filma, a ne ceo objekat
@@ -42,6 +43,8 @@ export class MoviesComponent implements OnInit {
     const modalRef = this.modalService.show(MovieComponent, { initialState, class: 'modal-lg' });
 
     this.moviesChanged = modalRef.content.moviesChanged$.subscribe(movie => {
+      // više ne dobijamo samo boolean vrednost, već ceo izmenjen objekat
+      // pronaći ćemo ga u našem nizu i napraviti izmene, bez novih zahteva ka serveru
       this.updateMovieRows(movie);
       this.toggleSuccessMessage();
     }, error => {
@@ -52,7 +55,6 @@ export class MoviesComponent implements OnInit {
   private deleteMovie(movie_id: String) {
     this.submitted = true;
     this.movieService.deleteMovie(movie_id).subscribe(res => {
-      this.toggleSuccessMessage();
       for (let i = 0; i < this.movies.length; i++) {
         const element = this.movies[i];
         if (element._id === movie_id) {
@@ -62,25 +64,30 @@ export class MoviesComponent implements OnInit {
         }
       }
       this.submitted = false;
+      this.toggleSuccessMessage();
     }, error => {
       this.error = error;
       this.submitted = false;
     });
   }
 
-  private updateMovieRows(movie) {
+  private updateMovieRows(movie: Movie) {
+    // funkcija se koristi i za add i za update
     let found = false;
 
+    // slično kao kod delete, pronalazimo odgovarajući film na osnovu _id
     for (let i = 0; i < this.movies.length; i++) {
       const movieElement = this.movies[i];
 
       if (movieElement._id === movie._id) {
+        // update
         found = true;
         Object.assign(movieElement, movie);
         break;
       }
     }
 
+    // add
     if (!found) {
       this.movies.push(movie);
     }
@@ -88,9 +95,11 @@ export class MoviesComponent implements OnInit {
     this.movies = [...this.movies];
   }
 
-  private getMovies() {
+  // ovaj operator nam omogućava da metodi prosledimo bilo koji broj ulaznih parametara
+  private getMovies(...excludeFields) {
     this.submitted = true;
-    this.movieService.listMovies().subscribe(movies => {
+    // svaki od tih parametara prosleđujemo dalje
+    this.movieService.listMovies(excludeFields).subscribe(movies => {
       this.movies = movies;
       this.submitted = false;
     }, error => {

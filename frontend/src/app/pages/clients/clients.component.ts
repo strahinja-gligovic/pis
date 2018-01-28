@@ -72,10 +72,13 @@ export class ClientsComponent implements OnInit {
 
   deleteClient(client: Client) {
     this.submitted = true;
+    // delete je jednostavna operacija, ne želimo ponovo da povlačimo podatke i bespotrebne zahteve ka serveru
     this.clientService.deleteClient(client._id).subscribe(res => {
-      this.toggleSuccessMessage();
+      // iz postojećeg niza klijenata pronalazimo onog koga smo upravo obrisali
       for (let i = 0; i < this.clients.length; i++) {
         const element = this.clients[i];
+        // svaki klijent koji je u tabeli se nalazi u db
+        // mora imati _id
         if (element._id === client._id) {
           this.clients.splice(i, 1);
           // ngx-datatable detektor promena
@@ -83,6 +86,7 @@ export class ClientsComponent implements OnInit {
         }
       }
       this.submitted = false;
+      this.toggleSuccessMessage();
     }, error => {
       this.error = error;
       this.submitted = false;

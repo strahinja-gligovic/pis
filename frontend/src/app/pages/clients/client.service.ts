@@ -21,18 +21,18 @@ export class ClientService {
             .map(response => <Client[]>response);
     }
 
-    addClient(client: Client): Observable<Client> {
+    private addClient(client: Client): Observable<Client> {
         return this.http.post('/api/client/add/', client)
             .map(response => new Client(response));
     }
 
-    updateClient(client: Client): Observable<any> {
+    private updateClient(client: Client): Observable<Client> {
         return this.http.put('/api/client/update/', client)
             .map(response => new Client(response));
     }
 
-    deleteClient(client_id: String): Observable<any> {
-        // setujemo responseType na text jer sa bekenda šaljemo "OK";
+    deleteClient(client_id: String): Observable<String> {
+        // setujemo responseType na text jer šaljemo "OK"
         return this.http.delete('/api/client/delete/' + client_id, { responseType: 'text' });
     }
 

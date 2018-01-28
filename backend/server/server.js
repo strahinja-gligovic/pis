@@ -39,7 +39,7 @@ app.set('port', port);
 mongoose.connect(dbConfig.url).then(() => {
     const server = http.createServer(app);
 
-    server.listen(port, () => console.log('mađija na portu ${port}'.rainbow));
+    server.listen(port, () => console.log(`mađija na portu ${port}`.rainbow));
   },
   (err) => {
     console.log('   MONGO???   '.zebra);

@@ -26,8 +26,23 @@ movieRouter.get('/get/:_id', function (req, res) {
 })
 
 movieRouter.get('/list/', function (req, res) {
+    const excludeFilter = {};
+    if (req.query.exclude) {
+        // objekat sa svim query parametrima
+        const queryParams = req.query;
+        // zanima nas samo exclude parametar koji dolazi u formatu
+        // polje1,polje2,...
+        const excludeFieldsList = queryParams.exclude.split(',');
+    
+        for (let i = 0; i < excludeFieldsList.length; i++) {
+            const field = excludeFieldsList[i];
+            excludeFilter[field] = 0;
+        }
+    }
+    
     // prazan objekat podrazumeva sve dokumente
-    Movie.find({}, function (error, movies) {
+    // drugi parametar je objekat u formatu { poljeKojeNeZelimo: 0, ... }
+    Movie.find({}, excludeFilter, function (error, movies) {
         res.json(movies);
     })
 })
