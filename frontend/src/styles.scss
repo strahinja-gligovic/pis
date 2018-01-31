@@ -1,20 +1,4 @@
 /*Crveni placehodler tekst za invalid input polja*/
-
-input.is-invalid::-webkit-input-placeholder {
-  color: #dc3545 !important;
-  opacity: 1 !important;
-}
-
-input.is-invalid::-moz-placeholder {
-  color: #dc3545 !important;
-  opacity: 1 !important;
-}
-
-input.is-invalid:-ms-input-placeholder {
-  color: #dc3545 !important;
-  opacity: 1 !important;
-}
-
 input.is-invalid::placeholder {
   color: #dc3545 !important;
   opacity: 1 !important;
@@ -269,3 +253,12 @@ input.is-invalid::placeholder {
 //   display: block;
 //   width: 100%;
 // }
+
+// bootstrap 4 css se ne primenjuje na ng-select
+ng-select.ng-invalid.ng-touched .ng-control {
+  border-color: #dc3545;
+}
+
+ng-select.ng-invalid.ng-touched + .invalid-feedback {
+  display: block;
+}

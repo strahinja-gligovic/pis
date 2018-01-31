@@ -64,7 +64,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <input name="street" [(ngModel)]="client.address.street" street id="input-street" class="form-control" placeholder="Street"
+            <input name="street" [(ngModel)]="client.address.street" id="input-street" class="form-control" placeholder="Street"
               #street="ngModel" [class.is-invalid]="street.invalid && street.touched" required="true">
             <small class="invalid-feedback" *ngIf="street.invalid && street.touched">
               Street is required!
@@ -84,7 +84,7 @@
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <ng-select name="country" [(ngModel)]="client.address.country" country id="input-country" placeholder="Country" #country="ngModel"
+            <ng-select name="country" [(ngModel)]="client.address.country" id="input-country" placeholder="Country" #country="ngModel"
               [class.is-invalid]="country.invalid && country.touched" required="true">
               <ng-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</ng-option>
             </ng-select>

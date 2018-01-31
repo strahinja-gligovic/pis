@@ -8,8 +8,7 @@ var rentalSchema = new mongoose.Schema({
     client: { type: mongoose.Schema.Types.ObjectId, ref: 'Client' },
     movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' },
     startDate: Date,
-    endDate: Date,
-    returned: Boolean
+    returnDate: Date
 });
 
 module.exports = mongoose.model('Rental', rentalSchema);

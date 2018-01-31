@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Rental } from '../../models/rental.model';
+import { AuthService } from '../../security/auth.service';
+import { User } from '../../models/user.model';
 
 @Injectable()
 export class RentalService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getRental(rental_id): Observable<Rental> {
@@ -20,11 +22,13 @@ export class RentalService {
   }
 
   private addRental(rental: Rental): Observable<Rental> {
+    this.setUser(rental);
     return this.http.post('/api/rental/add/', rental)
       .map(response => new Rental(response));
   }
 
   private updateRental(rental: Rental): Observable<Rental> {
+    this.setUser(rental);
     return this.http.put('/api/rental/update/', rental)
       .map(response => new Rental(response));
   }
@@ -38,6 +42,13 @@ export class RentalService {
       return this.updateRental(rental);
     } else {
       return this.addRental(rental);
+    }
+  }
+
+  private setUser(rental: Rental) {
+    if (!rental.user) {
+      rental.user = new User();
+      rental.user._id = this.authService.loggedInUser._id;
     }
   }
 

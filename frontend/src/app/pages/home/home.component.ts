@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCurrentlyLoggedIn() {
-    return this.authService.loggedInUsername;
+    return this.authService.loggedInUser.username;
   }
 
 }

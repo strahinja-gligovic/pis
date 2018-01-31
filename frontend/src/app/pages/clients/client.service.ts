@@ -17,8 +17,26 @@ export class ClientService {
     }
 
     listClients(): Observable<Client[]> {
+        // potreban nam je name getter Client klase da bi na UI prikazali puno ime klijenta
+        // kastovanje JSONa utiče samo na vreme pre kompajliranja koda
+        // to znači da ne dobijamo mogućnost korišćenja funkcija definisanih u klasi
+        // moramo da instanciramo objekte kako bi mogli koristiti sve funkcionalnosti
         return this.http.get('/api/client/list/')
-            .map(response => <Client[]>response);
+            // kastujemo JSON u array
+            // ako zakomentarišemo sledeću liniju nećemo moći da pristupimo responseArray.length u narednom callback
+            // tj mogli bismo sa responseArray['length'] ali onda ne koristimo type safety
+            // ( typescript  ¯\_(ツ)_/¯ )
+            .map(responseJson => <Array<Client>>responseJson)
+            // instanciramo objekte jedan po jedan
+            .map(responseArray => {
+                const clients = new Array<Client>();
+                for (let i = 0; i < responseArray.length; i++) {
+                    const clientJson = responseArray[i];
+                    const clientObject = new Client(clientJson);
+                    clients.push(clientObject);
+                }
+                return clients;
+            });
     }
 
     private addClient(client: Client): Observable<Client> {

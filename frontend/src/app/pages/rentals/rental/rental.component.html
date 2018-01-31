@@ -1,3 +1,76 @@
-<p>
-  rental works!
-</p>
+<div class="modal-header">
+  <h4 class="modal-title" *ngIf="rental._id; else rentalAdd">Rental Update</h4>
+  <ng-template #rentalAdd>
+    <h4 class="modal-title">Rental Add</h4>
+  </ng-template>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
+    <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
+  </alert>
+  <form #rentalForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="input-client">Client</label>
+          <ng-select name="client" [items]="clients$ | async" required="true" bindLabel="name" bindValue="_id" [(ngModel)]="rental.client._id" id="input-client"
+            placeholder="Client" #client="ngModel">
+            <ng-template ng-option-tmp let-client="item">
+              {{client.firstName}} {{client.lastName}}
+            </ng-template>
+          </ng-select>
+          <small class="invalid-feedback" *ngIf="client.invalid && client.touched">
+            Client is required!
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="input-movie">Movie</label>
+          <ng-select name="movie" [items]="movies$ | async" required="true" bindLabel="title" bindValue="_id" [(ngModel)]="rental.movie._id"
+            id="input-movie" [class.is-invalid]="movie.invalid && movie.touched" placeholder="Movie" #movie="ngModel">
+            <ng-template ng-option-tmp let-movie="item">
+              <span>{{movie.title}} - {{movie.releaseDate}}</span>
+              <span>({{movie.remaining}}/{{movie.total}})</span>
+            </ng-template>
+          </ng-select>
+          <small class="invalid-feedback">
+            Movie is required!
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <label for="input-startDate">Start Date</label>
+          <input name="startDate" [(ngModel)]="rental.startDate" bsDatepicker id="input-startDate" class="form-control" #startDate="ngModel"
+            [class.is-invalid]="startDate.invalid && startDate.touched" required="true" [bsConfig]="{ containerClass: 'theme-default' }">
+          <div class="invalid-feedback" *ngIf="startDate.invalid && startDate.touched">
+            Start Date is required!
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="input-returnDate">Return Date</label>
+          <input name="returnDate" [(ngModel)]="rental.returnDate" bsDatepicker id="input-returnDate" class="form-control" #returnDate="ngModel"
+            [class.is-invalid]="returnDate.invalid && returnDate.touched" [bsConfig]="{ containerClass: 'theme-default' }">
+          <div class="invalid-feedback" *ngIf="returnDate.invalid && returnDate.touched">
+            Return Date is required!
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" [disabled]="submitted || !rentalForm.valid" class="btn btn-default" (click)="saveRental()">Save</button>
+  <button type="button" class="btn btn-default" (click)="closeModal()">Close</button>
+</div>

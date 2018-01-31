@@ -50,6 +50,7 @@
               <div class="col">
                 <div class="form-group" *ngIf="movie?._id; else noValidatorTotal">
                   <label for="input-total">Total Copies</label>
+                  <!-- U INPUTU SE KORISTI CUSTOM DIREKTIVA copies-totals.directive.ts -->
                   <input name="total" [ngModel]="movie?.total" id="input-total" appCopiesTotals [greaterThan]="movie?.total - movie?.remaining"
                     class="form-control" #total="ngModel" [class.is-invalid]="total.invalid" required="true" type="number">
                   <div class="invalid-feedback" *ngIf="total.errors?.required && !total.errors?.gt">

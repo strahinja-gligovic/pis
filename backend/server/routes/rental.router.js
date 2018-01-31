@@ -5,7 +5,9 @@ const Rental = require('../../db/models/rental.model');
 rentalRouter.get('/get/:_id', function (req, res) {
     const rental_id = req.params._id;
 
-    Rental.findById(rental_id, function (error, rental) {
+    // http://mongoosejs.com/docs/populate.html
+
+    Rental.findById(rental_id).exec(function (error, rental) {
         if (error) {
             res.status(500).json({ errmsg: "No such rental." });
             return;
@@ -20,7 +22,7 @@ rentalRouter.get('/get/:_id', function (req, res) {
 })
 
 rentalRouter.get('/list/', function (req, res) {
-    Rental.find({}, function (error, rentals) {
+    Rental.find({}).populate('movie', 'title').populate('client').populate('user').exec(function (error, rentals) {
         res.json(rentals);
     })
 })
@@ -38,6 +40,8 @@ rentalRouter.post('/add/', function (req, res) {
 })
 
 rentalRouter.put('/update/', function (req, res) {
+    const rental_id = req.body._id;
+    
     Rental.findOne({ _id: rental_id }, function (error, rental) {
         if (error || !rental) {
             res.status(500).json({ errmsg: "No such rental." });
@@ -46,6 +50,7 @@ rentalRouter.put('/update/', function (req, res) {
 
             rental.save(function (error, rental) {
                 if (error) {
+                    console.error(error);
                     res.status(500).json({ errmsg: "Woops." });
                 } else {
                     res.json(rental);

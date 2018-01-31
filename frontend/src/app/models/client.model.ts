@@ -8,6 +8,10 @@ export class Client {
     dob: Date;
     address: Address;
 
+    get name(): string {
+        return this.firstName + ' ' + this.lastName;
+    }
+
     constructor(json?: any) {
         if (json) {
             this._id = json._id;
@@ -18,8 +22,7 @@ export class Client {
             if (json.address) {
                 this.address = new Address(json.address);
             }
-        }
-        if (!this.address) {
+        } else {
             this.address = new Address();
         }
     }

@@ -6,6 +6,11 @@ import { NgForm } from '@angular/forms';
 import { RentalService } from '../rental.service';
 import { Subject } from 'rxjs/Subject';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Observable } from 'rxjs/Observable';
+import { Client } from '../../../models/client.model';
+import { Movie } from '../../../models/movie.model';
+import { MovieService } from '../../movies/movie.service';
+import { ClientService } from '../../clients/client.service';
 
 @Component({
   selector: 'app-rental',
@@ -18,13 +23,22 @@ export class RentalComponent implements OnInit, OnDestroy {
   submitted = false;
   success = false;
 
+  private clients$: Observable<Client[]>;
+  private movies$: Observable<Movie[]>;
+
   private rentalsChanged$: EventEmitter<Boolean>;
 
-  constructor(private bsModalRef: BsModalRef, private rentalService: RentalService) {
+  constructor(private bsModalRef: BsModalRef, private rentalService: RentalService, private movieService: MovieService,
+    private clientService: ClientService) {
+      
   }
 
   ngOnInit() {
+    console.log(this.rental);
     this.rentalsChanged$ = new EventEmitter<Boolean>();
+
+    this.clients$ = this.clientService.listClients();
+    this.movies$ = this.movieService.listMovies('poster');
   }
 
   ngOnDestroy(): void {
@@ -38,6 +52,7 @@ export class RentalComponent implements OnInit, OnDestroy {
   saveRental() {
     this.submitted = true;
 
+    console.log(this.rental);
     this.rentalService.saveRental(this.rental).subscribe(res => {
       this.submitted = false;
       this.success = true;
@@ -50,4 +65,5 @@ export class RentalComponent implements OnInit, OnDestroy {
       this.error = error.error;
     });
   }
+
 }

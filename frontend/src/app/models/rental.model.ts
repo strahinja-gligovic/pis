@@ -8,9 +8,7 @@ export class Rental {
     client: Client;
     movie: Movie;
     startDate: Date;
-    endDate: Date;
-    returned: Boolean;
-
+    returnDate: Date;
 
     constructor(json?: any) {
         if (json) {
@@ -19,8 +17,10 @@ export class Rental {
             this.client = new Client(json.client);
             this.movie = new Movie(json.movie);
             this.startDate = new Date(json.startDate);
-            this.endDate = new Date(json.endDate);
-            this.returned = json.returned;
+            this.returnDate = new Date(json.returnDate);
+        } else {
+            this.client = new Client();
+            this.movie = new Movie();
         }
     }
 }
