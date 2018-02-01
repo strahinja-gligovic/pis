@@ -61,3 +61,4 @@ typings/
 .next
 frontend/.vs/slnx.sqlite
 frontend/.vs/VSWorkspaceState.json
+/.vscode
