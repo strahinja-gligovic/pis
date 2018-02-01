@@ -5,8 +5,6 @@ const Rental = require('../../db/models/rental.model');
 rentalRouter.get('/get/:_id', function (req, res) {
     const rental_id = req.params._id;
 
-    // http://mongoosejs.com/docs/populate.html
-
     Rental.findById(rental_id).exec(function (error, rental) {
         if (error) {
             res.status(500).json({ errmsg: "No such rental." });
@@ -22,6 +20,7 @@ rentalRouter.get('/get/:_id', function (req, res) {
 })
 
 rentalRouter.get('/list/', function (req, res) {
+    // http://mongoosejs.com/docs/populate.html
     Rental.find({}).populate('movie', 'title').populate('client').populate('user').exec(function (error, rentals) {
         res.json(rentals);
     })

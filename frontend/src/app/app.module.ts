@@ -57,14 +57,21 @@ import { RentalService } from './pages/rentals/rental.service';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
-    CookieModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    // https://github.com/salemdar/ngx-cookie
+    CookieModule.forRoot(),
+    // https://valor-software.com/ngx-bootstrap/#/modals
     ModalModule.forRoot(),
+    // https://valor-software.com/ngx-bootstrap/#/datepicker
     BsDatepickerModule.forRoot(),
+    // https://swimlane.gitbooks.io/ngx-datatable/
     NgxDatatableModule,
+    // https://ng-select.github.io/ng-select#/data-sources
     NgSelectModule,
+    // https://github.com/ng-select/ng-select
     Ng2CompleterModule,
+    // https://valor-software.com/ngx-bootstrap/#/alerts
     AlertModule.forRoot()
   ],
   entryComponents: [ClientComponent, MovieComponent, RentalComponent],
