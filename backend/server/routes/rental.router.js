@@ -1,6 +1,8 @@
 const express = require('express');
 const rentalRouter = express.Router();
 const Rental = require('../../db/models/rental.model');
+const Movie = require('../../db/models/movie.model');
+
 
 rentalRouter.get('/get/:_id', function (req, res) {
     const rental_id = req.params._id;
@@ -29,13 +31,29 @@ rentalRouter.get('/list/', function (req, res) {
 rentalRouter.post('/add/', function (req, res) {
     let rental = new Rental(req.body);
 
-    rental.save(function (error, rental) {
+    const movie_id = req.body.movie._id;
+
+    console.log(movie_id);
+    Movie.findById(movie_id).exec(function (error, movie) {
         if (error) {
-            res.status(500).json({ errmsg: "That's not a rental." });
-        } else {
-            res.json(rental);
+            res.status(500).json({ errmsg: "Error updating movie." });
         }
-    });
+        movie.remaining = movie.remaining - 1;
+
+        movie.save(function(error, movie) {
+            if (error) {
+                res.status(500).json({ errmsg: "Error updating movie." });
+            } else {
+                rental.save(function (error, rental) {
+                    if (error) {
+                        res.status(500).json({ errmsg: "That's not a rental." });
+                    } else {
+                        res.json(rental);
+                    }
+                });
+            }
+        })
+    })
 })
 
 rentalRouter.put('/update/', function (req, res) {
