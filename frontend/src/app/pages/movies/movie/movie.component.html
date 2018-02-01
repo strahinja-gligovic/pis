@@ -98,9 +98,9 @@
     </div>
     <div *ngIf="!movie?._id" class="form-group row">
       <div class="col">
-        <label for="input-tmdb">Search for a movie on TMDB</label>
+        <label for="input-tmdb">The Movie Database (TMDb)</label>
         <ng2-completer [inputClass]="'form-control '" #tmdb [inputName]="tmdb" name="tmdb" [datasource]="tmdbDatasource" [minSearchLength]="3"
-          [placeholder]="'Searching TMDB'" [clearUnselected]="true" [textSearching]="'Please wait...'" (selected)="onSelectedTmdb($event)"></ng2-completer>
+          [placeholder]="'Search for a movie...'" [clearUnselected]="true" [textSearching]="'Please wait...'" (selected)="onSelectedTmdb($event)"></ng2-completer>
       </div>
     </div>
   </form>

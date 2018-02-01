@@ -20,13 +20,6 @@ export class ClientsComponent implements OnInit {
   // referenca na osluškivanje promena u Client modalu
   clientsChanged: Subscription;
 
-  // ***TEMPLATE MODAL***
-  // smeštamo adresu koju želimo da prikažemo u modalu
-  selectedAddress: Address;
-  // povratna vrednost metode koja otvara modal, služi da bi isti mogli da zatvorimo
-  addressModalRef: BsModalRef;
-
-
   // UI
   success = false;
   error: any;

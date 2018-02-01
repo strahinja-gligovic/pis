@@ -9,6 +9,7 @@ import { CompleterService, RemoteData } from 'ng2-completer';
 import { TMDB_API_KEY, TMDB_BASE_URL, TMDB_IMG_BASE_URL } from '../../../util/const';
 import { CompleterData } from 'ng2-completer/services/completer-data';
 import { CompleterItem } from 'ng2-completer/components/completer-item';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-movie',
@@ -29,6 +30,7 @@ export class MovieComponent implements OnInit, OnDestroy {
   // tmdb
   tmdbDatasource: RemoteData;
   tmdbImageUrl: String;
+  tmdbMoviePoster$: Subscription;
 
   // UI
   error: any;
@@ -126,9 +128,14 @@ export class MovieComponent implements OnInit, OnDestroy {
       };
       this.movie.tmdb = movieData.id;
       if (movieData.poster_path) {
-        this.movieService.getMoviePoster(movieData.poster_path)
+        if (this.tmdbMoviePoster$ && !this.tmdbMoviePoster$.closed) {
+          this.tmdbMoviePoster$.unsubscribe();
+        }
+        this.tmdbMoviePoster$ = this.movieService.getMoviePoster(movieData.poster_path)
           .subscribe(blob => {
             this.createImageFromBlob(blob);
+          }, error => {
+            alert('Error fetching poster');
           });
       }
     } else {

@@ -17,7 +17,7 @@
         <div class="form-group">
           <label for="input-client">Client</label>
           <ng-select name="client" [items]="clients$ | async" required="true" bindLabel="name" bindValue="_id" [(ngModel)]="rental.client._id" id="input-client"
-            placeholder="Client" #client="ngModel">
+            placeholder="Search for a client..." #client="ngModel">
             <ng-template ng-option-tmp let-client="item">
               {{client.firstName}} {{client.lastName}}
             </ng-template>
@@ -33,7 +33,7 @@
         <div class="form-group">
           <label for="input-movie">Movie</label>
           <ng-select name="movie" [items]="movies$ | async" required="true" bindLabel="title" bindValue="_id" [(ngModel)]="rental.movie._id"
-            id="input-movie" [class.is-invalid]="movie.invalid && movie.touched" placeholder="Movie" #movie="ngModel">
+            id="input-movie" [class.is-invalid]="movie.invalid && movie.touched" placeholder="Search for a movie..." #movie="ngModel">
             <ng-template ng-option-tmp let-movie="item">
               <span>{{movie.title}} - {{movie.releaseDate}}</span>
               <span>({{movie.remaining}}/{{movie.total}})</span>

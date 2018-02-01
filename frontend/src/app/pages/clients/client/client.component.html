@@ -15,8 +15,9 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <input name="firstName" [(ngModel)]="client.firstName" id="input-firstName" class="form-control" placeholder="First Name"
-            #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched" required="true">
+          <label for="input-firstName">First Name</label>
+          <input name="firstName" [(ngModel)]="client.firstName" id="input-firstName" class="form-control" #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched"
+            required="true">
           <small class="invalid-feedback" *ngIf="firstName.invalid && firstName.touched">
             First Name is required!
           </small>
@@ -24,8 +25,9 @@
       </div>
       <div class="col">
         <div class="form-group">
-          <input name="lastName" [(ngModel)]="client.lastName" id="input-lastName" class="form-control" placeholder="Last Name" #lastName="ngModel"
-            [class.is-invalid]="lastName.invalid && lastName.touched" required="true">
+          <label for="input-lastName">Last Name</label>
+          <input name="lastName" [(ngModel)]="client.lastName" id="input-lastName" class="form-control" #lastName="ngModel" [class.is-invalid]="lastName.invalid && lastName.touched"
+            required="true">
           <small class="invalid-feedback" *ngIf="lastName.invalid && lastName.touched">
             Last Name is required!
           </small>
@@ -35,31 +37,28 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <input name="email" [(ngModel)]="client.email" pattern=".+@.+\..+" id="input-email" class="form-control" placeholder="Email Address"
-            #email="ngModel" [class.is-invalid]="email.invalid && email.touched" required="true">
+          <label for="input-email">Email</label>
+          <input name="email" [(ngModel)]="client.email" pattern=".+@.+\..+" id="input-email" class="form-control" #email="ngModel"
+            [class.is-invalid]="email.invalid && email.touched" required="true">
           <small class="invalid-feedback" *ngIf="email.invalid && email.touched && email.errors?.required">
-            Email Address is required!
+            Email is required!
           </small>
           <small class="invalid-feedback" *ngIf="email.invalid && email.touched && email.errors?.pattern">
-            That's not an Email Address!
+            That's not an Email!
           </small>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
-          <input name="dob" [(ngModel)]="client.dob" bsDatepicker id="input-dob" class="form-control" placeholder="Date of Birth" #dob="ngModel"
-            [class.is-invalid]="dob.invalid && dob.touched" required="true" [bsConfig]="{ containerClass: 'theme-default' }">
+          <label for="input-dob">Date of Birth</label>
+          <input name="dob" [(ngModel)]="client.dob" bsDatepicker id="input-dob" class="form-control" #dob="ngModel" [class.is-invalid]="dob.invalid && dob.touched"
+            required="true" [bsConfig]="{ containerClass: 'theme-default' }">
           <small class="invalid-feedback" *ngIf="dob.invalid && dob.touched">
             Date of Birth is required!
           </small>
         </div>
       </div>
     </div>
-    <!-- <div class="row">
-      <div class="col">
-        <h6>Address</h6>
-      </div>
-    </div> -->
     <app-address [(address)]="client.address" disableInputs="false" isModal="false"></app-address>
   </form>
 </div>

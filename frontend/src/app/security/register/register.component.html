@@ -17,30 +17,33 @@
         <div>{{error.errmsg || 'Something unexpected happened.'}}</div>
       </alert>
       <div class="form-group">
-        <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel" class="form-control" placeholder="Full name"
-          [class.is-invalid]="fullName.invalid && fullName.touched" [required]="true" autofocus>
+        <label for="input-fullName">Full Name</label>
+        <input name="fullName" [(ngModel)]="user.fullName" id="input-name" #fullName="ngModel" class="form-control" [class.is-invalid]="fullName.invalid && fullName.touched"
+          [required]="true">
         <small class="invalid-feedback" *ngIf="fullName.invalid && fullName.touched && fullName.errors?.required">
           Full name is required!
         </small>
       </div>
       <div class="form-group">
-        <input name="username" [(ngModel)]="user.username" id="input-username" #username="ngModel" class="form-control" placeholder="Username"
-          [class.is-invalid]="username.invalid && username.touched" [required]="true">
+        <label for="input-username">Username</label>
+        <input name="username" [(ngModel)]="user.username" id="input-username" #username="ngModel" class="form-control" [class.is-invalid]="username.invalid && username.touched"
+          [required]="true">
         <small class="invalid-feedback" *ngIf="username.invalid && username.touched && username.errors?.required">
           Username is required!
         </small>
       </div>
       <div class="form-group">
-        <label for="input-password" class="sr-only">Password</label>
-        <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control" placeholder="Password"
-          #password="ngModel" [class.is-invalid]="password.invalid && password.touched" [required]="true">
+        <label for="input-password">Password</label>
+        <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control" #password="ngModel"
+          [class.is-invalid]="password.invalid && password.touched" [required]="true">
         <small class="invalid-feedback" *ngIf="password.invalid && password.touched && password.errors?.required">
           Password is required!
         </small>
       </div>
       <div class="form-group">
-        <input name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password" class="form-control" placeholder="Confirm Password"
-          #rePass="ngModel" [class.is-invalid]="(rePass.invalid || password.value != rePass.value) && rePass.touched" [required]="true">
+        <label for="input-re-password">Confirm Password</label>
+        <input name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password" class="form-control" #rePass="ngModel"
+          [class.is-invalid]="(rePass.invalid || password.value != rePass.value) && rePass.touched" [required]="true">
         <small class="invalid-feedback" *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
           Password confirmation is required!
         </small>
