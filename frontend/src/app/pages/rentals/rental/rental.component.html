@@ -35,7 +35,7 @@
           <ng-select name="movie" [items]="movies$ | async" required="true" bindLabel="title" bindValue="_id" [(ngModel)]="rental.movie._id"
             id="input-movie" [class.is-invalid]="movie.invalid && movie.touched" placeholder="Search for a movie..." #movie="ngModel">
             <ng-template ng-option-tmp let-movie="item">
-              <span>{{movie.title}} - {{movie.releaseDate}}</span>
+              <span>{{movie.title}} - {{movie.releaseDate | date:'yyyy'}}</span>
               <span>({{movie.remaining}}/{{movie.total}})</span>
             </ng-template>
           </ng-select>
@@ -59,8 +59,8 @@
       <div class="col">
         <div class="form-group">
           <label for="input-returnDate">Return Date</label>
-          <input name="returnDate" [(ngModel)]="rental.returnDate" bsDatepicker id="input-returnDate" class="form-control" #returnDate="ngModel"
-            [class.is-invalid]="returnDate.invalid && returnDate.touched" [bsConfig]="{ containerClass: 'theme-default' }">
+          <input name="returnDate" [(ngModel)]="rental.returnDate" [minDate]="today" bsDatepicker id="input-returnDate" class="form-control" #returnDate="ngModel"
+            [class.is-invalid]="returnDate.invalid && returnDate.touched" [bsConfig]="{ containerClass: 'theme-default' }" [disabled]="!rental._id">
           <div class="invalid-feedback" *ngIf="returnDate.invalid && returnDate.touched">
             Return Date is required!
           </div>

@@ -16,8 +16,12 @@ export class Rental {
             this.user = new User(json.user);
             this.client = new Client(json.client);
             this.movie = new Movie(json.movie);
-            this.startDate = new Date(json.startDate);
-            this.returnDate = new Date(json.returnDate);
+            if (json.startDate) {
+                this.startDate = new Date(json.startDate);
+            }
+            if (json.returnDate) {
+                this.returnDate = new Date(json.returnDate);
+            }
         } else {
             this.client = new Client();
             this.movie = new Movie();

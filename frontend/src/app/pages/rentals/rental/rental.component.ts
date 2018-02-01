@@ -22,6 +22,8 @@ export class RentalComponent implements OnInit, OnDestroy {
   submitted = false;
   success = false;
 
+  today: Date;
+
   private clients$: Observable<Client[]>;
   private movies$: Observable<Movie[]>;
 
@@ -29,7 +31,8 @@ export class RentalComponent implements OnInit, OnDestroy {
 
   constructor(private bsModalRef: BsModalRef, private rentalService: RentalService, private movieService: MovieService,
     private clientService: ClientService) {
-      
+    this.today = new Date();
+    this.today.setDate(this.today.getDate() + 1);
   }
 
   ngOnInit() {
