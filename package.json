@@ -6,27 +6,27 @@
   "dependencies": {
     "bcrypt": "latest",
     "bcrypt-nodejs": "latest",
-    "body-parser": "~1.18.2",
-    "colors": "^1.1.2",
-    "connect-flash": "~0.1.1",
-    "cookie-parser": "~1.4.3",
-    "express": "~4.16.2",
-    "express-jwt": "^5.3.0",
-    "express-session": "~1.14.1",
-    "jsonwebtoken": "~8.1.0",
-    "method-override": "~2.3.10",
-    "mongoose": "~5.0.0",
-    "morgan": "~1.7.0",
-    "passport": "~0.3.2",
-    "passport-local": "~1.0.0"
+    "body-parser": "1.18.2",
+    "colors": "1.1.2",
+    "connect-flash": "0.1.1",
+    "cookie-parser": "1.4.3",
+    "express": "4.16.2",
+    "express-jwt": "5.3.0",
+    "express-session": "1.15.6",
+    "jsonwebtoken": "8.1.1",
+    "method-override": "2.3.10",
+    "mongoose": "5.0.3",
+    "morgan": "1.9.0",
+    "passport": "0.4.0",
+    "passport-local": "1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.14.11"
+    "nodemon": "1.14.11"
   },
   "scripts": {
     "start": "nodemon backend/server/server.js",
     "postinstall": "cd frontend && npm install",
-	"build": "cd frontend && ng build",
+    "build": "cd frontend && ng build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
