@@ -33,6 +33,7 @@ import { CopiesTotalsDirective } from './util/copies-totals.directive';
 import { RentalsComponent } from './pages/rentals/rentals.component';
 import { RentalComponent } from './pages/rentals/rental/rental.component';
 import { RentalService } from './pages/rentals/rental.service';
+import { AddressComponent } from './util/address/address.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { RentalService } from './pages/rentals/rental.service';
     NgxResizeWatcherDirective,
     CopiesTotalsDirective,
     RentalsComponent,
-    RentalComponent
+    RentalComponent,
+    AddressComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,7 @@ import { RentalService } from './pages/rentals/rental.service';
     // https://valor-software.com/ngx-bootstrap/#/alerts
     AlertModule.forRoot()
   ],
-  entryComponents: [ClientComponent, MovieComponent, RentalComponent],
+  entryComponents: [ClientComponent, MovieComponent, RentalComponent, AddressComponent],
   providers: [AuthService, CookieService, AuthGuard, ClientService, BsModalService, SidebarService,
     MovieService, RentalService],
   bootstrap: [AppComponent],

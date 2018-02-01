@@ -1,6 +1,5 @@
 import { Movie } from './../../../models/movie.model';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { countries, Address } from '../../../models/address.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgForm } from '@angular/forms';
 import { MovieService } from '../movie.service';

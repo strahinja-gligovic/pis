@@ -60,50 +60,7 @@
         <h6>Address</h6>
       </div>
     </div>
-    <div ngModelGroup="address" #address="ngModelGroup">
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <input name="street" [(ngModel)]="client.address.street" id="input-street" class="form-control" placeholder="Street"
-              #street="ngModel" [class.is-invalid]="street.invalid && street.touched" required="true">
-            <small class="invalid-feedback" *ngIf="street.invalid && street.touched">
-              Street is required!
-            </small>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <input name="city" [(ngModel)]="client.address.city" id="input-city" class="form-control" placeholder="City" #city="ngModel"
-              [class.is-invalid]="city.invalid && city.touched" required="true">
-            <small class="invalid-feedback" *ngIf="city.invalid && city.touched">
-              City is required!
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <ng-select name="country" [(ngModel)]="client.address.country" id="input-country" placeholder="Country" #country="ngModel"
-              [class.is-invalid]="country.invalid && country.touched" required="true">
-              <ng-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</ng-option>
-            </ng-select>
-            <small class="invalid-feedback" *ngIf="country.invalid && country.touched">
-              Country is required!
-            </small>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <input name="zip" [(ngModel)]="client.address.zip" id="input-zip" class="form-control" placeholder="Zip" #zip="ngModel" [class.is-invalid]="zip.invalid && zip.touched"
-              required="true">
-            <small class="invalid-feedback" *ngIf="zip.invalid && zip.touched">
-              Zip is required!
-            </small>
-          </div>
-        </div>
-      </div>
-    </div>
+    <app-address [(address)]="client.address" disableInputs="false" isModal="false"></app-address>
   </form>
 </div>
 <div class="modal-footer">

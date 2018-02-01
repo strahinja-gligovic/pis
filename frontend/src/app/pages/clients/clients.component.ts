@@ -5,8 +5,9 @@ import { Client } from '../../models/client.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
-import { Address, countries } from '../../models/address.model';
+import { Address } from '../../models/address.model';
 import { SUCCESS_DURATION } from '../../util/const';
+import { AddressComponent } from '../../util/address/address.component';
 
 @Component({
   selector: 'app-clients',
@@ -24,8 +25,7 @@ export class ClientsComponent implements OnInit {
   selectedAddress: Address;
   // povratna vrednost metode koja otvara modal, služi da bi isti mogli da zatvorimo
   addressModalRef: BsModalRef;
-  // činimo uveženu promenljivu dostupnom na template
-  countries = countries;
+
 
   // UI
   success = false;
@@ -52,13 +52,12 @@ export class ClientsComponent implements OnInit {
     }
 
     // kreiramo objekat koji prosleđujemo komponenti u modalu
-    // mora da se zove tako
-    const initialState = {
+    const clientComponentState = {
       client: client
     };
 
     // ostaje nam referenca na otvoreni modal
-    const modalRef = this.modalService.show(ClientComponent, { initialState });
+    const modalRef = this.modalService.show(ClientComponent, { initialState : clientComponentState });
 
     // pristupamo poljima u okviru komponente koja se nalazi u modalu
     // ukoliko korisnik uspešno izmeni klijenta, ponovo povlačimo podatke
@@ -104,10 +103,14 @@ export class ClientsComponent implements OnInit {
     });
   }
 
-  // ***TEMPLATE MODAL***
-  openAddressModal(address: Address, template: TemplateRef<any>) {
-    this.selectedAddress = address;
-    this.addressModalRef = this.modalService.show(template);
+  openAddressModal(address: Address) {
+    const addressComponentState = {
+      address: address,
+      isModal: true,
+      disableInputs: true
+    };
+
+    this.modalService.show(AddressComponent, { initialState : addressComponentState });
   }
 
   private toggleSuccessMessage() {

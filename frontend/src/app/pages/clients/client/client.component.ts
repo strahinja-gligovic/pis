@@ -1,6 +1,5 @@
 import { Client } from './../../../models/client.model';
 import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { countries, Address } from '../../../models/address.model';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NgForm } from '@angular/forms';
 import { ClientService } from '../client.service';
@@ -12,9 +11,6 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
   templateUrl: './client.component.html'
 })
 export class ClientComponent implements OnInit, OnDestroy {
-
-  // ovom deklaracijom činimo dostupnim niz u template
-  countries = countries;
 
   client: Client;
   error: any;

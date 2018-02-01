@@ -5,7 +5,6 @@ import { Rental } from '../../models/rental.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RentalComponent } from './rental/rental.component';
 import { Subscription } from 'rxjs/Subscription';
-import { Address, countries } from '../../models/address.model';
 import { SUCCESS_DURATION } from '../../util/const';
 
 @Component({

@@ -1,0 +1,54 @@
+<ng-container *ngIf="isModal">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Address</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</ng-container>
+<div [ngClass]="{'modal-body': isModal}">
+  <fieldset disabled="disableInputs">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <input name="street" [(ngModel)]="address.street" id="input-street" class="form-control" placeholder="Street" #street="ngModel"
+            [class.is-invalid]="street.invalid && street.touched" required="true">
+          <small class="invalid-feedback" *ngIf="street.invalid && street.touched">
+            Street is required!
+          </small>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <input name="city" [(ngModel)]="address.city" id="input-city" class="form-control" placeholder="City" #city="ngModel" [class.is-invalid]="city.invalid && city.touched"
+            required="true">
+          <small class="invalid-feedback" *ngIf="city.invalid && city.touched">
+            City is required!
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <ng-select name="country" [(ngModel)]="address.country" id="input-country" placeholder="Country" #country="ngModel" [class.is-invalid]="country.invalid && country.touched"
+            required="true" [disabled]="disableInputs">
+            <ng-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</ng-option>
+          </ng-select>
+          <small class="invalid-feedback" *ngIf="country.invalid && country.touched">
+            Country is required!
+          </small>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <input name="zip" [(ngModel)]="address.zip" id="input-zip" class="form-control" placeholder="Zip" #zip="ngModel" [class.is-invalid]="zip.invalid && zip.touched"
+            required="true">
+          <small class="invalid-feedback" *ngIf="zip.invalid && zip.touched">
+            Zip is required!
+          </small>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>

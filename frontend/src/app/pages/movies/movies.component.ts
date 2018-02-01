@@ -5,7 +5,6 @@ import { Movie } from '../../models/movie.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MovieComponent } from './movie/movie.component';
 import { Subscription } from 'rxjs/Subscription';
-import { Address, countries } from '../../models/address.model';
 import { SUCCESS_DURATION } from '../../util/const';
 
 @Component({
