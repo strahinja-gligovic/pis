@@ -37,11 +37,11 @@
         </ng-template>
         <ng-template let-rental="row" ngx-datatable-cell-template>
           <div>
-            <span *ngIf="!submitted" (click)="openRentalModal(rental)">
+            <span *ngIf="!submitted" [ngClass]="{'d-none' : rental.returnDate}" (click)="openRentalModal(rental)">
               <i class="fas fa-pencil-alt fa-lg clickable"></i>
             </span>
             &nbsp;
-            <span *ngIf="!submitted" (click)="deleteRental(rental)">
+            <span *ngIf="!submitted" [ngClass]="{'d-none' : !rental.returnDate}" (click)="deleteRental(rental)">
               <i class="fas fa-trash fa-lg clickable"></i>
             </span>
           </div>

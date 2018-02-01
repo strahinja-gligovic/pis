@@ -14,13 +14,13 @@ import { SUCCESS_DURATION } from '../../util/const';
 })
 export class RentalsComponent implements OnInit {
 
-  rentals: Rental[];
-  rentalsChanged: Subscription;
+  private rentals: Rental[];
+  private rentalsChanged: Subscription;
 
   // UI
-  success = false;
-  error: any;
-  submitted = false;
+  private success = false;
+  private error: any;
+  private submitted = false;
 
   constructor(private modalService: BsModalService, private rentalService: RentalService) { }
 

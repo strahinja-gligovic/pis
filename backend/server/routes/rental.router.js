@@ -10,7 +10,6 @@ rentalRouter.get('/get/:_id', function (req, res) {
     Rental.findById(rental_id).exec(function (error, rental) {
         if (error) {
             res.status(500).json({ errmsg: "No such rental." });
-            return;
         }
 
         if (rental) {
@@ -33,7 +32,6 @@ rentalRouter.post('/add/', function (req, res) {
 
     const movie_id = req.body.movie._id;
 
-    console.log(movie_id);
     Movie.findById(movie_id).exec(function (error, movie) {
         if (error) {
             res.status(500).json({ errmsg: "Error updating movie." });
@@ -63,16 +61,33 @@ rentalRouter.put('/update/', function (req, res) {
         if (error || !rental) {
             res.status(500).json({ errmsg: "No such rental." });
         } else {
-            rental.set(req.body);
+            if (req.body.returnDate) {
+                const movie_id = rental.movie;
 
-            rental.save(function (error, rental) {
-                if (error) {
-                    console.error(error);
-                    res.status(500).json({ errmsg: "Woops." });
-                } else {
-                    res.json(rental);
-                }
-            })
+                Movie.findById(movie_id).exec(function (error, movie) {
+                    if (error) {
+                        res.status(500).json({ errmsg: "Error updating movie." });
+                    }
+
+                    movie.remaining = movie.remaining + 1;
+            
+                    movie.save(function(error, movie) {
+                        if (error) {
+                            res.status(500).json({ errmsg: "Error updating movie." });
+                        } else {
+                            rental.set(req.body);
+
+                            rental.save(function (error, rental) {
+                                if (error) {
+                                    res.status(500).json({ errmsg: "Error updating rental." });
+                                } else {
+                                    res.json(rental);
+                                }
+                            })
+                        }
+                    })
+                })
+            }
         }
     })
 })

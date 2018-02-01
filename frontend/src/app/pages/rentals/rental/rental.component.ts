@@ -17,12 +17,11 @@ import { ClientService } from '../../clients/client.service';
 })
 export class RentalComponent implements OnInit, OnDestroy {
 
-  rental: Rental;
-  error: any;
-  submitted = false;
-  success = false;
-
-  today: Date;
+  private rental: Rental;
+  private error: any;
+  private submitted = false;
+  private success = false;
+  private today: Date;
 
   private clients$: Observable<Client[]>;
   private movies$: Observable<Movie[]>;
@@ -32,11 +31,9 @@ export class RentalComponent implements OnInit, OnDestroy {
   constructor(private bsModalRef: BsModalRef, private rentalService: RentalService, private movieService: MovieService,
     private clientService: ClientService) {
     this.today = new Date();
-    this.today.setDate(this.today.getDate() + 1);
   }
 
   ngOnInit() {
-    console.log(this.rental);
     this.rentalsChanged$ = new EventEmitter<Boolean>();
 
     this.clients$ = this.clientService.listClients();
@@ -51,10 +48,9 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.bsModalRef.hide();
   }
 
-  saveRental() {
+  private saveRental() {
     this.submitted = true;
 
-    console.log(this.rental);
     this.rentalService.saveRental(this.rental).subscribe(res => {
       this.submitted = false;
       this.success = true;
