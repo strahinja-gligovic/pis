@@ -8,6 +8,7 @@
 </ng-container>
 <div [ngClass]="{'modal-body': isModal}">
   <fieldset disabled="disableInputs">
+    <legend *ngIf="!isModal">Address</legend>
     <div class="row">
       <div class="col">
         <div class="form-group">
