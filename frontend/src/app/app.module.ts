@@ -71,7 +71,7 @@ import { AddressComponent } from './util/address/address.component';
     NgxDatatableModule,
     // https://ng-select.github.io/ng-select#/data-sources
     NgSelectModule,
-    // https://github.com/ng-select/ng-select
+    // https://github.com/oferh/ng2-completer
     Ng2CompleterModule,
     // https://valor-software.com/ngx-bootstrap/#/alerts
     AlertModule.forRoot()
