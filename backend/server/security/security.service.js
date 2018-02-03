@@ -17,34 +17,47 @@ exports.loginRoute = function loginRoute(req, res) {
     const password = req.body.password;
 
     // pronalazimo usera iz DB
-    User.findOne({ username: username }, function (error, user) {
+    User.findOne({
+        username: username
+    }, function (error, user) {
         if (error) {
-            console.log(error);
-            res.status(401).json(error);
-            return;
+            res.status(401).json({
+                errmsg: 'Error fetching user.'
+            });
         }
 
         if (!user) {
-            res.status(401).json({ errmsg: "Invalid credentials !" });
-            return;
+            res.status(401).json({
+                errmsg: 'Invalid credentials !'
+            });
         }
 
         user.comparePasswords(password, function (error, result) {
             if (error) {
-                console.log(error);
-                res.status(401).json({ errmsg: "Invalid credentials !" });
-                return;
+                res.status(401).json({
+                    errmsg: 'Invalid credentials !'
+                });
             }
 
             if (result) {
                 // kreiramo JWT
-                const jwtToken = jwt.sign({ username: username }, secret, { expiresIn: 7200 });
+                const jwtToken = jwt.sign({
+                    username: username
+                }, secret, {
+                    expiresIn: 7200
+                });
                 // obaveštavamo o uspešnosti i šaljemo token frontendu
                 // token traje 2 sata
                 // ponovo šaljemo ovaj podatak zbog lakšeg upravljanja
-                res.json({ token: jwtToken, expiresIn: 7200, user });
+                res.json({
+                    token: jwtToken,
+                    expiresIn: 7200,
+                    user
+                });
             } else {
-                res.status(401).json({ errmsg: "Invalid credentials !" });
+                res.status(401).json({
+                    errmsg: 'Invalid credentials !'
+                });
             }
         })
     });
@@ -59,9 +72,13 @@ exports.registerRoute = function registerRoute(req, res) {
         // ukoliko postoji greška obavestavamo o istoj
         if (error) {
             if (error.code === MONGO_DUPLICATE_CODE) {
-                res.status(500).json({ errmsg: "That username is taken, try a different one!" });
+                res.status(500).json({
+                    errmsg: 'That username is taken, try a different one!'
+                });
             } else {
-                res.status(500).json(error);
+                res.status(500).json({
+                    errmsg: 'Error saving user.'
+                });
             }
         } else {
             res.json(user);

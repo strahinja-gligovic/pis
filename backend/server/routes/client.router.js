@@ -10,7 +10,9 @@ clientRouter.get('/get/:_id', function (req, res) {
     Client.findById(client_id, function (error, client) {
         // obaveštavamo o grešci
         if (error) {
-            res.status(500).json({ errmsg: "No such client." });
+            res.status(500).json({
+                errmsg: 'Error fetching client.'
+            });
             return;
         }
 
@@ -19,7 +21,9 @@ clientRouter.get('/get/:_id', function (req, res) {
             res.json(client);
         } else {
             // obaveštavamo o grešci
-            res.status(500).json({ errmsg: "No such client." });
+            res.status(500).json({
+                errmsg: 'No such client.'
+            });
         }
     })
 })
@@ -27,6 +31,11 @@ clientRouter.get('/get/:_id', function (req, res) {
 clientRouter.get('/list/', function (req, res) {
     // prazan objekat podrazumeva sve dokumente
     Client.find({}, function (error, clients) {
+        if (error) {
+            res.status(500).json({
+                errmsg: 'Error fetching clients.'
+            })
+        }
         res.json(clients);
     })
 })
@@ -37,7 +46,9 @@ clientRouter.post('/add/', function (req, res) {
 
     client.save(function (error, client) {
         if (error) {
-            res.status(500).json({ errmsg: "That's not a client." });
+            res.status(500).json({
+                errmsg: 'Error saving client.'
+            });
         } else {
             res.json(client);
         }
@@ -48,9 +59,13 @@ clientRouter.put('/update/', function (req, res) {
     const client_id = req.body._id;
 
     // prvo pronalazimo primljeni klijent
-    Client.findOne({ _id: client_id }, function (error, client) {
+    Client.findOne({
+        _id: client_id
+    }, function (error, client) {
         if (error || !client) {
-            res.status(500).json({ errmsg: "No such client." });
+            res.status(500).json({
+                errmsg: 'Error fetching client.'
+            });
         } else {
             // setujemo nove vrednosti iz zahteva
             client.set(req.body);
@@ -58,7 +73,9 @@ clientRouter.put('/update/', function (req, res) {
             // upisujemo izmenjeni klijent
             client.save(function (error, client) {
                 if (error) {
-                    res.status(500).json({ errmsg: "Woops." });
+                    res.status(500).json({
+                        errmsg: 'Error saving client.'
+                    });
                 } else {
                     res.json(client);
                 }
@@ -72,10 +89,12 @@ clientRouter.delete('/delete/:_id', function (req, res) {
 
     Client.findByIdAndRemove(client_id, function (error) {
         if (error) {
-            res.status(500).json({ errmsg: "Woops." });
+            res.status(500).json({
+                errmsg: 'Error deleting client.'
+            });
         } else {
             // sve OK !
-            res.sendStatus(200);
+            res.status(200).send('OK');
         }
     })
 })

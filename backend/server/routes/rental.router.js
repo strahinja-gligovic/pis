@@ -9,22 +9,31 @@ rentalRouter.get('/get/:_id', function (req, res) {
 
     Rental.findById(rental_id).exec(function (error, rental) {
         if (error) {
-            res.status(500).json({ errmsg: "No such rental." });
+            res.status(500).json({
+                errmsg: 'Error fetching rental.'
+            });
         }
 
         if (rental) {
             res.json(rental);
-        } else {
-            res.status(500).json({ errmsg: "No such rental." });
         }
     })
 })
 
 rentalRouter.get('/list/', function (req, res) {
     // http://mongoosejs.com/docs/populate.html
-    Rental.find({}).populate('movie', 'title').populate('client').populate('user').exec(function (error, rentals) {
-        res.json(rentals);
-    })
+    Rental.find({}).populate('movie', ['title'])
+        .populate('client', ['firstName', 'lastName'])
+        .populate('user', ['username'])
+        .exec(function (error, rentals) {
+            if (error) {
+                res.status(500).json({
+                    errmsg: 'Error fetching rentals.'
+                })
+            }
+
+            res.json(rentals);
+        })
 })
 
 rentalRouter.post('/add/', function (req, res) {
@@ -34,17 +43,23 @@ rentalRouter.post('/add/', function (req, res) {
 
     Movie.findById(movie_id).exec(function (error, movie) {
         if (error) {
-            res.status(500).json({ errmsg: "Error updating movie." });
+            res.status(500).json({
+                errmsg: 'Error fetching movie.'
+            });
         }
         movie.remaining = movie.remaining - 1;
 
-        movie.save(function(error, movie) {
+        movie.save(function (error, movie) {
             if (error) {
-                res.status(500).json({ errmsg: "Error updating movie." });
+                res.status(500).json({
+                    errmsg: 'Error saving movie.'
+                });
             } else {
                 rental.save(function (error, rental) {
                     if (error) {
-                        res.status(500).json({ errmsg: "That's not a rental." });
+                        res.status(500).json({
+                            errmsg: 'Error saving rental.'
+                        });
                     } else {
                         res.json(rental);
                     }
@@ -56,30 +71,40 @@ rentalRouter.post('/add/', function (req, res) {
 
 rentalRouter.put('/update/', function (req, res) {
     const rental_id = req.body._id;
-    
-    Rental.findOne({ _id: rental_id }, function (error, rental) {
+
+    Rental.findOne({
+        _id: rental_id
+    }, function (error, rental) {
         if (error || !rental) {
-            res.status(500).json({ errmsg: "No such rental." });
+            res.status(500).json({
+                errmsg: 'Error fetching rental.'
+            });
         } else {
             if (req.body.returnDate) {
                 const movie_id = rental.movie;
 
                 Movie.findById(movie_id).exec(function (error, movie) {
-                    if (error) {
-                        res.status(500).json({ errmsg: "Error updating movie." });
+                    if (error || !movie) {
+                        res.status(500).json({
+                            errmsg: 'Error fetching movie.'
+                        });
                     }
 
                     movie.remaining = movie.remaining + 1;
-            
-                    movie.save(function(error, movie) {
+
+                    movie.save(function (error, movie) {
                         if (error) {
-                            res.status(500).json({ errmsg: "Error updating movie." });
+                            res.status(500).json({
+                                errmsg: 'Error saving movie.'
+                            });
                         } else {
                             rental.set(req.body);
 
                             rental.save(function (error, rental) {
                                 if (error) {
-                                    res.status(500).json({ errmsg: "Error updating rental." });
+                                    res.status(500).json({
+                                        errmsg: 'Error saving rental.'
+                                    });
                                 } else {
                                     res.json(rental);
                                 }
@@ -97,9 +122,11 @@ rentalRouter.delete('/delete/:_id', function (req, res) {
 
     Rental.findByIdAndRemove(rental_id, function (error) {
         if (error) {
-            res.status(500).json({ errmsg: "Woops." });
+            res.status(500).json({
+                errmsg: 'Error deleting rental.'
+            });
         } else {
-            res.sendStatus(200);
+            res.status(200).send('OK');
         }
     })
 })
