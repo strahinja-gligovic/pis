@@ -46,8 +46,8 @@ export class MovieService {
             .map(response => new Movie(response));
     }
 
-    deleteMovie(movie_id: String): Observable<String> {
-        return this.http.delete('/api/movie/delete/' + movie_id, { responseType: 'text' });
+    deleteMovie(movie_id: String): Observable<any> {
+        return this.http.delete('/api/movie/delete/' + movie_id);
     }
 
     saveMovie(movie: Movie): Observable<Movie> {

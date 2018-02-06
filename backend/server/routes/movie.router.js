@@ -11,7 +11,6 @@ movieRouter.get('/get/:_id', function (req, res) {
             res.status(500).json({
                 errmsg: 'No such movie.'
             });
-            return;
         }
 
         if (movie) {
@@ -102,14 +101,24 @@ movieRouter.put('/update/', function (req, res) {
 movieRouter.delete('/delete/:_id', function (req, res) {
     const movie_id = req.params._id;
 
-    Movie.findByIdAndRemove(movie_id, function (error) {
+    Movie.findById(movie_id, function (error, movie) {
         if (error) {
             res.status(500).json({
-                errmsg: 'Error deleting movie.'
+                errmsg: 'No such movie.'
             });
-        } else {
-            res.status(200).send('OK');
         }
+        movie.remove(function (error) {
+            if (error) {
+                const errmsg = error.errmsg ? error.errmsg : 'Error deleting movie.';
+                res.status(500).json({
+                    errmsg
+                });
+            } else {
+                res.status(200).json({
+                    msg: 'OK'
+                });
+            }
+        })
     })
 })
 

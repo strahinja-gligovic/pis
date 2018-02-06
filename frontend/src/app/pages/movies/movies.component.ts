@@ -65,7 +65,7 @@ export class MoviesComponent implements OnInit {
       this.submitted = false;
       this.toggleSuccessMessage();
     }, error => {
-      this.error = error;
+      this.error = error.error;
       this.submitted = false;
     });
   }

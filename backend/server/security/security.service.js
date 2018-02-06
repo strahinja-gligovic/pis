@@ -30,6 +30,7 @@ exports.loginRoute = function loginRoute(req, res) {
             res.status(401).json({
                 errmsg: 'Invalid credentials !'
             });
+            return;
         }
 
         user.comparePasswords(password, function (error, result) {

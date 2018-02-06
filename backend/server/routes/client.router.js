@@ -87,15 +87,24 @@ clientRouter.put('/update/', function (req, res) {
 clientRouter.delete('/delete/:_id', function (req, res) {
     const client_id = req.params._id;
 
-    Client.findByIdAndRemove(client_id, function (error) {
+    Client.findById(client_id, function (error, client) {
         if (error) {
             res.status(500).json({
-                errmsg: 'Error deleting client.'
+                errmsg: 'No such client.'
             });
-        } else {
-            // sve OK !
-            res.status(200).send('OK');
         }
+        client.remove(function (error) {
+            if (error) {
+                const errmsg = error.errmsg ? error.errmsg : 'Error deleting client.';
+                res.status(500).json({
+                    errmsg
+                });
+            } else {
+                res.status(200).json({
+                    msg: 'OK'
+                });
+            }
+        })
     })
 })
 

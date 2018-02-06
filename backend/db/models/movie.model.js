@@ -28,4 +28,29 @@ movieSchema.pre('save', function (next) {
     next();
 });
 
+movieSchema.pre('remove', function (next) {
+    const movie = this;
+    const movie_id = movie._id;
+    const Rental = mongoose.model('Rental');
+
+    Rental.find({}, function (error, rentals) {
+        let found = false;
+        for (let i = 0; i < rentals.length; i++) {
+            const rental = rentals[i];
+            if (rental.movie.equals(movie_id)) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            const error = {
+                errmsg: 'Delete the associated rentals first.'
+            };
+            next(error);
+        } else {
+            next();
+        }
+    })
+})
+
 module.exports = mongoose.model('Movie', movieSchema);

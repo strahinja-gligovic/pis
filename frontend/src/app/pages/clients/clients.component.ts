@@ -59,7 +59,7 @@ export class ClientsComponent implements OnInit {
         this.getClients();
         this.toggleSuccessMessage();
       }
-    }, error => { this.error = error; }, () => { this.clientsChanged.unsubscribe(); });
+    }, error => { this.error = error.error; }, () => { this.clientsChanged.unsubscribe(); });
   }
 
   deleteClient(client: Client) {
@@ -80,7 +80,7 @@ export class ClientsComponent implements OnInit {
       this.submitted = false;
       this.toggleSuccessMessage();
     }, error => {
-      this.error = error;
+      this.error = error.error;
       this.submitted = false;
     });
   }
@@ -91,7 +91,7 @@ export class ClientsComponent implements OnInit {
       this.clients = clients;
       this.submitted = false;
     }, error => {
-      this.error = error;
+      this.error = error.error;
       this.submitted = false;
     });
   }
