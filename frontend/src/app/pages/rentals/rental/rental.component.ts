@@ -37,7 +37,16 @@ export class RentalComponent implements OnInit, OnDestroy {
     this.rentalsChanged$ = new EventEmitter<Boolean>();
 
     this.clients$ = this.clientService.listClients();
-    this.movies$ = this.movieService.listMovies('poster');
+    this.movies$ = this.movieService.listMovies('poster').map(movies => {
+      for (let i = 0; i < movies.length; i++) {
+        const movie = movies[i];
+        // ne mogu da se izdaju filmovi bez dostupnih kopija
+        if (movie.remaining === 0) {
+          movie['disabled'] = true;
+        }
+      }
+      return movies;
+    });
   }
 
   ngOnDestroy(): void {

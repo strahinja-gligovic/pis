@@ -64,9 +64,12 @@
                   <div class="form-group">
                     <label for="input-total">Total Copies</label>
                     <input name="total" [ngModel]="movie?.total" id="input-total" class="form-control" #total="ngModel" [class.is-invalid]="total.invalid && total.touched"
-                      required="true" type="number">
-                    <div class="invalid-feedback" *ngIf="total.invalid && total.touched">
+                      required="true" type="number" appMin min="1">
+                    <div class="invalid-feedback" *ngIf="total.errors?.required && !total.errors?.min">
                       Total Copies is required!
+                    </div>
+                    <div class="invalid-feedback" *ngIf="total.errors?.min && !total.errors?.required">
+                      Must be greater than 0!
                     </div>
                   </div>
                 </ng-template>

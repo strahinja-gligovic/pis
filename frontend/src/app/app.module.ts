@@ -34,6 +34,7 @@ import { RentalsComponent } from './pages/rentals/rentals.component';
 import { RentalComponent } from './pages/rentals/rental/rental.component';
 import { RentalService } from './pages/rentals/rental.service';
 import { AddressComponent } from './util/address/address.component';
+import { MinDirective } from './util/min.directive';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { AddressComponent } from './util/address/address.component';
     CopiesTotalsDirective,
     RentalsComponent,
     RentalComponent,
-    AddressComponent
+    AddressComponent,
+    MinDirective
   ],
   imports: [
     BrowserModule,
