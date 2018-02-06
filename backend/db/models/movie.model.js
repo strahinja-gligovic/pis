@@ -21,7 +21,7 @@ var movieSchema = new mongoose.Schema({
 movieSchema.pre('save', function (next) {
     const movie = this;
 
-    if (!movie.remaining) {
+    if (movie.remaining === undefined) {
         movie.remaining = movie.total;
     }
 

@@ -20,4 +20,20 @@ var rentalSchema = new mongoose.Schema({
     returnDate: Date
 });
 
+rentalSchema.pre('save', function(next) {
+    const rental = this;
+    const movie_id = rental.movie;
+
+    if (this.isNew) {
+        Movie.findByIdAndUpdate(movie_id, {$inc: {remaining : -1}}, next);
+    } else {
+        if (this.returnDate) {
+            Movie.findByIdAndUpdate(movie_id, {$inc: {remaining : 1}}, next);
+        } else {
+            next();
+        }
+    }
+
+})
+
 module.exports = mongoose.model('Rental', rentalSchema);

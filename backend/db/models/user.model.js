@@ -26,20 +26,19 @@ userSchema.pre('save', function (next) {
             // upisujemo hash
             user.password = hash;
             // sledeću funkciju pozivamo da bi se nastavio tok programa (tj save())
-            // opet, ovo je ovde zbog prirode mongoose modula i javascript
             next();
         });
     });
 });
 
 // funkcija koja za datog korisnika proverava password
-userSchema.methods.comparePasswords = function (password, cb) {
+userSchema.methods.comparePasswords = function (password, callback) {
 
-    // string $password se ponovo hashuje i proverava se da li odgovara sa hashom upisanim u DB 
+    // string password se ponovo hashuje i proverava se da li odgovara sa hashom upisanim u DB 
     bcrypt.compare(password, this.password, function (error, result) {
-        if (error) return cb(error);
+        if (error) return callback(error);
         // vraćamo rezultat poređenja (prvi parametar error objekat)
-        cb(null, result);
+        callback(null, result);
     });
 
 }
