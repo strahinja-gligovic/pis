@@ -9,7 +9,6 @@ import { routes } from './routing/app.routes';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CookieModule, CookieService } from 'ngx-cookie';
 import { LoginComponent } from './security/login/login.component';
-import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './security/register/register.component';
 import { PageNotFoundComponent } from './util/page-not-found/page-not-found.component';
 import { WrapperComponent } from './pages/wrapper/wrapper.component';
@@ -42,7 +41,6 @@ import { MinDirective } from './util/min.directive';
     LoginComponent,
     RegisterComponent,
     PageNotFoundComponent,
-    HomeComponent,
     WrapperComponent,
     SidebarComponent,
     MoviesComponent,

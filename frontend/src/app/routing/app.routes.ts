@@ -2,7 +2,6 @@ import { WrapperComponent } from './../pages/wrapper/wrapper.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PageNotFoundComponent } from './../util/page-not-found/page-not-found.component';
 import { AuthGuard } from './auth.guard';
-import { HomeComponent } from './../pages/home/home.component';
 import { RegisterComponent } from './../security/register/register.component';
 import { LoginComponent } from './../security/login/login.component';
 import { AppComponent } from './../app.component';
@@ -15,7 +14,7 @@ export const routes: Routes = [
   {
     path: 'auth', component: WrapperComponent, canActivate: [AuthGuard],
     children: [
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: RentalsComponent, pathMatch: 'full' },
       { path: 'movies', component: MoviesComponent },
       { path: 'clients', component: ClientsComponent },
       { path: 'rentals', component: RentalsComponent },
