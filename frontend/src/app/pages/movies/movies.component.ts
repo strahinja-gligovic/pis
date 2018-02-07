@@ -5,7 +5,8 @@ import { Movie } from '../../models/movie.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MovieComponent } from './movie/movie.component';
 import { Subscription } from 'rxjs/Subscription';
-import { SUCCESS_DURATION } from '../../util/const';
+import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE } from '../../util/const';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-movies',
@@ -20,11 +21,10 @@ export class MoviesComponent implements OnInit {
   moviesChanged: Subscription;
 
   // UI
-  success = false;
   submitted = false;
   error: any;
 
-  constructor(private modalService: BsModalService, private movieService: MovieService) { }
+  constructor(private modalService: BsModalService, private movieService: MovieService, private toastr: ToastrService) { }
 
   ngOnInit() {
     // isključujemo poster polje iz list zahteva, više o tome niz callstack
@@ -108,10 +108,7 @@ export class MoviesComponent implements OnInit {
   }
 
   private toggleSuccessMessage() {
-    this.success = true;
-    setTimeout(() => {
-      this.success = false;
-    }, SUCCESS_DURATION);
+    this.toastr.success(...TOASTR_SUCCESS_MESSAGE);
   }
 
 }

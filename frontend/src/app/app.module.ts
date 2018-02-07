@@ -34,6 +34,10 @@ import { RentalComponent } from './pages/rentals/rental/rental.component';
 import { RentalService } from './pages/rentals/rental.service';
 import { AddressComponent } from './util/address/address.component';
 import { MinDirective } from './util/min.directive';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SUCCESS_DURATION } from './util/const';
+
 
 @NgModule({
   declarations: [
@@ -59,8 +63,14 @@ import { MinDirective } from './util/min.directive';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    // https://github.com/scttcper/ngx-toastr
+    ToastrModule.forRoot({
+      timeOut: SUCCESS_DURATION,
+      preventDuplicates: true,
+    }),
     // https://github.com/salemdar/ngx-cookie
     CookieModule.forRoot(),
     // https://valor-software.com/ngx-bootstrap/#/modals

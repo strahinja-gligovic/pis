@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "~ngx-toastr/toastr-bs4-alert";
+
 /*Crveni placehodler tekst za invalid input polja*/
 input.is-invalid::placeholder {
   color: #dc3545 !important;

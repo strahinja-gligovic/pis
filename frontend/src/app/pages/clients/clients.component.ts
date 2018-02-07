@@ -6,8 +6,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Address } from '../../models/address.model';
-import { SUCCESS_DURATION } from '../../util/const';
+import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE } from '../../util/const';
 import { AddressComponent } from '../../util/address/address.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-clients',
@@ -21,11 +22,10 @@ export class ClientsComponent implements OnInit {
   clientsChanged: Subscription;
 
   // UI
-  success = false;
   error: any;
   submitted = false;
 
-  constructor(private modalService: BsModalService, private clientService: ClientService) { }
+  constructor(private modalService: BsModalService, private clientService: ClientService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getClients();
@@ -86,7 +86,6 @@ export class ClientsComponent implements OnInit {
   }
 
   getClients() {
-    this.submitted = true;
     this.clientService.listClients().subscribe(clients => {
       this.clients = clients;
       this.submitted = false;
@@ -107,10 +106,7 @@ export class ClientsComponent implements OnInit {
   }
 
   private toggleSuccessMessage() {
-    this.success = true;
-    setTimeout(() => {
-      this.success = false;
-    }, SUCCESS_DURATION);
+    this.toastr.success(...TOASTR_SUCCESS_MESSAGE);
   }
 
 }

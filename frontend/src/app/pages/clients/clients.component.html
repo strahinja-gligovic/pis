@@ -1,7 +1,4 @@
 <app-title [title]="'Clients'"></app-title>
-<alert *ngIf="success" type="success">
-  <strong>Success!</strong>
-</alert>
 <alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
   <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
 </alert>

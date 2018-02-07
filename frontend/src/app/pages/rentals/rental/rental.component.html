@@ -16,7 +16,7 @@
       <div class="col">
         <div class="form-group">
           <label for="input-client">Client</label>
-          <ng-select name="client" [items]="clients$ | async" required="true" bindLabel="name" bindValue="_id" [(ngModel)]="rental.client._id" id="input-client"
+          <ng-select [disabled]="rental._id" name="client" [items]="clients$ | async" required="true" bindLabel="name" bindValue="_id" [(ngModel)]="rental.client._id" id="input-client"
             placeholder="Search for a client..." #client="ngModel">
             <ng-template ng-option-tmp let-client="item">
               {{client.firstName}} {{client.lastName}}
@@ -32,7 +32,7 @@
       <div class="col">
         <div class="form-group">
           <label for="input-movie">Movie</label>
-          <ng-select name="movie" [items]="movies$ | async" required="true" bindLabel="title" bindValue="_id" [(ngModel)]="rental.movie._id"
+          <ng-select [disabled]="rental._id" name="movie" [items]="movies$ | async" required="true" bindLabel="title" bindValue="_id" [(ngModel)]="rental.movie._id"
             id="input-movie" [class.is-invalid]="movie.invalid && movie.touched" placeholder="Search for a movie..." #movie="ngModel">
             <ng-template ng-option-tmp let-movie="item">
               <span>{{movie.title}} - {{movie.releaseDate | date:'yyyy'}}</span>
@@ -49,7 +49,7 @@
       <div class="col">
         <div class="form-group">
           <label for="input-startDate">Start Date</label>
-          <input name="startDate" [(ngModel)]="rental.startDate" bsDatepicker id="input-startDate" class="form-control" #startDate="ngModel"
+          <input [disabled]="rental._id" name="startDate" [(ngModel)]="rental.startDate" bsDatepicker id="input-startDate" class="form-control" #startDate="ngModel"
             [class.is-invalid]="startDate.invalid && startDate.touched" required="true" [bsConfig]="{ containerClass: 'theme-default' }">
           <div class="invalid-feedback" *ngIf="startDate.invalid && startDate.touched">
             Start Date is required!

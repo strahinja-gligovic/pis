@@ -5,7 +5,8 @@ import { Rental } from '../../models/rental.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RentalComponent } from './rental/rental.component';
 import { Subscription } from 'rxjs/Subscription';
-import { SUCCESS_DURATION } from '../../util/const';
+import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE } from '../../util/const';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rentals',
@@ -18,11 +19,10 @@ export class RentalsComponent implements OnInit {
   private rentalsChanged: Subscription;
 
   // UI
-  private success = false;
   private error: any;
   private submitted = false;
 
-  constructor(private modalService: BsModalService, private rentalService: RentalService) { }
+  constructor(private modalService: BsModalService, private rentalService: RentalService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.getRentals();
@@ -79,10 +79,7 @@ export class RentalsComponent implements OnInit {
   }
 
   private toggleSuccessMessage() {
-    this.success = true;
-    setTimeout(() => {
-      this.success = false;
-    }, SUCCESS_DURATION);
+    this.toastr.success(...TOASTR_SUCCESS_MESSAGE);
   }
 
 }
