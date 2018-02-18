@@ -23,6 +23,7 @@ export class ClientsComponent implements OnInit {
 
   // UI
   submitted = false;
+  @ViewChild('clientsTable') table: any;
 
   constructor(private modalService: BsModalService, private clientService: ClientService, private toastr: ToastrService) { }
 
@@ -110,6 +111,11 @@ export class ClientsComponent implements OnInit {
 
   private toggleErrorMessage(error) {
     this.toastr.error(error.errmsg ? error.errmsg : TOASTR_ERROR_MESSAGE, 'Error.');
+  }
+
+  private toggleExpandRow(row) {
+    console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
   }
 
 }

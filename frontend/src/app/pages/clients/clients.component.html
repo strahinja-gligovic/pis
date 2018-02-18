@@ -7,24 +7,62 @@
 
 <div class="row">
   <div class="col">
-    <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40"
-      [rowHeight]="'auto'">
-      <ngx-datatable-column name="First Name" prop="firstName" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
-      <ngx-datatable-column name="Last Name" prop="lastName" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
-      <ngx-datatable-column name="Email" prop="email" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable #clientsTable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'force'" [headerHeight]="40"
+      [footerHeight]="40" [rowHeight]="'auto'">
+
+      <ngx-datatable-row-detail [rowHeight]="50" #responsiveDetailRow [flexGrow]="1">
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+          <div style="padding-left:20px; font-size:14px">
+            totalno neko ludilo
+          </div>
+        </ng-template>
+      </ngx-datatable-row-detail>
+
+      <ngx-datatable-column [width]="20" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)"
+            class="desktop-hidden clickable">
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Name" [minWidth]="200" [resizeable]="false" [draggable]="false" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span>{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <span>{{row.firstName}} {{row.lastName}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Email" prop="email" [resizeable]="false" [draggable]="false" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{value}}</span>
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column name="Date of Birth" prop="dob" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
-        <ng-template let-dob="value" ngx-datatable-cell-template>
-          <span>{{dob | date}}</span>
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-dob="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{dob | date}}</span>
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Address" prop="address" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
-        <ng-template let-address="value" ngx-datatable-cell-template>
-          <span style="cursor: pointer;" (click)="openAddressModal(address, addressTemplate)">Click to view</span>
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-address="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden clickable" (click)="openAddressModal(address, addressTemplate)">Click to view</span>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Operations" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+      <ngx-datatable-column name="Operations" [minWidth]="70" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template ngx-datatable-header-template>
-          &nbsp;
+          <span class="mobile-hidden"></span>
         </ng-template>
         <ng-template let-client="row" ngx-datatable-cell-template>
           <div>
