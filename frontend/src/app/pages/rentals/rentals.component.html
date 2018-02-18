@@ -1,7 +1,4 @@
 <app-title [title]="'Rentals'"></app-title>
-<alert *ngIf="error && !submitted" type="danger" [dismissible]="true">
-  <strong>{{error.errmsg || 'Something unexpected happened.'}}</strong>
-</alert>
 <div class="row">
   <div class="col">
     <button type="button" [disabled]="submitted" class="btn btn-secondary" (click)="openRentalModal()">Add Rental</button>

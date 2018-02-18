@@ -5,7 +5,7 @@ import { Rental } from '../../models/rental.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RentalComponent } from './rental/rental.component';
 import { Subscription } from 'rxjs/Subscription';
-import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE } from '../../util/const';
+import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE, TOASTR_ERROR_MESSAGE } from '../../util/const';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -19,7 +19,6 @@ export class RentalsComponent implements OnInit {
   private rentalsChanged: Subscription;
 
   // UI
-  private error: any;
   private submitted = false;
 
   constructor(private modalService: BsModalService, private rentalService: RentalService, private toastr: ToastrService) { }
@@ -46,7 +45,7 @@ export class RentalsComponent implements OnInit {
         this.getRentals();
         this.toggleSuccessMessage();
       }
-    }, error => { this.error = error; }, () => { this.rentalsChanged.unsubscribe(); });
+    }, error => { this.toggleErrorMessage(error.error); }, () => { this.rentalsChanged.unsubscribe(); });
   }
 
   deleteRental(rental: Rental) {
@@ -62,7 +61,7 @@ export class RentalsComponent implements OnInit {
       this.submitted = false;
       this.toggleSuccessMessage();
     }, error => {
-      this.error = error;
+      this.toggleErrorMessage(error.error);
       this.submitted = false;
     });
   }
@@ -73,13 +72,17 @@ export class RentalsComponent implements OnInit {
       this.rentals = rentals;
       this.submitted = false;
     }, error => {
-      this.error = error;
+      this.toggleErrorMessage(error.error);
       this.submitted = false;
     });
   }
 
   private toggleSuccessMessage() {
     this.toastr.success(...TOASTR_SUCCESS_MESSAGE);
+  }
+
+  private toggleErrorMessage(error) {
+    this.toastr.error(error.errmsg ? error.errmsg : TOASTR_ERROR_MESSAGE, 'Error.');
   }
 
 }
