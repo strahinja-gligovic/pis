@@ -1,6 +1,7 @@
 import { Directive, AfterContentChecked } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 
+// tslint:disable-next-line:directive-selector
 @Directive({ selector: '[ngx-resize-watcher]' })
 export class NgxResizeWatcherDirective implements AfterContentChecked {
 

@@ -5,16 +5,31 @@
   </div>
 </div>
 
-<div class="row">
+<div class="row h-100">
   <div class="col">
     <ngx-datatable #clientsTable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'force'" [headerHeight]="40"
       [footerHeight]="40" [rowHeight]="'auto'">
 
-      <ngx-datatable-row-detail [rowHeight]="50" #responsiveDetailRow [flexGrow]="1">
-        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-          <div style="padding-left:20px; font-size:14px">
-            totalno neko ludilo
+      <ngx-datatable-row-detail [rowHeight]="100" #responsiveDetailRow [flexGrow]="1">
+        <ng-template let-client="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+          <div>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div><strong>Email</strong></div>
+                  <span>{{client.email}}</span>
+                  <div><strong>Date of Birth</strong></div>
+                  <span>{{client.dob | date}}</span>
+                </div>
+                <div class="col">
+                  <div><strong>City</strong></div>
+                  <span>{{client.address.city}}</span>
+                  <div><strong>Street Address</strong></div>
+                  <span>{{client.address.street}}</span>
+                </div>
+              </div>
           </div>
+        </div>
         </ng-template>
       </ngx-datatable-row-detail>
 
