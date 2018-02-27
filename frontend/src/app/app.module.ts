@@ -37,6 +37,7 @@ import { MinDirective } from './util/min.directive';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SUCCESS_DURATION } from './util/const';
+import { ProvideFormDirective } from './util/provide-form.directive';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { SUCCESS_DURATION } from './util/const';
     RentalsComponent,
     RentalComponent,
     AddressComponent,
-    MinDirective
+    MinDirective,
+    ProvideFormDirective
   ],
   imports: [
     BrowserModule,
