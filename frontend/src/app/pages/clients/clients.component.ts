@@ -6,7 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ClientComponent } from './client/client.component';
 import { Subscription } from 'rxjs/Subscription';
 import { Address } from '../../models/address.model';
-import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE } from '../../util/const';
+import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE, TOASTR_ERROR_MESSAGE } from '../../util/const';
 import { AddressComponent } from '../../util/address/address.component';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,8 +22,8 @@ export class ClientsComponent implements OnInit {
   clientsChanged: Subscription;
 
   // UI
-  error: any;
   submitted = false;
+  @ViewChild('clientsTable') table: any;
 
   constructor(private modalService: BsModalService, private clientService: ClientService, private toastr: ToastrService) { }
 
@@ -59,7 +59,7 @@ export class ClientsComponent implements OnInit {
         this.getClients();
         this.toggleSuccessMessage();
       }
-    }, error => { this.error = error.error; }, () => { this.clientsChanged.unsubscribe(); });
+    }, error => { this.toggleErrorMessage(error.error) }, () => { this.clientsChanged.unsubscribe(); });
   }
 
   deleteClient(client: Client) {
@@ -80,7 +80,7 @@ export class ClientsComponent implements OnInit {
       this.submitted = false;
       this.toggleSuccessMessage();
     }, error => {
-      this.error = error.error;
+      this.toggleErrorMessage(error.error);
       this.submitted = false;
     });
   }
@@ -90,7 +90,7 @@ export class ClientsComponent implements OnInit {
       this.clients = clients;
       this.submitted = false;
     }, error => {
-      this.error = error.error;
+      this.toggleErrorMessage(error.error);
       this.submitted = false;
     });
   }
@@ -107,6 +107,15 @@ export class ClientsComponent implements OnInit {
 
   private toggleSuccessMessage() {
     this.toastr.success(...TOASTR_SUCCESS_MESSAGE);
+  }
+
+  private toggleErrorMessage(error) {
+    this.toastr.error(error.errmsg ? error.errmsg : TOASTR_ERROR_MESSAGE, 'Error.');
+  }
+
+  private toggleExpandRow(row) {
+    console.log('Toggled Expand Row!', row);
+    this.table.rowDetail.toggleExpandRow(row);
   }
 
 }

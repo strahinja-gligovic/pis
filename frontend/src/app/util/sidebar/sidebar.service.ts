@@ -10,7 +10,7 @@ export class SidebarService {
     // malo komplikovaniji oblik događaja ( naspram onog u komponentama )
     // ovde želimo da pratimo stanje toggled promenljive i treba da nam je dostupno uvek
     // komponenta koja se pretplati na BehaviorSubject odmah će imati uvid u vrednost toggled
-    private toggled: Boolean = true;
+    private toggled: Boolean = false;
     // podklasa Subject koja omogućava postavljanje inicijalne vrednosti
     toggled$: BehaviorSubject<Boolean>;
 

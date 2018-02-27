@@ -5,7 +5,7 @@ import { Movie } from '../../models/movie.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { MovieComponent } from './movie/movie.component';
 import { Subscription } from 'rxjs/Subscription';
-import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE } from '../../util/const';
+import { SUCCESS_DURATION, TOASTR_SUCCESS_MESSAGE, TOASTR_ERROR_MESSAGE } from '../../util/const';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -22,7 +22,6 @@ export class MoviesComponent implements OnInit {
 
   // UI
   submitted = false;
-  error: any;
 
   constructor(private modalService: BsModalService, private movieService: MovieService, private toastr: ToastrService) { }
 
@@ -47,7 +46,7 @@ export class MoviesComponent implements OnInit {
       this.updateMovieRows(movie);
       this.toggleSuccessMessage();
     }, error => {
-      this.error = error;
+      this.toggleErrorMessage(error.error);
     }, () => { this.moviesChanged.unsubscribe(); });
   }
 
@@ -65,7 +64,7 @@ export class MoviesComponent implements OnInit {
       this.submitted = false;
       this.toggleSuccessMessage();
     }, error => {
-      this.error = error.error;
+      this.toggleErrorMessage(error.error);
       this.submitted = false;
     });
   }
@@ -102,13 +101,17 @@ export class MoviesComponent implements OnInit {
       this.movies = movies;
       this.submitted = false;
     }, error => {
-      this.error = error;
+      this.toggleErrorMessage(error.error);
       this.submitted = false;
     });
   }
 
   private toggleSuccessMessage() {
     this.toastr.success(...TOASTR_SUCCESS_MESSAGE);
+  }
+
+  private toggleErrorMessage(error) {
+    this.toastr.error(error.errmsg ? error.errmsg : TOASTR_ERROR_MESSAGE, 'Error.');
   }
 
 }

@@ -4,6 +4,7 @@ export const TMDB_IMG_BASE_URL = 'http://image.tmdb.org/t/p/w342';
 export const TMDB_BASE_URL = 'https://api.themoviedb.org/3/';
 export const SUCCESS_DURATION = 2000;
 export const TOASTR_SUCCESS_MESSAGE = ['Everything went well.', 'Success.'];
+export const TOASTR_ERROR_MESSAGE = 'Something unexpected happened.';
 
 export const countries = [
     {
