@@ -58,6 +58,6 @@ export class SidebarService {
         // klasičan budž
         setTimeout(() => {
             window.dispatchEvent(new Event('resize'));
-        }, 600);
+        }, 1000);
     }
 }

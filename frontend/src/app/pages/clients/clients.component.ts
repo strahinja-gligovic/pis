@@ -59,7 +59,7 @@ export class ClientsComponent implements OnInit {
         this.getClients();
         this.toggleSuccessMessage();
       }
-    }, error => { this.toggleErrorMessage(error.error) }, () => { this.clientsChanged.unsubscribe(); });
+    }, error => { this.toggleErrorMessage(error.error); }, () => { this.clientsChanged.unsubscribe(); });
   }
 
   deleteClient(client: Client) {

@@ -7,7 +7,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
       {
           provide: ControlContainer,
           useFactory: function (form: NgForm) {
-              return form;
+              return form ? form : new Object();
           },
           deps: [NgForm]
       }

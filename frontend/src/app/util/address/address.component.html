@@ -1,33 +1,23 @@
-<ng-container *ngIf="isModal">
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Address</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-</ng-container>
-<div [ngClass]="{'modal-body': isModal}">
-  <fieldset appProvideForm [disabled]="disableInputs">
-    <legend *ngIf="!isModal">Address</legend>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Address</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <fieldset disabled>
+    <legend>Address</legend>
     <div class="row">
       <div class="col">
         <div class="form-group">
           <label for="input-street">Street</label>
-          <input name="street" [(ngModel)]="address.street" id="input-street" class="form-control" #street="ngModel"
-            [class.is-invalid]="street.invalid && street.touched" required="true">
-          <small class="invalid-feedback" *ngIf="street.invalid && street.touched">
-            Street is required!
-          </small>
+          <input name="street" [ngModel]="address.street" id="input-street" class="form-control">
         </div>
       </div>
       <div class="col">
         <div class="form-group">
           <label for="input-city">City</label>
-          <input name="city" [(ngModel)]="address.city" id="input-city" class="form-control" #city="ngModel" [class.is-invalid]="city.invalid && city.touched"
-            required="true">
-          <small class="invalid-feedback" *ngIf="city.invalid && city.touched">
-            City is required!
-          </small>
+          <input name="city" [ngModel]="address.city" id="input-city" class="form-control">
         </div>
       </div>
     </div>
@@ -35,23 +25,15 @@
       <div class="col">
         <div class="form-group">
           <label for="input-country">Country</label>
-          <ng-select name="country" [(ngModel)]="address.country" id="input-country" #country="ngModel" [class.is-invalid]="country.invalid && country.touched"
-            required="true" [disabled]="disableInputs" placeholder="Search for a country...">
+          <ng-select name="country" [(ngModel)]="address.country" id="input-country" [disabled]="true">
             <ng-option *ngFor="let country of countries" [value]="country.code">{{country.name}}</ng-option>
           </ng-select>
-          <small class="invalid-feedback" *ngIf="country.invalid && country.touched">
-            Country is required!
-          </small>
         </div>
       </div>
       <div class="col">
         <div class="form-group">
           <label for="input-zip">Zip</label>
-          <input name="zip" [(ngModel)]="address.zip" id="input-zip" class="form-control" #zip="ngModel" [class.is-invalid]="zip.invalid && zip.touched"
-            required="true">
-          <small class="invalid-feedback" *ngIf="zip.invalid && zip.touched">
-            Zip is required!
-          </small>
+          <input name="zip" [ngModel]="address.zip" id="input-zip" class="form-control">
         </div>
       </div>
     </div>

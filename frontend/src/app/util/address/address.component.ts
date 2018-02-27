@@ -14,8 +14,7 @@ export class AddressComponent implements OnInit {
   countries = countries;
 
   // UI
-  isModal: boolean;
-  disableInputs: boolean;
+  disableInputs = true;
 
   @Input() address: Address;
 
