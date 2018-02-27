@@ -7,18 +7,70 @@
 
 <div class="row">
   <div class="col">
-    <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="movies" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40"
-      [rowHeight]="'auto'">
-      <ngx-datatable-column name="Title" prop="title" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
-      <ngx-datatable-column name="Release Date" prop="releaseDate" [resizeable]="false" [sortable]="false" [draggable]="false"
-        [flexGrow]="1">
-        <ng-template let-releaseDate="value" ngx-datatable-cell-template>
-          <span>{{ releaseDate | date}}</span>
+    <ngx-datatable #moviesTable ngx-resize-watcher class="bootstrap" [rows]="movies" [columnMode]="'force'" [headerHeight]="40"
+      [footerHeight]="40" [rowHeight]="'auto'">
+
+      <ngx-datatable-row-detail [rowHeight]="80" #responsiveDetailRow [flexGrow]="1">
+        <ng-template let-movie="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+            <div class="col">
+              <div><strong>Remaining</strong></div>
+              <span>{{movie.remaining}}</span>
+              <div><strong>Total</strong></div>
+              <span>{{movie.total}}</span>
+            </div>
+        </ng-template>
+      </ngx-datatable-row-detail>
+
+      <ngx-datatable-column [width]="20" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)"
+            class="desktop-hidden clickable">
+          </a>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Remaining" prop="remaining" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column name="Total" prop="total" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1"></ngx-datatable-column>
-      <ngx-datatable-column name="Operations" prop="_id" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+
+      <ngx-datatable-column name="Title" prop="title" [resizeable]="false" [draggable]="false" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span>{{column.name}}</span>
+        </ng-template>
+        <ng-template let-title="value" ngx-datatable-cell-template>
+          <span>{{title}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Remaining" prop="remaining" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-remaining="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{remaining}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Total" prop="total" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-total="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{total}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Release Date" prop="releaseDate" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+          <span class="desktop-hidden">Year</span>
+        </ng-template>
+        <ng-template let-releaseDate="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{releaseDate | date}}</span>
+          <span class="desktop-hidden">{{releaseDate | date: 'yyyy'}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Operations" prop="_id" [resizeable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template ngx-datatable-header-template>
           &nbsp;
         </ng-template>
@@ -34,6 +86,7 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
+
     </ngx-datatable>
   </div>
 </div>

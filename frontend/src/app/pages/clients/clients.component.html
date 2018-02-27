@@ -10,25 +10,17 @@
     <ngx-datatable #clientsTable ngx-resize-watcher class="bootstrap" [rows]="clients" [columnMode]="'force'" [headerHeight]="40"
       [footerHeight]="40" [rowHeight]="'auto'">
 
-      <ngx-datatable-row-detail [rowHeight]="100" #responsiveDetailRow [flexGrow]="1">
+      <ngx-datatable-row-detail [rowHeight]="160" #responsiveDetailRow [flexGrow]="1">
         <ng-template let-client="row" let-expanded="expanded" ngx-datatable-row-detail-template>
-          <div>
-            <div class="container">
-              <div class="row">
-                <div class="col">
-                  <div><strong>Email</strong></div>
-                  <span>{{client.email}}</span>
-                  <div><strong>Date of Birth</strong></div>
-                  <span>{{client.dob | date}}</span>
-                </div>
-                <div class="col">
-                  <div><strong>City</strong></div>
-                  <span>{{client.address.city}}</span>
-                  <div><strong>Street Address</strong></div>
-                  <span>{{client.address.street}}</span>
-                </div>
-              </div>
-          </div>
+          <div class="col">
+            <div><strong>Email</strong></div>
+            <span>{{client.email}}</span>
+            <div><strong>Date of Birth</strong></div>
+            <span>{{client.dob | date}}</span>
+            <div><strong>City</strong></div>
+            <span>{{client.address.city}}</span>
+            <div><strong>Street Address</strong></div>
+            <span>{{client.address.street}}</span>
         </div>
         </ng-template>
       </ngx-datatable-row-detail>
@@ -43,6 +35,7 @@
           </a>
         </ng-template>
       </ngx-datatable-column>
+
       <ngx-datatable-column name="Name" [minWidth]="200" [resizeable]="false" [draggable]="false" [flexGrow]="2">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span>{{column.name}}</span>
@@ -51,30 +44,25 @@
           <span>{{row.firstName}} {{row.lastName}}</span>
         </ng-template>
       </ngx-datatable-column>
+
       <ngx-datatable-column name="Email" prop="email" [resizeable]="false" [draggable]="false" [flexGrow]="2">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span class="mobile-hidden">{{column.name}}</span>
         </ng-template>
-        <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
           <span class="mobile-hidden">{{value}}</span>
         </ng-template>
       </ngx-datatable-column>
-      <!-- <ngx-datatable-column name="Date of Birth" prop="dob" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
-        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span class="mobile-hidden">{{column.name}}</span>
-        </ng-template>
-        <ng-template let-row="row" let-dob="value" ngx-datatable-cell-template>
-          <span class="mobile-hidden">{{dob | date}}</span>
-        </ng-template>
-      </ngx-datatable-column> -->
+
       <ngx-datatable-column name="Address" prop="address" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span class="mobile-hidden">{{column.name}}</span>
         </ng-template>
-        <ng-template let-row="row" let-address="value" ngx-datatable-cell-template>
+        <ng-template let-address="value" ngx-datatable-cell-template>
           <span class="mobile-hidden clickable" (click)="openAddressModal(address, addressTemplate)">Click to view</span>
         </ng-template>
       </ngx-datatable-column>
+
       <ngx-datatable-column name="Operations" [minWidth]="70" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template ngx-datatable-header-template>
           <span class="mobile-hidden"></span>
@@ -91,6 +79,7 @@
           </div>
         </ng-template>
       </ngx-datatable-column>
+
     </ngx-datatable>
   </div>
 </div>

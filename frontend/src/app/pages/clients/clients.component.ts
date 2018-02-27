@@ -114,7 +114,6 @@ export class ClientsComponent implements OnInit {
   }
 
   private toggleExpandRow(row) {
-    console.log('Toggled Expand Row!', row);
     this.table.rowDetail.toggleExpandRow(row);
   }
 

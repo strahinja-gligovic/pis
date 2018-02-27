@@ -22,6 +22,7 @@ export class MoviesComponent implements OnInit {
 
   // UI
   submitted = false;
+  @ViewChild('moviesTable') table: any;
 
   constructor(private modalService: BsModalService, private movieService: MovieService, private toastr: ToastrService) { }
 
@@ -112,6 +113,10 @@ export class MoviesComponent implements OnInit {
 
   private toggleErrorMessage(error) {
     this.toastr.error(error.errmsg ? error.errmsg : TOASTR_ERROR_MESSAGE, 'Error.');
+  }
+
+  private toggleExpandRow(row) {
+    this.table.rowDetail.toggleExpandRow(row);
   }
 
 }
