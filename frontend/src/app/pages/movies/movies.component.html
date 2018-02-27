@@ -32,30 +32,21 @@
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Title" prop="title" [resizeable]="false" [draggable]="false" [flexGrow]="2">
+      <ngx-datatable-column name="Title" prop="title" [minWidth]="200" [width]="200" [resizeable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span>{{column.name}}</span>
         </ng-template>
         <ng-template let-title="value" ngx-datatable-cell-template>
-          <span>{{title}}</span>
+          <span tooltip="title">{{title}}</span>
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column name="Remaining" prop="remaining" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+      <ngx-datatable-column name="Remaining/Total" prop="remaining" [resizeable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span class="mobile-hidden">{{column.name}}</span>
         </ng-template>
-        <ng-template let-remaining="value" ngx-datatable-cell-template>
-          <span class="mobile-hidden">{{remaining}}</span>
-        </ng-template>
-      </ngx-datatable-column>
-
-      <ngx-datatable-column name="Total" prop="total" [resizeable]="false" [draggable]="false" [flexGrow]="1">
-        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-          <span class="mobile-hidden">{{column.name}}</span>
-        </ng-template>
-        <ng-template let-total="value" ngx-datatable-cell-template>
-          <span class="mobile-hidden">{{total}}</span>
+        <ng-template let-movie="row" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{movie.remaining}} / {{movie.total}}</span>
         </ng-template>
       </ngx-datatable-column>
 

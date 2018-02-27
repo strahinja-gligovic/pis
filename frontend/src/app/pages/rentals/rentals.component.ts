@@ -20,6 +20,7 @@ export class RentalsComponent implements OnInit {
 
   // UI
   private submitted = false;
+  @ViewChild('rentalsTable') table: any;
 
   constructor(private modalService: BsModalService, private rentalService: RentalService, private toastr: ToastrService) { }
 
@@ -83,6 +84,10 @@ export class RentalsComponent implements OnInit {
 
   private toggleErrorMessage(error) {
     this.toastr.error(error.errmsg ? error.errmsg : TOASTR_ERROR_MESSAGE, 'Error.');
+  }
+
+  private toggleExpandRow(row) {
+    this.table.rowDetail.toggleExpandRow(row);
   }
 
 }

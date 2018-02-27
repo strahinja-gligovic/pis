@@ -7,24 +7,80 @@
 
 <div class="row">
   <div class="col">
-    <ngx-datatable ngx-resize-watcher class="bootstrap" [rows]="rentals" [columnMode]="'flex'" [headerHeight]="40" [footerHeight]="40"
-      [rowHeight]="'auto'">
-      <ngx-datatable-column name="Client" prop="client" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2">
+    <ngx-datatable #rentalsTable ngx-resize-watcher class="bootstrap" [rows]="rentals" [columnMode]="'force'" [headerHeight]="40"
+      [footerHeight]="40" [rowHeight]="'auto'">
+
+      <ngx-datatable-row-detail [rowHeight]="120" #responsiveDetailRow [flexGrow]="1">
+        <ng-template let-rental="row" let-expanded="expanded" ngx-datatable-row-detail-template>
+          <div class="col">
+            <div>
+              <strong>Movie</strong>
+            </div>
+            <span>{{rental.movie.title}}</span>
+            <ng-container *ngIf="rental.returnDate">
+              <div>
+                <strong>Return Date</strong>
+              </div>
+              <span>{{rental.returnDate | date}}</span>
+            </ng-container>
+            <div>
+              <strong>Start Date</strong>
+            </div>
+            <span>{{rental.startDate | date}}</span>
+          </div>
+        </ng-template>
+      </ngx-datatable-row-detail>
+
+      <ngx-datatable-column [width]="20" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+        <ng-template let-column="column" ngx-datatable-header-template>
+          <span>{{column.name}}</span>
+        </ng-template>
+        <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+          <a [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row" (click)="toggleExpandRow(row)"
+            class="desktop-hidden clickable">
+          </a>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Client" prop="client" [minWidth]="120" [width]="120" [resizeable]="false" [draggable]="false" [flexGrow]="2">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span>{{column.name}}</span>
+        </ng-template>
         <ng-template let-client="value" ngx-datatable-cell-template>
           <span>{{client.firstName}} {{client.lastName}}</span>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Movie" prop="movie.title" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="2"></ngx-datatable-column>
-      <ngx-datatable-column name="Start Date" prop="startDate" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+
+      <ngx-datatable-column name="Movie" prop="movie.title" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
+        <ng-template let-title="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{title}}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Start Date" prop="startDate" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+        </ng-template>
         <ng-template let-startDate="value" ngx-datatable-cell-template>
-          <span>{{startDate | date }}</span>
+          <span class="mobile-hidden">{{startDate | date}}</span>
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="Return Date" prop="returnDate" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
+
+      <ngx-datatable-column name="Return Date" prop="returnDate" [resizeable]="false" [draggable]="false" [flexGrow]="1">
+        <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+          <span class="mobile-hidden">{{column.name}}</span>
+          <span class="desktop-hidden">Returned</span>
+        </ng-template>
         <ng-template let-returnDate="value" ngx-datatable-cell-template>
-          <span>{{returnDate | date}}</span>
+          <span class="mobile-hidden">{{returnDate | date}}</span>
+          <span class="desktop-hidden">{{returnDate ? 'YES' : 'NO'}}
+          </span>
         </ng-template>
       </ngx-datatable-column>
+
       <ngx-datatable-column name="Operations" [resizeable]="false" [sortable]="false" [draggable]="false" [flexGrow]="1">
         <ng-template ngx-datatable-header-template>
           &nbsp;
@@ -40,6 +96,7 @@
             </span>
           </div>
         </ng-template>
+
       </ngx-datatable-column>
     </ngx-datatable>
   </div>

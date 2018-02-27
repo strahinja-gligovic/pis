@@ -40,8 +40,8 @@
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span>{{column.name}}</span>
         </ng-template>
-        <ng-template let-row="row" ngx-datatable-cell-template>
-          <span>{{row.firstName}} {{row.lastName}}</span>
+        <ng-template let-client="row" ngx-datatable-cell-template>
+          <span>{{client.firstName}} {{client.lastName}}</span>
         </ng-template>
       </ngx-datatable-column>
 
@@ -49,8 +49,8 @@
         <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
           <span class="mobile-hidden">{{column.name}}</span>
         </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <span class="mobile-hidden">{{value}}</span>
+        <ng-template let-email="value" ngx-datatable-cell-template>
+          <span class="mobile-hidden">{{email}}</span>
         </ng-template>
       </ngx-datatable-column>
 
