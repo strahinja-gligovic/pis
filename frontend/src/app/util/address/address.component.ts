@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Address } from '../../models/address.model';
-import { countries } from '../const';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -9,10 +8,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
   styleUrls: ['./address.component.css']
 })
 export class AddressComponent implements OnInit {
-
-  // ovom deklaracijom činimo dostupnim niz u template
-  countries = countries;
-
   // UI
   disableInputs = true;
 

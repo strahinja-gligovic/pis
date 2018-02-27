@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { ClientService } from '../client.service';
 import { Subject } from 'rxjs/Subject';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { countries } from '../../../util/const';
+
 
 @Component({
   selector: 'app-client',
@@ -16,6 +18,9 @@ export class ClientComponent implements OnInit, OnDestroy {
   error: any;
   submitted = false;
   success = false;
+
+  // ovom deklaracijom činimo dostupnim niz u template
+  countries = countries;
 
   // najjednostavniji oblik događaja
   // imamo mogućnost da pravimo događaje sa .emit(), prosleđujemo parametar deklarisanog tipa

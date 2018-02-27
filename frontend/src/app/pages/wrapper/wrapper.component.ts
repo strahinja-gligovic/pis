@@ -9,7 +9,6 @@ import { SidebarService } from '../../util/sidebar/sidebar.service';
   styleUrls: ['./wrapper.component.css']
 })
 export class WrapperComponent implements OnInit {
-
   toggled: Boolean;
 
   constructor(private authService: AuthService, private router: Router,
