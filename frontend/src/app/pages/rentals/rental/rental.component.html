@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col-md-6 col-xs-12">
         <div class="form-group">
           <label for="input-startDate">Start Date</label>
           <input [disabled]="rental._id" name="startDate" [(ngModel)]="rental.startDate" bsDatepicker id="input-startDate" class="form-control" #startDate="ngModel"
@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col-md-6 col-xs-12">
         <div class="form-group">
           <label for="input-returnDate">Return Date</label>
           <input name="returnDate" [(ngModel)]="rental.returnDate" [minDate]="today" bsDatepicker id="input-returnDate" class="form-control" #returnDate="ngModel"
