@@ -26,8 +26,7 @@
   "scripts": {
     "start": "nodemon backend/server/server.js",
     "postinstall": "cd frontend && npm install",
-    "build": "cd frontend && ng build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cd frontend && ng build"
   },
   "repository": {
     "type": "git",
