@@ -265,3 +265,8 @@ ng-select.ng-invalid.ng-touched .ng-control {
 ng-select.ng-invalid.ng-touched + .invalid-feedback {
   display: block;
 }
+
+input.search {
+    float: right;
+    width: 300px;
+}
