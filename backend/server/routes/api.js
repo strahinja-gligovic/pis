@@ -10,14 +10,12 @@ const security = require("../security/security.service");
 router.post('/login', (req, res) => security.loginRoute(req, res));
 router.post('/register', (req, res) => security.registerRoute(req, res));
 
-router.use('/movie', movieRouter);
-router.use('/client', clientRouter);
-router.use('/rental', rentalRouter);
-
-
 // ovaj middleware proverava da li je korisnik ulogovan
 // tek ovde ga uključujemo da bi rute za autentifikaciju bile dostupne
 router.use(security.checkIfAuthenticated);
 
+router.use('/movie', movieRouter);
+router.use('/client', clientRouter);
+router.use('/rental', rentalRouter);
 
 module.exports = router;
