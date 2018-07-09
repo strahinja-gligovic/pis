@@ -25,6 +25,8 @@ export class ClientsComponent implements OnInit {
   submitted = false;
   @ViewChild('clientsTable') table: any;
 
+  noviBoolean = true;
+
   constructor(private modalService: BsModalService, private clientService: ClientService, private toastr: ToastrService) { }
 
   ngOnInit() {
